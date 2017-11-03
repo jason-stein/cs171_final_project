@@ -1,19 +1,25 @@
+// CLASS DECLARATION FOR STACKED AREA CHART
+//
+// expects data in raw row format as provided from original CSV
+
 StackedAreaChart = function(_parentElement, _data, _fields){
     this.parentElement = _parentElement;
     this.data = _data;
     this.fields = _fields;
     this.displayData = [];
+    this.normalize = true;
 
     this.initVis();
 }
 
+// all one-time init business
 StackedAreaChart.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
+    vis.margin = { top: 50, right: 0, bottom: 60, left: 60 };
 
     vis.width = 800 - vis.margin.left - vis.margin.right,
-    vis.height = 400 - vis.margin.top - vis.margin.bottom;
+    vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
 
     // SVG drawing area
@@ -21,10 +27,11 @@ StackedAreaChart.prototype.initVis = function(){
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+        .attr("transform", "translate(" + vis.margin.left +
+              "," + vis.margin.top + ")");
 
 
-    // Scales and axes
+    // scales and axes
     vis.x = d3.scaleTime()
         .range([0, vis.width])
         .domain(d3.extent(vis.data, function(d) { return d.ACADEMIC_YEAR; }));
@@ -47,15 +54,21 @@ StackedAreaChart.prototype.initVis = function(){
     vis.svg.append("g")
         .attr("class", "y-axis axis");
 
+    // area constructor
     vis.area = d3.area()
-        .curve(d3.curveCardinal)
         .x(function(d) { return vis.x(d.data.year); })
         .y0(function(d) { return vis.y(d[0]); })
         .y1(function(d) { return vis.y(d[1]); });
 
+    // mouseover display
+    vis.tooltip = vis.svg.append("text")
+        .attr("x", 50)
+        .attr("y", -10);
+
     vis.wrangleData();
 }
 
+// data manipulation
 StackedAreaChart.prototype.wrangleData = function(){
     var vis = this;
 
@@ -79,12 +92,14 @@ StackedAreaChart.prototype.wrangleData = function(){
         vis.displayData[i].year = year.key
     });
 
+    // get all the concentrations we care about
     vis.keys = []
     vis.fields.forEach(function(d){
         vis.keys.push(d.Concentration)
     })
 
-    // stack wants zeros for empty fields
+    // d3.stack wants zeros for empty fields
+    // (could infer but whatever Mike Bostock)
     vis.displayData.forEach(function(d){
         vis.fields.forEach(function(e){
             if (!d.hasOwnProperty(e.Concentration)){
@@ -93,11 +108,20 @@ StackedAreaChart.prototype.wrangleData = function(){
         });
     });
 
+    // create a stack constructor
     vis.stack = d3.stack()
         .keys(vis.keys);
 
+    // normalize?
+    // THIS WILL BE EXTERNALLY CONTROLLED LATER
+    if(vis.normalize){
+        vis.stack.offset(d3.stackOffsetExpand)
+    }
+
+    // stack the data
     vis.displayData = vis.stack(vis.displayData);
 
+    // that thing about nest with non-string keys... whatever Bostock
     vis.displayData.forEach(function(d){
         d.forEach(function(e){
             e.data.year = new Date(e.data.year);
@@ -107,9 +131,11 @@ StackedAreaChart.prototype.wrangleData = function(){
     vis.updateVis()
 }
 
+// dynamic shit
 StackedAreaChart.prototype.updateVis = function(){
     var vis = this;
 
+    // get 2-d max
     vis.y.domain([0, d3.max(vis.displayData, function(d) {
             return d3.max(d, function(e) {
                 return e[1];
@@ -117,8 +143,11 @@ StackedAreaChart.prototype.updateVis = function(){
         })
     ]);
 
+    // colorscale domain
+    // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
 
+    // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
         .data(vis.displayData);
 
@@ -132,6 +161,14 @@ StackedAreaChart.prototype.updateVis = function(){
             console.log(d);
             return vis.colorScale(d.key);
         })
+        .on("mouseover", function(d, i){
+            vis.tooltip.text(d.key);
+        })
+        .on("mouseout", function(d){
+            vis.tooltip.text("");
+        })
+
+    categories.exit().remove();
 
     // Call axis functions with the new domain
     vis.svg.select(".x-axis").call(vis.xAxis);
