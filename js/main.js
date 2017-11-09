@@ -9,10 +9,15 @@ queue()
 
 function createVis(error, data, concentrations){
     if(error) throw error;
-    console.log(data);
     data.forEach(function(d){
         d.ACADEMIC_YEAR = parseDate(d.ACADEMIC_YEAR)
     })
     stackedAreaChart = new StackedAreaChart('stackedareachart', data, concentrations);
+}
+
+function normalizeStackedAreaChart(){
+    stackedAreaChart.normalize = !stackedAreaChart.normalize;
+    console.log
+    stackedAreaChart.wrangleData();
 }
 

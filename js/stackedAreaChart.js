@@ -7,7 +7,7 @@ StackedAreaChart = function(_parentElement, _data, _fields){
     this.data = _data;
     this.fields = _fields;
     this.displayData = [];
-    this.normalize = true;
+    this.normalize = false;
 
     this.initVis();
 }
@@ -16,7 +16,7 @@ StackedAreaChart = function(_parentElement, _data, _fields){
 StackedAreaChart.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 50, right: 0, bottom: 60, left: 60 };
+    vis.margin = { top: 40, right: 0, bottom: 60, left: 80 };
 
     vis.width = 800 - vis.margin.left - vis.margin.right,
     vis.height = 600 - vis.margin.top - vis.margin.bottom;
@@ -54,6 +54,15 @@ StackedAreaChart.prototype.initVis = function(){
     vis.svg.append("g")
         .attr("class", "y-axis axis");
 
+    vis.ylab = vis.svg.append("text")
+        .attr("transform", "translate(-50," + vis.height / 2 + ")rotate(270)")
+        .attr("text-anchor", "middle")
+
+    vis.xlab = vis.svg.append("text")
+        .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height + 40) + ")")
+        .attr("text-anchor", "middle")
+        .text("Year")
+
     // area constructor
     vis.area = d3.area()
         .x(function(d) { return vis.x(d.data.year); })
@@ -71,6 +80,8 @@ StackedAreaChart.prototype.initVis = function(){
 // data manipulation
 StackedAreaChart.prototype.wrangleData = function(){
     var vis = this;
+
+    vis.displayData = []
 
     // nest data by year first
     vis.nestData = d3.nest()
@@ -113,9 +124,14 @@ StackedAreaChart.prototype.wrangleData = function(){
         .keys(vis.keys);
 
     // normalize?
-    // THIS WILL BE EXTERNALLY CONTROLLED LATER
     if(vis.normalize){
+        vis.ylab.text("Fraction of Courses")
         vis.stack.offset(d3.stackOffsetExpand)
+    }
+    else{
+        vis.ylab.text("Number of Courses")
+        vis.stack = d3.stack()
+        .keys(vis.keys);
     }
 
     // stack the data
@@ -154,23 +170,24 @@ StackedAreaChart.prototype.updateVis = function(){
     categories.enter().append("path")
         .attr("class", "area")
         .merge(categories)
-        .attr("d", function(d) {
-            return vis.area(d);
-        })
-        .attr("fill", function(d){
-            console.log(d);
-            return vis.colorScale(d.key);
-        })
         .on("mouseover", function(d, i){
             vis.tooltip.text(d.key);
         })
         .on("mouseout", function(d){
             vis.tooltip.text("");
         })
+        .transition()
+        .duration(800)
+        .attr("d", function(d) {
+            return vis.area(d);
+        })
+        .attr("fill", function(d){
+            return vis.colorScale(d.key);
+        })
 
     categories.exit().remove();
 
     // Call axis functions with the new domain
-    vis.svg.select(".x-axis").call(vis.xAxis);
-    vis.svg.select(".y-axis").call(vis.yAxis);
+    vis.svg.select(".x-axis").transition().duration(800).call(vis.xAxis);
+    vis.svg.select(".y-axis").transition().duration(800).call(vis.yAxis);
 }
