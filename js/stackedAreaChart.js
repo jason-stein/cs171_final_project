@@ -18,8 +18,8 @@ StackedAreaChart.prototype.initVis = function(){
 
     vis.margin = { top: 40, right: 0, bottom: 60, left: 80 };
 
-    vis.width = 800 - vis.margin.left - vis.margin.right,
-    vis.height = 600 - vis.margin.top - vis.margin.bottom;
+    vis.width = 600 - vis.margin.left - vis.margin.right,
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
 
     // SVG drawing area
