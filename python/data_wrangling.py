@@ -3,11 +3,11 @@ import csv
 import operator
 
 # constants
-MIN_YEAR = 1975
+MIN_YEAR = 1990
 MAX_YEAR = 2017
 
 # files
-FIELDS_OF_INTEREST = '../data/concentrations.csv'
+FIELDS_OF_INTEREST = '../data/concentrations2.csv'
 RAW = '../data/raw.csv'
 CLEAN = '../data/filter_to_all_fields.csv'
 
@@ -38,6 +38,9 @@ with open(RAW) as infp:
         writer.writeheader()
         # now, one row at a time,
         for line in reader:
+            # FAS only
+            if line['ACAD_GROUP'] != 'FAS':
+                continue
             # only years we like
             if int(line['ACADEMIC_YEAR']) < MIN_YEAR or int(line['ACADEMIC_YEAR']) > MAX_YEAR:
                 continue

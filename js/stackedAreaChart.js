@@ -17,6 +17,8 @@ StackedAreaChart = function(_parentElement, _data, _fields){
 StackedAreaChart.prototype.initVis = function(){
     var vis = this;
 
+    console.log(vis.data)
+
     vis.margin = { top: 40, right: 0, bottom: 60, left: 80 };
 
     vis.width = 600 - vis.margin.left - vis.margin.right,
@@ -123,7 +125,6 @@ StackedAreaChart.prototype.wrangleData = function(){
         });
     });
 
-    console.log(vis.displayData)
 
     // create a stack constructor
     vis.stack = d3.stack()
