@@ -1,32 +1,27 @@
-var stackedAreaChart, departmentTimeline;
+function CourseCount() {
+    $('#CourseCount')
+        .prop('Counter',0)
+        .animate({ Counter: 350000 }, {
+            duration: 2000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    }
 
-var parseDate = d3.timeParse("%Y");
 
-d3.select("#tooltip").text("Mouseover to see fields.")
-
-queue()
-    .defer(d3.csv,"data/filter_to_concentrations.csv")
-    .defer(d3.csv,"data/concentrations.csv")
-    .await(createVis);
-
-function createVis(error, data, concentrations){
-    if(error) throw error;
-    data.forEach(function(d){
-        d.ACADEMIC_YEAR = parseDate(d.ACADEMIC_YEAR)
-    })
-    stackedAreaChart = new StackedAreaChart('stackedareachart', data, concentrations);
-    departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
-}
-
-function normalizeStackedAreaChart(){
-    stackedAreaChart.normalize = !stackedAreaChart.normalize;
-    console.log
-    stackedAreaChart.wrangleData();
-}
-
-function brushed() {
-    var selectionRange = d3.brushSelection(d3.select(".brush").node());
-    var selectionDomain = selectionRange.map(departmentTimeline.x.invert);
-    stackedAreaChart.selectionChanged(selectionDomain);
+function move() {
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 20);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            elem.style.width = width + '%';
+        }
+    }
 }
 

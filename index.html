@@ -1,33 +1,121 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CS171 - Final Project</title>
+    <meta charset="UTF-8">
+    <title>The Knowledge Producing Machine</title>
 
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.fullpage.css">
 
-	<!-- CSS libraries -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
-	<!-- Custom CSS code -->
-	<link rel="stylesheet" href="css/style.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/style.css">
+    <!--<link href="css/grayscale.css" rel="stylesheet">-->
 </head>
 <body>
-	<div id="stackedareachart"><button onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br></div>
-	<span id="tooltip"></span>
-	<div id="departmenttimeline"></div>
-	<!-- Load JS libraries -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/queue.v1.min.js"></script>
-	<script src="js/d3.js"></script>
 
-	<!-- Visualization objects -->
-	<script src="js/stackedAreaChart.js"></script>
-	<script src="js/departmentTimeline.js"></script>
 
-	<!-- Load data, create visualizations -->
-	<script src="js/main.js"></script>
+    <!-- overall div container -->
+    <div id="overall">
+
+        <!--  -->
+        <div id="fullpage">
+
+            <!-- INTRO -->
+            <div class="section" id="CoverPage">
+                <h1>The Knowledge Producing Machine</h1>
+                <h2>Mapping Harvard's Curricular History</h2>
+                <div class="row">
+                    <!-- "GUIDE ME" button -->
+                    <div class="col-xs-4 col-xs-offset-2 button-container" onclick="CourseCount(); move()">
+                        <p class="btn-txt">guide me</p>
+                        <a href="#MartiniOne" class="btn btn-circle">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                    <!-- "SKIP GUIDE" button -->
+                    <div class="col-xs-4  button-container">
+                        <p class="btn-txt">skip guide</p>
+                        <a href="#dashboard" class="btn btn-circle">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- GUIDED MARTINI GLASS TOUR -->
+
+            <!-- (1) DATA OVERVIEW -->
+            <div class="section" id="martini-one">
+
+                <div class="container">
+                    <div class="col-lg-12 mx-auto">
+                        <h1><span id="CourseCount"></span></h1>
+                        <h3></h3>
+
+                        <div id="myProgress"><div id="myBar"></div></div>
+                        <h2>Courses offered between 1930-2017</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- (2) DESCRIBING DATA WRANGLING -->
+            <div class ="section" id="martini-two">
+                <h1>DESCRIBE DATA WRANGLING</h1>
+                <div>
+                    <img src="img/stackedAreaChart.svg">
+                </div>
+            </div>
+
+            <!-- (3) PRESENTING FILTERED DATA -->
+            <div class ="section" id="martini-three">
+                <h1>SHOW FILTERED DATA</h1>
+            </div>
+
+            <!-- (4) DEPARTMENT OVERVIEW, ABSOLUTE -->
+            <div class ="section" id="martini-four">
+                <h1>STACKED AREA CHART, ABSOLUTE</h1>
+            </div>
+
+            <!-- (5) DEPARTMENT OVERVIEW, PROPORTIONAL -->
+            <div class ="section" id="martini-five">
+                <h1>STACKED AREA CHART, PROPORTIONAL</h1>
+            </div>
+
+            <!-- (6) MINIATURE DASHBOARD -->
+            <div class ="section" id="martini-six">
+                <h1>STACKED AREA CHART & COURSE VIEW INTRO</h1>
+            </div>
+
+
+
+
+            <!-- DASHBOARD -->
+
+            <div class ="section" id="dash-board">
+                <h1>DASHBOARD</h1>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Load JS libraries -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/jquery.fullpage.js"></script>
+
+    <!-- own JS files -->
+    <script src="js/fullpageCustomization.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
 </html>
