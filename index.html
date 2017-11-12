@@ -48,7 +48,8 @@
                     <!-- "SKIP GUIDE" button -->
                     <div class="col-xs-4  button-container">
                         <p class="btn-txt">skip guide</p>
-                        <a href="dashboard.html" class="btn btn-circle">
+                        <!--href="dashboard.html"-->
+                        <a href="#DashBoard" class="btn btn-circle">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
                     </div>
@@ -136,6 +137,20 @@
 
             <div class ="section" id="dash-board">
                 <h1>DASHBOARD</h1>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h2>Stacked Area Chart</h2>
+                        <div id="stackedareachart"></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <h2>Brush Element</h2>
+                        <span id="tooltip"></span>
+                        <div id="departmenttimeline"></div>
+                    </div>
+                </div>
+                <button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br>
+
+
             </div>
         </div>
 
@@ -145,12 +160,20 @@
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/d3.min.js"></script>
+    <script src="js/d3.js"></script>
     <script src="js/jquery.fullpage.js"></script>
+    <script src="js/queue.v1.min.js"></script>
 
     <!-- own JS files -->
     <script src="js/fullpageCustomization.js"></script>
     <script src="js/main.js"></script>
+
+
+    <!-- Visualization objects -->
+    <script src="js/stackedAreaChart.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/departmentTimeline.js"></script>
+
 
 </body>
 </html>

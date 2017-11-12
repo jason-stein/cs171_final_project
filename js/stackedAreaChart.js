@@ -5,7 +5,7 @@
 StackedAreaChart = function(_parentElement, _data, _fields){
     this.parentElement = _parentElement;
     this.data = _data;
-    this.fields = _fields
+    this.fields = _fields;
     this.filterData = _data;
     this.displayData = [];
     this.normalize = false;
