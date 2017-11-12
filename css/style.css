@@ -45,39 +45,43 @@ button#normalize{
 
 #CoverPage {
     /*background: rgba(250, 250, 250, 0.80);*/
-    background: rgba(250, 250, 250, 0.81);
+    background: rgba(250, 250, 250, 0.8);
 }
 
 #martini-one {
     /*background: rgba(250, 250, 250, 0.85);*/
-    background: rgba(230, 230, 230, 0.81);
+    background: rgba(230, 230, 230, 0.95);
 }
 
 #martini-two {
     /*background: rgba(250, 250, 250, 0.90);*/
-    background: rgba(210, 210, 210, 0.81);
+    background: rgba(210, 210, 210, 95);
 }
 
 #martini-three {
-    background: rgba(190, 190, 190, 0.81);
+    background: rgba(190, 190, 190, 0.95);
 }
 
 #martini-four {
-    background: rgba(170, 170, 170, 0.81);
+    background: rgba(170, 170, 170, 0.95);
 }
 
 #martini-five {
-    background: rgba(150, 150, 150, 0.81);
+    background: rgba(150, 150, 150, 0.95);
 }
 
 #martini-six {
-    background: rgba(130, 130, 130, 0.81);
+    background: rgba(130, 130, 130, 0.95);
 }
 
 #dash-board {
-    background: rgba(250, 250, 250, 0.81);
+    background: rgba(250, 250, 250, 0.95);
 }
 
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
 
 /*
     TEXT STYLES
@@ -100,8 +104,43 @@ h2 {
     font-weight: lighter;
     font-size: 36px;
     color: #727272;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
+
+h3 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*text-transform: uppercase;*/
+    /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    text-align: center;
+    font-weight: lighter;
+    font-size: 28px;
+    color: #555555;
+}
+
+
+h4 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*text-transform: uppercase;*/
+    /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    text-align: justify;
+    font-weight: 100;
+    font-size: 16px;
+    color: #000000;
+    margin-right: 35%;
+    margin-left: 35%;
+    margin-bottom: 3%;
+    font-style: italic;
+}
+
+
+/*
+    STORYTELLING ETC.
+*/
+
+.StoryTellingSVG {
+    width: 100%;
+}
+
 
 
 /*
@@ -109,9 +148,9 @@ h2 {
 */
 
 .btn-txt {
-    /*font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
-    font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+
     font-weight: bold;
     margin-bottom: -10px;
 }

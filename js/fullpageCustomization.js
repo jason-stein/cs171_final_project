@@ -6,7 +6,7 @@ $(document).ready(function() {
         anchors:['Intro', 'MartiniOne', 'MartiniTwo' , 'MartiniThree','MartiniFour','MartiniFive','MartiniSix', 'DashBoard'],
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['Intro', 'Facts', 'Vis 1', 'Vis 2', 'Vis 3', 'Moving Forward', 'Recommendations'],
+        //navigationTooltips: ['Intro', 'Facts', 'Vis 1', 'Vis 2', 'Vis 3', 'Moving Forward', 'Recommendations'],
         showActiveTooltip: false,
         slidesNavigation: false,
         slidesNavPosition: 'bottom',
@@ -69,7 +69,15 @@ $(document).ready(function() {
         afterRender: function(){},
         afterResize: function(){},
         afterResponsive: function(isResponsive){},
-        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+
+            console.log(anchorLink, index, slideAnchor, slideIndex);
+            if(anchorLink === 'MartiniOne'){
+                CourseCount();
+
+            }
+        },
+
         onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){}
     });
 });
