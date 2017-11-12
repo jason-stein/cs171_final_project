@@ -78,6 +78,10 @@ button#normalize{
     background: rgba(250, 250, 250, 0.95);
 }
 
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
 
 /*
     TEXT STYLES
