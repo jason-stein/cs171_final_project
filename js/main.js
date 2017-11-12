@@ -1,3 +1,5 @@
+
+
 function CourseCount() {
     $('#CourseCount')
         .prop('Counter',0)
@@ -9,6 +11,54 @@ function CourseCount() {
             }
         });
     }
+
+function InstructorsCount() {
+    $('#InstructorCount')
+        .prop('Counter',0)
+        .animate({ Counter: 14781 }, {
+            duration: 2000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+}
+
+function SubjectCount() {
+    $('#SubjectCount')
+        .prop('Counter',0)
+        .animate({ Counter: 1070 }, {
+            duration: 2000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+}
+
+function TermCount() {
+    $('#TermCount')
+        .prop('Counter',0)
+        .animate({ Counter: 250 }, {
+            duration: 2000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+}
+
+function DepartmentCount() {
+    $('#DepartmentCount')
+        .prop('Counter',0)
+        .animate({ Counter: 126 }, {
+            duration: 2000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+}
 
 
 function move() {
@@ -24,4 +74,6 @@ function move() {
         }
     }
 }
+
+
 

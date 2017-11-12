@@ -45,17 +45,17 @@ button#normalize{
 
 #CoverPage {
     /*background: rgba(250, 250, 250, 0.80);*/
-    background: rgba(250, 250, 250, 0.81);
+    background: rgba(250, 250, 250, 0.8);
 }
 
 #martini-one {
     /*background: rgba(250, 250, 250, 0.85);*/
-    background: rgba(230, 230, 230, 0.81);
+    background: rgba(230, 230, 230, 0.9);
 }
 
 #martini-two {
     /*background: rgba(250, 250, 250, 0.90);*/
-    background: rgba(210, 210, 210, 0.81);
+    background: rgba(230, 230, 230, 1);
 }
 
 #martini-three {
@@ -100,19 +100,43 @@ h2 {
     font-weight: lighter;
     font-size: 36px;
     color: #727272;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
-h4 {
+h3 {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     /*text-transform: uppercase;*/
     /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
     text-align: center;
     font-weight: lighter;
-    font-size: 18px;
-    color: #000000;
-    max-width: 30%;
+    font-size: 28px;
+    color: #555555;
 }
+
+
+h4 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*text-transform: uppercase;*/
+    /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    text-align: justify;
+    font-weight: 100;
+    font-size: 16px;
+    color: #000000;
+    margin-right: 35%;
+    margin-left: 35%;
+    margin-bottom: 3%;
+    font-style: italic;
+}
+
+/*
+    STORYTELLING ETC.
+*/
+
+.StoryTellingSVG {
+    width: 100%;
+}
+
+
 
 /*
     BUTTONS ETC.

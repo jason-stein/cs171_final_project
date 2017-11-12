@@ -32,12 +32,14 @@
                 <h2>Mapping Harvard's Curricular History</h2>
 
                 <h4>
-                        “This website was designed with the express intent of giving interested parties a deeper look at the curricular history of this storied institution.”
+                    This website was designed with the express intent of giving interested parties a deeper
+                    look at the curricular history of this storied institution.
                 </h4>
 
                 <div class="row">
                     <!-- "GUIDE ME" button -->
-                    <div class="col-xs-4 col-xs-offset-2 button-container" onclick="CourseCount(); move()">
+                    <div class="col-xs-4 col-xs-offset-2 button-container" onclick="move(); CourseCount();
+                    InstructorsCount(); SubjectCount(); TermCount(); DepartmentCount()">
                         <p class="btn-txt">guide me</p>
                         <a href="#MartiniOne" class="btn btn-circle">
                             <i class="fa fa-angle-double-down animated"></i>
@@ -62,22 +64,48 @@
             <div class="section" id="martini-one">
 
                 <div class="container">
+
                     <div class="col-lg-12 mx-auto">
-                        <h1><span id="CourseCount"></span></h1>
-                        <h3></h3>
-
+                        <h1>The Data</h1>
                         <div id="myProgress"><div id="myBar"></div></div>
-                        <h2>Courses offered between 1930-2017</h2>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3 style="text-align: right"><span id="CourseCount"></span></h3>
+                                <h3 style="text-align: right"><span id="InstructorCount"></span></h3>
+                                <h3 style="text-align: right"><span id="SubjectCount"></span></h3>
+                                <h3 style="text-align: right"><span id="TermCount"></span></h3>
+                                <h3 style="text-align: right"><span id="DepartmentCount"></span></h3>
 
+                            </div>
+                            <div class="col-xs-6">
+                                <h3 style="text-align: left">Courses</h3>
+                                <h3 style="text-align: left">Instructors</h3>
+                                <h3 style="text-align: left">Subjects</h3>
+                                <h3 style="text-align: left">Terms</h3>
+                                <h3 style="text-align: left">Departments</h3>
+
+                            </div>
+                        </div>
+                        <div>
+                            <p style="text-align: right; font-style: italic">Between 1930-2017</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- (2) DESCRIBING DATA WRANGLING -->
             <div class ="section" id="martini-two">
-                <h1>DESCRIBE DATA WRANGLING</h1>
-                <div>
-                    <img src="img/stackedAreaChart.svg">
+                <h1>Wrangling the Data</h1>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-1"><img src="img/DataWranglingOne.svg" class="StoryTellingSVG"></div>
+                    <div class="col-xs-4 vcenter">
+                        <ul style="vertical-align: middle; border: thin solid red;">
+                            <li>This area chart represents all the courses offered at Harvard since 1931.</li>
+                            <li>Notice that prior to the 1990s the data becomes quite sparse.</li>
+                            <li>Though there were classes offered before the 1990s we will focus our attention on the most complete data set</li>
+                        </ul>
+                        </div>
+
                 </div>
             </div>
 
