@@ -5,7 +5,8 @@
 StackedAreaChart = function(_parentElement, _data, _fields){
     this.parentElement = _parentElement;
     this.data = _data;
-    this.fields = _fields;
+    this.fields = _fields
+    this.filterData = _data;
     this.displayData = [];
     this.normalize = false;
 
@@ -33,8 +34,7 @@ StackedAreaChart.prototype.initVis = function(){
 
     // scales and axes
     vis.x = d3.scaleTime()
-        .range([0, vis.width])
-        .domain(d3.extent(vis.data, function(d) { return d.ACADEMIC_YEAR; }));
+        .range([0, vis.width]);
 
     vis.y = d3.scaleLinear()
         .range([vis.height, 0]);
@@ -86,7 +86,7 @@ StackedAreaChart.prototype.wrangleData = function(){
     // nest data by year first
     vis.nestData = d3.nest()
         .key(function(d){ return d.ACADEMIC_YEAR; })
-        .entries(vis.data);
+        .entries(vis.filterData);
 
     // now for each year, nest per academic organization
     // this will give: [{year: ___, org1: ___, org2: ___ ...} ...]
@@ -105,8 +105,12 @@ StackedAreaChart.prototype.wrangleData = function(){
 
     // get all the concentrations we care about
     vis.keys = []
-    vis.fields.forEach(function(d){
-        vis.keys.push(d.Concentration)
+    tmp = {}
+    vis.data.forEach(function(d){
+        if(!tmp.hasOwnProperty(d.CLASS_ACAD_ORG_DESCRIPTION)){
+            vis.keys.push(d.CLASS_ACAD_ORG_DESCRIPTION);
+            tmp[d.CLASS_ACAD_ORG_DESCRIPTION] = 1;
+        }
     })
 
     // d3.stack wants zeros for empty fields
@@ -118,6 +122,8 @@ StackedAreaChart.prototype.wrangleData = function(){
             }
         });
     });
+
+    console.log(vis.displayData)
 
     // create a stack constructor
     vis.stack = d3.stack()
@@ -151,6 +157,8 @@ StackedAreaChart.prototype.wrangleData = function(){
 StackedAreaChart.prototype.updateVis = function(){
     var vis = this;
 
+    vis.x.domain(d3.extent(vis.filterData, function(d) { return d.ACADEMIC_YEAR; }));
+
     // get 2-d max
     vis.y.domain([0, d3.max(vis.displayData, function(d) {
             return d3.max(d, function(e) {
@@ -171,13 +179,11 @@ StackedAreaChart.prototype.updateVis = function(){
         .attr("class", "area")
         .merge(categories)
         .on("mouseover", function(d, i){
-            vis.tooltip.text(d.key);
+            d3.select("#tooltip").text(d.key);
         })
         .on("mouseout", function(d){
-            vis.tooltip.text("");
+            d3.select("#tooltip").text("Mouseover to see fields.");
         })
-        .transition()
-        .duration(800)
         .attr("d", function(d) {
             return vis.area(d);
         })
@@ -190,4 +196,16 @@ StackedAreaChart.prototype.updateVis = function(){
     // Call axis functions with the new domain
     vis.svg.select(".x-axis").transition().duration(800).call(vis.xAxis);
     vis.svg.select(".y-axis").transition().duration(800).call(vis.yAxis);
+}
+
+StackedAreaChart.prototype.selectionChanged = function(brushRegion){
+    var vis = this;
+
+    // Filter data accordingly without changing the original data
+    vis.filterData = vis.data.filter(function(d){
+        return d.ACADEMIC_YEAR >= brushRegion[0] && d.ACADEMIC_YEAR <= brushRegion[1]
+    })
+
+    // Update the visualization
+    vis.wrangleData();
 }

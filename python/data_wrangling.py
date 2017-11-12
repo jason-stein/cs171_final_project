@@ -15,7 +15,7 @@ CLEAN = '../data/filter_to_all_fields.csv'
 # data structures
 dic = {}
 concentrations = set()
-columns = ['ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION']
+columns = ['ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION', 'COURSE_TITLE_LONG']
 
 # read concentrations (or whatever depts we care about)
 with open(FIELDS_OF_INTEREST) as fp:

@@ -27,3 +27,7 @@ button{
   margin: 25px;
   margin-bottom: 0px;
 }
+
+#tooltip{
+  margin-left:80px;
+}
