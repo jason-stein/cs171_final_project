@@ -132,6 +132,7 @@ h4 {
     font-style: italic;
 }
 
+
 /*
     STORYTELLING ETC.
 */
@@ -147,9 +148,9 @@ h4 {
 */
 
 .btn-txt {
-    /*font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
-    font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*font-family: 'Cabin', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+
     font-weight: bold;
     margin-bottom: -10px;
 }

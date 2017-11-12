@@ -41,14 +41,14 @@
                     <!-- "GUIDE ME" button -->
                     <div class="col-xs-4 col-xs-offset-2 button-container" onclick="move(); CourseCount();
                     InstructorsCount(); SubjectCount(); TermCount(); DepartmentCount()">
-                        <p class="btn-txt">guide me</p>
+                        <p class="btn-txt">Guide Me</p>
                         <a href="#MartiniOne" class="btn btn-circle">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
                     </div>
                     <!-- "SKIP GUIDE" button -->
                     <div class="col-xs-4  button-container">
-                        <p class="btn-txt">skip guide</p>
+                        <p class="btn-txt">Skip Guide</p>
                         <!--href="dashboard.html"-->
                         <a href="#DashBoard" class="btn btn-circle">
                             <i class="fa fa-angle-double-down animated"></i>
@@ -104,19 +104,31 @@
                             <li><h5>This area chart represents all the courses offered at Harvard since 1931.</h5></li>
                             <li><h5>Notice that prior to the 1990s the data becomes quite sparse.</h5></li>
                             <li><h5>Though there were classes offered before the 1990s we will focus our attention on the most complete data set</h5></li>
+                            <li><h5 style="color: red">TODO: all courses after 1990 should be colored </h5></li>
                         </ul>
                     </div>
+                </div>
+                <div class="col-xs-12  button-container">
+                    <p class="btn-txt">1990-2017</p>
+                    <!--href="dashboard.html"-->
+                    <a href="#MartiniThree" class="btn btn-circle">
+                        <i class="fa fa-angle-double-down animated"></i>
+                    </a>
                 </div>
             </div>
 
             <!-- (3) PRESENTING FILTERED DATA -->
             <div class ="section" id="martini-three">
-                <h1>Filter Data by School</h1>
+                <h1>Wrangling the Data - Part Two</h1>
                 <div class="row vertical-align">
                     <div class="col-xs-6 col-xs-offset-1"><img src="img/stacked1990color.svg" class="StoryTellingSVG"></div>
                     <div class="col-xs-4">
-                        <ul style="vertical-align: middle">
-                            <li><h5>All courses should be stacked, color coded by school. All schools schould be grey, despite FAS which should be crimson red</h5></li>
+                        <ul>
+                            <li><h5>Now the data is aggregated into a more complete dataset from 1992 to 2017.</h5></li>
+                            <li><h5>Take a closer look at a department of interest.</h5></li>
+
+                            <li><h5 style="color: red">All courses should be stacked, color coded by school. All schools schould be grey,
+                                despite FAS which should be crimson red</h5></li>
                         </ul>
                     </div>
                 </div>
@@ -126,8 +138,22 @@
 
             <!-- (4) DEPARTMENT OVERVIEW, ABSOLUTE -->
             <div class ="section" id="martini-four">
-                <h1>STACKED AREA CHART, ABSOLUTE</h1>
-                <object id="my-svg" type="image/svg+xml" data="img/stacked1990color.svg"></object>
+                <h1>Mini Dashboard</h1>
+
+                <div class="row vertical-align">
+                    <div class="col-xs-6 col-xs-offset-1"><object id="my-svg" type="image/svg+xml" data="img/stacked1990color.svg"></object></div>
+                    <div class="col-xs-4">
+                        <ul>
+                            <li><h5>Display actual d3 area chart on the left. Display d3 gantt chart on the left, after clicking on a department </h5></li>
+                            <li><h5>Add Intro.js explanations regarding what the user is able to do</h5></li>
+                            <li><h5>Explore change in y scale in absolute/proportions</h5></li>
+                            <li><h5>Allow user to switch between concentrations / all departments view</h5></li>
+
+                            <li><h5 style="color: red">All courses should be stacked, color coded by school. All schools schould be grey,
+                                despite FAS which should be crimson red</h5></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- (5) DEPARTMENT OVERVIEW, PROPORTIONAL -->
