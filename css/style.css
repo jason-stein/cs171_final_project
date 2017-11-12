@@ -23,7 +23,7 @@
   shape-rendering: crispEdges;
 }
 
-button{
+button#normalize{
   margin: 25px;
   margin-bottom: 0px;
 }
