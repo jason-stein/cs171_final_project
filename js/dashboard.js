@@ -5,17 +5,19 @@ var parseDate = d3.timeParse("%Y");
 d3.select("#tooltip").text("Mouseover to see fields.");
 
 queue()
-    .defer(d3.csv,"data/filter_to_all_fields.csv")
-    .defer(d3.csv,"data/concentrations2.csv")
+    .defer(d3.csv,"data/filter_to_concentrations.csv")
+    .defer(d3.csv,"data/concentrations.csv")
+    .defer(d3.csv, "data/course_enrollments_test.csv")
     .await(createVis);
 
-function createVis(error, data, concentrations){
+function createVis(error, data, concentrations, test){
     if(error) throw error;
     data.forEach(function(d){
         d.ACADEMIC_YEAR = parseDate(d.ACADEMIC_YEAR)
     });
     stackedAreaChart = new StackedAreaChart('stackedareachart', data, concentrations);
     departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
+    bubbleChart = new BubbleChart('bubbleChart', test);
 }
 
 function normalizeStackedAreaChart(){

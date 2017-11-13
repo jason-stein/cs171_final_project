@@ -32,6 +32,9 @@ button#normalize{
   margin-left:80px;
 }
 
+.framed {
+    border: thin solid black;
+}
 
 
 /*

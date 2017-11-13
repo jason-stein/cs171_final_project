@@ -4,14 +4,14 @@ DepartmentTimeline = function(_parentElement, _data){
     this.displayData = [];
 
     this.initVis();
-}
+};
 
 DepartmentTimeline.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 25, right: 0, bottom: 60, left: 80 };
+    vis.margin = { top: 25, right: 0, bottom: 60, left: 20 };
 
-    vis.width = 600 - vis.margin.left - vis.margin.right
+    vis.width = $("#departmenttimeline").width() - vis.margin.left - vis.margin.right;
 
 
 
@@ -24,7 +24,7 @@ DepartmentTimeline.prototype.initVis = function(){
         .scale(vis.x);
 
     vis.wrangleData();
-}
+};
 
 DepartmentTimeline.prototype.wrangleData = function(){
     var vis = this;
