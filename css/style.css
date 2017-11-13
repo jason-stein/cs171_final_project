@@ -50,32 +50,25 @@ button#normalize{
 
 #martini-one {
     /*background: rgba(250, 250, 250, 0.85);*/
-    background: rgba(230, 230, 230, 0.95);
+    background: rgba(250, 250, 250, 0.9);
 }
 
 #martini-two {
     /*background: rgba(250, 250, 250, 0.90);*/
-    background: rgba(210, 210, 210, 95);
+    background: rgba(240, 240, 240, 0.95);
 }
 
 #martini-three {
-    background: rgba(190, 190, 190, 0.95);
+    background: rgba(225, 225, 225, 0.96);
 }
 
 #martini-four {
-    background: rgba(170, 170, 170, 0.95);
+    background: rgba(210, 210, 210, 0.98);
 }
 
-#martini-five {
-    background: rgba(150, 150, 150, 0.95);
-}
-
-#martini-six {
-    background: rgba(130, 130, 130, 0.95);
-}
 
 #dash-board {
-    background: rgba(250, 250, 250, 0.95);
+    background: rgba(240, 240, 240, 1);
 }
 
 .vertical-align {
