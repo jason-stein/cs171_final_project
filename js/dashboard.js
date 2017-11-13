@@ -5,8 +5,8 @@ var parseDate = d3.timeParse("%Y");
 d3.select("#tooltip").text("Mouseover to see fields.");
 
 queue()
-    .defer(d3.csv,"data/filter_to_concentrations.csv")
-    .defer(d3.csv,"data/concentrations.csv")
+    .defer(d3.csv,"data/filter_to_all_fields.csv")
+    .defer(d3.csv,"data/concentrations2.csv")
     .await(createVis);
 
 function createVis(error, data, concentrations){
