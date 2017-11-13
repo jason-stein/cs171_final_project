@@ -37,14 +37,12 @@ BubbleChart.prototype.initVis = function(){
 BubbleChart.prototype.wrangleData = function() {
     var vis = this;
 
-    console.log(vis.data);
+/*
+    vis.displayData = d3.csv
 
-    vis.data.forEach(function(d){
-        vis.displayData.push({
-            key: d.id,
-            value: +d.course_enrollment
-        });
-    });
+    */
+
+
     vis.updateVis();
 };
 

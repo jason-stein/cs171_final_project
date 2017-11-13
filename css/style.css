@@ -128,13 +128,20 @@ h4 {
     font-style: italic;
 }
 
+h5 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 
 /*
     STORYTELLING ETC.
 */
 
 .StoryTellingSVG {
-    width: 100%;
+    width: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
 }
 
 
