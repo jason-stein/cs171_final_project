@@ -7,7 +7,7 @@ d3.select("#tooltip").text("Mouseover to see fields.");
 var range
 
 queue()
-    .defer(d3.csv,"data/schools_1990_2017.csv")
+    .defer(d3.csv,"data/all_fields_all_years.csv")
     .defer(d3.csv,"data/concentrations.csv")
     // .defer(d3.csv, "data/course_enrollments_test.csv")
     .await(createVis);
