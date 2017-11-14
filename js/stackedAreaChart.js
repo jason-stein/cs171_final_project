@@ -2,10 +2,9 @@
 //
 // expects data in raw row format as provided from original CSV
 
-StackedAreaChart = function(_parentElement, _data, _fields){
+StackedAreaChart = function(_parentElement, _data){
     this.parentElement = _parentElement;
     this.data = _data;
-    this.fields = _fields;
     this.filterData = _data;
     this.displayData = [];
     this.normalize = false;
@@ -19,7 +18,7 @@ StackedAreaChart.prototype.initVis = function(){
 
     console.log(vis.data);
 
-    vis.margin = { top: 40, right: 0, bottom: 60, left: 80 };
+    vis.margin = { top: 40, right: 25, bottom: 60, left: 80 };
 
     vis.width = $("#stackedareachart").width() - vis.margin.left - vis.margin.right,
     vis.height = 350 - vis.margin.top - vis.margin.bottom;
@@ -118,9 +117,9 @@ StackedAreaChart.prototype.wrangleData = function(){
     // d3.stack wants zeros for empty fields
     // (could infer but whatever Mike Bostock)
     vis.displayData.forEach(function(d){
-        vis.fields.forEach(function(e){
-            if (!d.hasOwnProperty(e.Concentration)){
-                d[e.Concentration] = 0;
+        vis.keys.forEach(function(e){
+            if (!d.hasOwnProperty(e)){
+                d[e] = 0;
             }
         });
     });
@@ -171,6 +170,7 @@ StackedAreaChart.prototype.updateVis = function(){
     // colorscale domain
     // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
+    console.log(vis.keys)
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")

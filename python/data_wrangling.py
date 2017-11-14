@@ -9,16 +9,19 @@ import operator
 ################################################################################
 
 # constants
-MIN_YEAR = 1930
-MAX_YEAR = 2019
+MIN_YEAR = 1990
+MAX_YEAR = 2017
 
 # files
 FIELDS = '../data/all_fields.csv'      # CSV of fields (e.g. concentrations.csv)
 INPUT = '../data/raw.csv'                                   # main CSV: all data
-OUTPUT = '../data/all_fields_all_years.csv'              # where to write out to
+OUTPUT = '../data/schools_1990_2017.csv'              # where to write out to
 
+# schools to put in output
+# set to empty list for all
+SCHOOLS = ['FAS']
 # columns to put in output
-COLUMNS = ['ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION', 'COURSE_TITLE_LONG']
+COLUMNS = ['ACAD_GROUP', 'ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION']
 
 ################################################################################
 #                                                                              #
@@ -46,17 +49,16 @@ with open(INPUT) as infp:
         # look at everything but...
         reader = csv.DictReader(infp)
         # only write the colums we care to keep
-        writer = csv.DictWriter(outfp, fieldnames=columns)
+        writer = csv.DictWriter(outfp, fieldnames=COLUMNS)
         # let's have nice CSVs thanks
         writer.writeheader()
         # now, one row at a time,
         for line in reader:
             # FAS only
-            if line['ACAD_GROUP'] != 'FAS':
+            if SCHOOLS and line['ACAD_GROUP'] not in SCHOOLS:
                 continue
             # only years we like
-            if int(line['ACADEMIC_YEAR']) < MIN_YEAR
-                or int(line['ACADEMIC_YEAR']) > MAX_YEAR:
+            if int(line['ACADEMIC_YEAR']) < MIN_YEAR or int(line['ACADEMIC_YEAR']) > MAX_YEAR:
                 continue
             # and only departments we like
             # if line['CLASS_ACAD_ORG_DESCRIPTION'] not in concentrations:
@@ -64,7 +66,7 @@ with open(INPUT) as infp:
             if line['CLASS_ACAD_ORG_DESCRIPTION'] == 'No Department':
                 continue
             # so we care about this line, copy out the fields we want
-            writeline = {column: line[column] for column in columns}
+            writeline = {column: line[column] for column in COLUMNS}
             writer.writerow(writeline)
             # this is just for display. departments and total counts
             if line['CLASS_ACAD_ORG_DESCRIPTION'] not in dic:
