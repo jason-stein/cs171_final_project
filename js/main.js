@@ -1,4 +1,4 @@
-
+introJs().showHints();
 
 function CourseCount() {
     $('#CourseCount')

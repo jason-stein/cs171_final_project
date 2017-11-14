@@ -11,18 +11,18 @@ StackedAreaChart = function(_parentElement, _data, _fields){
     this.normalize = false;
 
     this.initVis();
-}
+};
 
 // all one-time init business
 StackedAreaChart.prototype.initVis = function(){
     var vis = this;
 
-    console.log(vis.data)
+    console.log(vis.data);
 
     vis.margin = { top: 40, right: 0, bottom: 60, left: 80 };
 
-    vis.width = 600 - vis.margin.left - vis.margin.right,
-    vis.height = 400 - vis.margin.top - vis.margin.bottom;
+    vis.width = $("#stackedareachart").width() - vis.margin.left - vis.margin.right,
+    vis.height = 350 - vis.margin.top - vis.margin.bottom;
 
 
     // SVG drawing area
@@ -58,12 +58,12 @@ StackedAreaChart.prototype.initVis = function(){
 
     vis.ylab = vis.svg.append("text")
         .attr("transform", "translate(-50," + vis.height / 2 + ")rotate(270)")
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "middle");
 
     vis.xlab = vis.svg.append("text")
         .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height + 40) + ")")
         .attr("text-anchor", "middle")
-        .text("Year")
+        .text("Year");
 
     // area constructor
     vis.area = d3.area()
@@ -77,13 +77,13 @@ StackedAreaChart.prototype.initVis = function(){
         .attr("y", -10);
 
     vis.wrangleData();
-}
+};
 
 // data manipulation
 StackedAreaChart.prototype.wrangleData = function(){
     var vis = this;
 
-    vis.displayData = []
+    vis.displayData = [];
 
     // nest data by year first
     vis.nestData = d3.nest()
@@ -97,23 +97,23 @@ StackedAreaChart.prototype.wrangleData = function(){
             .key(function(d){ return d.CLASS_ACAD_ORG_DESCRIPTION })
             .rollup(function(leaves){ return leaves.length; })
             .entries(year.values);
-        var object = {}
+        var object = {};
         array.forEach(function(d){
             object[d.key] = d.value;
-        })
+        });
         vis.displayData.push(object);
         vis.displayData[i].year = year.key
     });
 
     // get all the concentrations we care about
-    vis.keys = []
-    tmp = {}
+    vis.keys = [];
+    tmp = {};
     vis.data.forEach(function(d){
         if(!tmp.hasOwnProperty(d.CLASS_ACAD_ORG_DESCRIPTION)){
             vis.keys.push(d.CLASS_ACAD_ORG_DESCRIPTION);
             tmp[d.CLASS_ACAD_ORG_DESCRIPTION] = 1;
         }
-    })
+    });
 
     // d3.stack wants zeros for empty fields
     // (could infer but whatever Mike Bostock)
@@ -132,11 +132,11 @@ StackedAreaChart.prototype.wrangleData = function(){
 
     // normalize?
     if(vis.normalize){
-        vis.ylab.text("Fraction of Courses")
+        vis.ylab.text("Fraction of Courses");
         vis.stack.offset(d3.stackOffsetExpand)
     }
     else{
-        vis.ylab.text("Number of Courses")
+        vis.ylab.text("Number of Courses");
         vis.stack = d3.stack()
         .keys(vis.keys);
     }
@@ -149,10 +149,10 @@ StackedAreaChart.prototype.wrangleData = function(){
         d.forEach(function(e){
             e.data.year = new Date(e.data.year);
         })
-    })
+    });
 
     vis.updateVis()
-}
+};
 
 // dynamic shit
 StackedAreaChart.prototype.updateVis = function(){
@@ -190,14 +190,14 @@ StackedAreaChart.prototype.updateVis = function(){
         })
         .attr("fill", function(d){
             return vis.colorScale(d.key);
-        })
+        });
 
     categories.exit().remove();
 
     // Call axis functions with the new domain
     vis.svg.select(".x-axis").transition().duration(800).call(vis.xAxis);
     vis.svg.select(".y-axis").transition().duration(800).call(vis.yAxis);
-}
+};
 
 StackedAreaChart.prototype.selectionChanged = function(brushRegion){
     var vis = this;
@@ -205,8 +205,8 @@ StackedAreaChart.prototype.selectionChanged = function(brushRegion){
     // Filter data accordingly without changing the original data
     vis.filterData = vis.data.filter(function(d){
         return d.ACADEMIC_YEAR >= brushRegion[0] && d.ACADEMIC_YEAR <= brushRegion[1]
-    })
+    });
 
     // Update the visualization
     vis.wrangleData();
-}
+};
