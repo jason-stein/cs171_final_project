@@ -2,23 +2,36 @@
 import csv
 import operator
 
+################################################################################
+#                                                                              #
+# THESE ARE THINGS YOU MIGHT WANT TO CHANGE                                    #
+#                                                                              #
+################################################################################
+
 # constants
-MIN_YEAR = 1990
-MAX_YEAR = 2017
+MIN_YEAR = 1930
+MAX_YEAR = 2019
 
 # files
-FIELDS_OF_INTEREST = '../data/concentrations2.csv'
-RAW = '../data/raw.csv'
-CLEAN = '../data/filter_to_all_fields.csv'
+FIELDS = '../data/all_fields.csv'      # CSV of fields (e.g. concentrations.csv)
+INPUT = '../data/raw.csv'                                   # main CSV: all data
+OUTPUT = '../data/all_fields_all_years.csv'              # where to write out to
 
+# columns to put in output
+COLUMNS = ['ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION', 'COURSE_TITLE_LONG']
+
+################################################################################
+#                                                                              #
+# THESE ARE THINGS YOU PROBABLY WON'T CHANGE                                   #
+#                                                                              #
+################################################################################
 
 # data structures
 dic = {}
 concentrations = set()
-columns = ['ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION', 'COURSE_TITLE_LONG']
 
 # read concentrations (or whatever depts we care about)
-with open(FIELDS_OF_INTEREST) as fp:
+with open(FIELDS) as fp:
     reader = csv.reader(fp)
     # it has a header and i didn't bother using a DictReader so skip
     next(reader)
@@ -28,8 +41,8 @@ with open(FIELDS_OF_INTEREST) as fp:
 # big moves...
 # open raw data
 # open outfile
-with open(RAW) as infp:
-    with open(CLEAN, 'w') as outfp:
+with open(INPUT) as infp:
+    with open(OUTPUT, 'w') as outfp:
         # look at everything but...
         reader = csv.DictReader(infp)
         # only write the colums we care to keep
@@ -42,7 +55,8 @@ with open(RAW) as infp:
             if line['ACAD_GROUP'] != 'FAS':
                 continue
             # only years we like
-            if int(line['ACADEMIC_YEAR']) < MIN_YEAR or int(line['ACADEMIC_YEAR']) > MAX_YEAR:
+            if int(line['ACADEMIC_YEAR']) < MIN_YEAR
+                or int(line['ACADEMIC_YEAR']) > MAX_YEAR:
                 continue
             # and only departments we like
             # if line['CLASS_ACAD_ORG_DESCRIPTION'] not in concentrations:
