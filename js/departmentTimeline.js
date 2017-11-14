@@ -1,7 +1,7 @@
 DepartmentTimeline = function(_parentElement, _data){
     this.parentElement = _parentElement;
     this.data = _data;
-    this.displayData = [];
+    this.displayData = _data;
 
     this.initVis();
 };
@@ -9,7 +9,7 @@ DepartmentTimeline = function(_parentElement, _data){
 DepartmentTimeline.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 25, right: 0, bottom: 60, left: 20 };
+    vis.margin = { top: 25, right: 25, bottom: 60, left: 20 };
 
     vis.width = $("#departmenttimeline").width() - vis.margin.left - vis.margin.right;
 
@@ -17,8 +17,7 @@ DepartmentTimeline.prototype.initVis = function(){
 
 
     vis.x = d3.scaleTime()
-        .range([0, vis.width])
-        .domain(d3.extent(vis.data, function(d) { return d.ACADEMIC_YEAR; }));
+        .range([0, vis.width]);
 
     vis.xAxis = d3.axisBottom()
         .scale(vis.x);
@@ -29,12 +28,14 @@ DepartmentTimeline.prototype.initVis = function(){
 DepartmentTimeline.prototype.wrangleData = function(){
     var vis = this;
 
+    vis.x.domain(d3.extent(vis.displayData, function(d) { return d.ACADEMIC_YEAR; }));
+
     vis.displayData = d3.nest()
         .key(function(d){ return d.CLASS_ACAD_ORG_DESCRIPTION })
         .rollup(function(leaves){ return d3.extent(leaves, function(d){
             return d.ACADEMIC_YEAR
         }); })
-        .entries(vis.data);
+        .entries(vis.displayData);
 
     vis.updateVis();
 }
@@ -44,6 +45,7 @@ DepartmentTimeline.prototype.updateVis = function(){
 
     vis.height = 5 * vis.displayData.length;
     // SVG drawing area
+    d3.select("#" + vis.parentElement).html("")
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -51,13 +53,13 @@ DepartmentTimeline.prototype.updateVis = function(){
         .attr("transform", "translate(" + vis.margin.left +
               "," + vis.margin.top + ")");
 
-    vis.brush = d3.brushX()
-        .extent([[0, 0], [vis.width, vis.height]])
-        .on("brush", brushed);
+    // vis.brush = d3.brushX()
+    //     .extent([[0, 0], [vis.width, vis.height]])
+    //     .on("brush", brushed);
 
-    vis.svg.append("g")
-        .attr("class", "brush")
-        .call(vis.brush);
+    // vis.svg.append("g")
+    //     .attr("class", "brush")
+    //     .call(vis.brush);
 
     vis.svg.append("g")
         .attr("class", "x-axis axis")
@@ -92,5 +94,18 @@ DepartmentTimeline.prototype.updateVis = function(){
         })
         .attr("fill", "steelblue")
         // .attr("pointer-events", "none");
+
+    bars.exit().remove()
 }
 
+DepartmentTimeline.prototype.selectionChanged = function(brushRegion){
+    var vis = this;
+
+    // Filter data accordingly without changing the original data
+    vis.displayData = vis.data.filter(function(d){
+        return d.ACADEMIC_YEAR >= brushRegion[0] && d.ACADEMIC_YEAR <= brushRegion[1]
+    });
+
+    // Update the visualization
+    vis.wrangleData();
+};

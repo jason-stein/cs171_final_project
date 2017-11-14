@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery.fullpage.css">
     <link rel="stylesheet" href="css/introjs.css">
+    <link href="css/nouislider.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
 
@@ -105,7 +106,11 @@
             <div class ="section" id="martini-two">
                 <h1>Wrangling the Data</h1>
                 <div class="row vertical-align">
-                    <div class="col-xs-6 col-xs-offset-1 StoryTellingSVG"><img src="img/MartiniStory_AreaChart.svg" class="StoryTellingSVG"></div>
+                    <div class="col-xs-6 col-xs-offset-1 StoryTellingSVG">
+
+                        <img src="img/MartiniStory_AreaChart.svg" class="StoryTellingSVG">
+
+                    </div>
                     <div class="col-xs-4">
                         <ul>
                             <li><h5>This area chart represents all the courses offered at Harvard since 1931.</h5></li>
@@ -183,21 +188,7 @@
             <div class ="section" id="dash-board">
                 <h1>Dashboard</h1>
                 <div class="row">
-<<<<<<< HEAD
-                    <div class="col-xs-6">
-                        <h2>Stacked Area Chart</h2>
-                        <div id="stackedareachart"><button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br></div>
-                    </div>
-                    <div class="col-xs-6">
-                        <h2>Brush Element</h2>
-                        <span id="tooltip"></span>
-                        <div id="departmenttimeline"></div>
-                    </div>
-                </div>
-                <h2>AT LEAST 3 MORE VISUALIZATIONS PER SKETCHES & STORYBOARD WILL BE PLACED HERE</h2>
-
-
-=======
+                    <div class="sliders" id="slider" style="margin:50px"></div>
                     <div class="col-xs-5 col-xs-offset-1" id="stackedareachart"></div>
                     <div class="col-xs-5">
                         <div><button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br></div>
@@ -210,7 +201,6 @@
                     <div class="col-xs-3 framed" id="networkChart"></div>
                     <div class="col-xs-4 framed" id="overlapChart"></div>
                 </div>
->>>>>>> 07bfc6e0e393f5707414430890cc981bad6ab418
             </div>
         </div>
     </div>
@@ -223,6 +213,7 @@
     <script src="js/jquery.fullpage.js"></script>
     <script src="js/queue.v1.min.js"></script>
     <script src="js/intro.js"></script>
+    <script src="js/nouislider.js"></script>
 
     <!-- own JS files -->
     <script src="js/fullpageCustomization.js"></script>
@@ -234,6 +225,8 @@
     <script src="js/dashboard.js"></script>
     <script src="js/departmentTimeline.js"></script>
     <script src="js/bubbleChart.js"></script>
+
+    <script src="js/MartiniStory_AreaChart.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/vivus@0.4.3/dist/vivus.min.js"></script>
 
