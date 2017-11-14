@@ -15,7 +15,7 @@ MAX_YEAR = 2017
 # files
 FIELDS = '../data/all_fields.csv'      # CSV of fields (e.g. concentrations.csv)
 INPUT = '../data/raw.csv'                                   # main CSV: all data
-OUTPUT = '../data/schools_1990_2017.csv'              # where to write out to
+OUTPUT = '../data/all_fields_1990_2017.csv'              # where to write out to
 
 # schools to put in output
 # set to empty list for all
