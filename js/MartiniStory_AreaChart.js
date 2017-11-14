@@ -22,6 +22,7 @@ d3.csv("../data/all_fields_all_years.csv", function(RawData) {
 
     // Define svg_areaChart as a child-element (g) of the drawing area and include spaces
     var svg_areaChart = d3.select("#MartiniStory_AreaChart").append("svg")
+        .attr("id", "my-svg")
         .attr("width", areaChartWidth + margin.left + margin.right)
         .attr("height", areaChartHeight + margin.top + margin.bottom)
         .append("g")
@@ -119,6 +120,19 @@ d3.csv("../data/all_fields_all_years.csv", function(RawData) {
         .attr("transform", "translate(" + (areaChartWidth / 2) + "," + (areaChartHeight + 40) + ")")
         .attr("text-anchor", "middle")
         .text("Year");
+
+/*    svg_areaChart.append("circle")
+        .attr("cx", areaChartWidth / 2)
+        .attr("cy", areaChartHeight / 2)
+        .attr("r", 0)
+        .attr("data-hint", "hallo");
+
+    introJs().showHints();*/
+    var myVivus = new Vivus('my-svg');
+    myVivus
+        .stop()
+        .reset()
+        .play(2)
 
 });
 
