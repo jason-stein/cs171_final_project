@@ -7,6 +7,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery.fullpage.css">
+    <link rel="stylesheet" href="css/introjs.css">
 
     <!-- Custom fonts for this template -->
 
@@ -27,8 +28,7 @@
         <!--  -->
         <div id="fullpage">
             <!-- INTRO -->
-            <div class="section" id="CoverPage">
-
+            <div class="section" id="CoverPage" data-intro="Get it, use it.">
                 <h1>The Knowledge Producing Machine</h1>
                 <h2>Mapping Harvard's Curricular History</h2>
 
@@ -54,8 +54,8 @@
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
                     </div>
-
                 </div>
+
             </div>
 
 
@@ -87,8 +87,15 @@
 
                             </div>
                         </div>
-                        <div>
+                        <div style="margin-bottom: 5%">
                             <p style="text-align: right; font-style: italic">Between 1930-2017</p>
+                        </div>
+                        <div class="col-xs-12  button-container">
+                            <p class="btn-txt">Wrangling the Data</p>
+                            <!--href="dashboard.html"-->
+                            <a href="#MartiniTwo" class="btn btn-circle">
+                                <i class="fa fa-angle-double-down animated"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -98,13 +105,12 @@
             <div class ="section" id="martini-two">
                 <h1>Wrangling the Data</h1>
                 <div class="row vertical-align">
-                    <div class="col-xs-6 col-xs-offset-1"><img src="img/DataWranglingOne.svg" class="StoryTellingSVG"></div>
+                    <div class="col-xs-6 col-xs-offset-1 StoryTellingSVG"><img src="img/MartiniStory_AreaChart.svg" class="StoryTellingSVG"></div>
                     <div class="col-xs-4">
                         <ul>
                             <li><h5>This area chart represents all the courses offered at Harvard since 1931.</h5></li>
                             <li><h5>Notice that prior to the 1990s the data becomes quite sparse.</h5></li>
                             <li><h5>Though there were classes offered before the 1990s we will focus our attention on the most complete data set</h5></li>
-                            <li><h5 style="color: red">TODO: all courses after 1990 should be colored </h5></li>
                         </ul>
                     </div>
                 </div>
@@ -121,7 +127,7 @@
             <div class ="section" id="martini-three">
                 <h1>Wrangling the Data - Part Two</h1>
                 <div class="row vertical-align">
-                    <div class="col-xs-6 col-xs-offset-1"><img src="img/stacked1990color.svg" class="StoryTellingSVG"></div>
+                    <div class="col-xs-6 col-xs-offset-1"><object id="my-svg" type="image/svg+xml" data="img/stacked1990color.svg"></object></div>
                     <div class="col-xs-4">
                         <ul>
                             <li><h5>Now the data is aggregated into a more complete dataset from 1992 to 2017.</h5></li>
@@ -132,6 +138,13 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-xs-12  button-container">
+                    <p class="btn-txt">Explore</p>
+                    <!--href="dashboard.html"-->
+                    <a href="#MartiniFour" class="btn btn-circle">
+                        <i class="fa fa-angle-double-down animated"></i>
+                    </a>
+                </div>
             </div>
 
 
@@ -141,7 +154,7 @@
                 <h1>Mini Dashboard</h1>
 
                 <div class="row vertical-align">
-                    <div class="col-xs-6 col-xs-offset-1"><object id="my-svg" type="image/svg+xml" data="img/stacked1990color.svg"></object></div>
+                    <div class="col-xs-6 col-xs-offset-1"><img src="img/minidashboard.png"></div>
                     <div class="col-xs-4">
                         <ul>
                             <li><h5>Display actual d3 area chart on the left. Display d3 gantt chart on the left, after clicking on a department </h5></li>
@@ -154,18 +167,14 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-xs-12  button-container">
+                    <p class="btn-txt">Advanced Dashboard</p>
+                    <!--href="dashboard.html"-->
+                    <a href="#DashBoard" class="btn btn-circle">
+                        <i class="fa fa-angle-double-down animated"></i>
+                    </a>
+                </div>
             </div>
-
-            <!-- (5) DEPARTMENT OVERVIEW, PROPORTIONAL -->
-            <div class ="section" id="martini-five">
-                <h1>STACKED AREA CHART, PROPORTIONAL</h1>
-            </div>
-
-            <!-- (6) MINIATURE DASHBOARD -->
-            <div class ="section" id="martini-six">
-                <h1>STACKED AREA CHART & COURSE VIEW INTRO</h1>
-            </div>
-
 
 
 
@@ -174,6 +183,7 @@
             <div class ="section" id="dash-board">
                 <h1>Dashboard</h1>
                 <div class="row">
+<<<<<<< HEAD
                     <div class="col-xs-6">
                         <h2>Stacked Area Chart</h2>
                         <div id="stackedareachart"><button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br></div>
@@ -187,9 +197,22 @@
                 <h2>AT LEAST 3 MORE VISUALIZATIONS PER SKETCHES & STORYBOARD WILL BE PLACED HERE</h2>
 
 
+=======
+                    <div class="col-xs-5 col-xs-offset-1" id="stackedareachart"></div>
+                    <div class="col-xs-5">
+                        <div><button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br></div>
+                        <div id="tooltip" style="text-align: right"></div>
+                        <div id="departmenttimeline"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-1 framed" id="bubbleChart"></div>
+                    <div class="col-xs-3 framed" id="networkChart"></div>
+                    <div class="col-xs-4 framed" id="overlapChart"></div>
+                </div>
+>>>>>>> 07bfc6e0e393f5707414430890cc981bad6ab418
             </div>
         </div>
-
     </div>
 
 
@@ -199,6 +222,7 @@
     <script src="js/d3.js"></script>
     <script src="js/jquery.fullpage.js"></script>
     <script src="js/queue.v1.min.js"></script>
+    <script src="js/intro.js"></script>
 
     <!-- own JS files -->
     <script src="js/fullpageCustomization.js"></script>
@@ -209,6 +233,7 @@
     <script src="js/stackedAreaChart.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/departmentTimeline.js"></script>
+    <script src="js/bubbleChart.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/vivus@0.4.3/dist/vivus.min.js"></script>
 
