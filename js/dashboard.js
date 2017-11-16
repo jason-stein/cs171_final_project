@@ -4,14 +4,14 @@ var parseDate = d3.timeParse("%Y");
 
 d3.select("#tooltip").text("Mouseover to see fields.");
 
-var range
+var range;
 
 queue()
     .defer(d3.csv,"data/all_fields_1990_2017.csv")
-    // .defer(d3.csv, "data/course_enrollments_test.csv")
+    .defer(d3.csv, "data/course_enrollments_test.csv")
     .await(createVis);
 
-function createVis(error, data, test){
+function createVis(error, data, bubbleData){
     if(error) throw error;
 
     range = document.getElementById('slider');
@@ -50,7 +50,7 @@ function createVis(error, data, test){
     });
     stackedAreaChart = new StackedAreaChart('stackedareachart', data);
     departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
-    // bubbleChart = new BubbleChart('bubbleChart', test);
+    bubbleChart = new BubbleChart('bubbleChart', bubbleData);
 }
 
 function normalizeStackedAreaChart(){

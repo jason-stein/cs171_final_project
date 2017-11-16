@@ -92,7 +92,7 @@ DepartmentTimeline.prototype.updateVis = function(){
         .attr("width", function(d){
             return vis.x(d.value[1]) - vis.x(d.value[0]);
         })
-        .attr("fill", "steelblue")
+        .attr("fill", "steelblue");
         // .attr("pointer-events", "none");
 
     bars.exit().remove()

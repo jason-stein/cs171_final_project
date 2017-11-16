@@ -170,7 +170,22 @@ StackedAreaChart.prototype.updateVis = function(){
     // colorscale domain
     // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
-    console.log(vis.keys)
+
+
+/*
+    JASOOOOOONNNN!!!
+    console.log(tmpArray);
+    var tmpArray = [];
+    vis.keys.forEach(function (d){
+        tmpArray.push(
+
+        )
+    });*/
+
+
+    //console.log(vis.keys);
+
+
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
