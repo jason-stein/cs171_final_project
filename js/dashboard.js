@@ -64,3 +64,4 @@ function slid() {
     stackedAreaChart.selectionChanged(selectionRange);
     departmentTimeline.selectionChanged(selectionRange);
 }
+
