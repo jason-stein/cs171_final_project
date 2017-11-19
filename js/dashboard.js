@@ -15,7 +15,7 @@ function createVis(error, data, bubbleData){
     if(error) throw error;
 
     range = document.getElementById('slider');
-    var extent = d3.extent(data, function(d){ return +d.ACADEMIC_YEAR })
+    var extent = d3.extent(data, function(d){ return +d.ACADEMIC_YEAR });
     console.log(extent);
     noUiSlider.create(range, {
             start: extent,
