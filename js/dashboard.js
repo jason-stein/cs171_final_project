@@ -43,12 +43,13 @@ function createVis(error, data, bubbleData){
         });
 
         // callback for slider: update
-        range.noUiSlider.on('slide', slid)
+        range.noUiSlider.on('slide', slid);
 
     data.forEach(function(d){
         d.ACADEMIC_YEAR = parseDate(d.ACADEMIC_YEAR)
     });
     stackedAreaChart = new StackedAreaChart('stackedareachart', data);
+    DetailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
     departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
     bubbleChart = new BubbleChart('bubbleChart', bubbleData);
 }
@@ -60,8 +61,9 @@ function normalizeStackedAreaChart(){
 
 function slid() {
     var selectionRange = range.noUiSlider.get();
-    selectionRange = selectionRange.map(function(d){ return parseDate(d) })
+    selectionRange = selectionRange.map(function(d){ return parseDate(d) });
     stackedAreaChart.selectionChanged(selectionRange);
+    DetailedStackedAreaChart.selectionChanged(selectionRange);
     departmentTimeline.selectionChanged(selectionRange);
 }
 

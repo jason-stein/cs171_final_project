@@ -186,21 +186,59 @@
             <!-- DASHBOARD -->
 
             <div class ="section" id="dash-board">
-                <h1>Dashboard</h1>
-                <div class="row">
+                <div class="slide">
 
-                    <div class="sliders" id="slider" style="margin:50px"></div>
-                    <div class="col-xs-5 col-xs-offset-1" id="stackedareachart"></div>
-                    <div class="col-xs-5">
-                        <div><button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button><br></div>
-                        <div id="tooltip" style="text-align: right"></div>
-                        <div id="departmenttimeline"></div>
+                    <!-- Header -->
+                    <div id="dynamicHeader" class="row">
+                        <h1>
+                            <span id="DashboardHeader">Dashboard</span>
+                            <span id="DashboardMouseOverHeader"></span>
+                            <span id="DashBoardClickHeader"></span>
+                        </h1>
                     </div>
+
+                    <!-- button - we have to find a nice place for that one -->
+                    <div class="col-xs-2 col-xs-offset-5" style="margin-bottom: -2%; text-align: center">
+                        <button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button>
+                    </div>
+
+                    <!-- upper row -->
+                    <div class="row">
+                        <div><br></div>
+                        <div class="col-xs-5 col-xs-offset-1" id="stackedareachart" style="text-align: center"><h3>Department Overview</h3></div>
+                        <div class="col-xs-5">
+
+                           <!-- <div id="tooltip" style="text-align: right"></div>-->
+                            <!--<div id="departmenttimeline"></div>-->
+                        </div>
+                    </div>
+
+                    <!-- slider -->
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <div class="sliders" id="slider" style="margin-bottom: 20px"></div>
+                    </div>
+
+                    <!-- lower row -->
+                    <div class="row">
+                        <div class="col-xs-3 col-xs-offset-1 framed" id="bubbleChart"></div>
+                        <div class="col-xs-3 framed" id="networkChart"><a href="#DashBoard/1" class="btn btn-circle">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a></div>
+                        <div class="col-xs-4 framed" id="overlapChart"></div>
+                    </div>
+
                 </div>
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-1 framed" id="bubbleChart"></div>
-                    <div class="col-xs-3 framed" id="networkChart"></div>
-                    <div class="col-xs-4 framed" id="overlapChart"></div>
+
+                <!-- Detailed Stacked Area Chart View -->
+                <div class="slide">
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-1" id="DetailedStackedAreaChart"></div>
+                        <div class="col-xs-5" id="departmenttimeline"></div>
+                        Back to Dashboard 1
+                        <a href="#DashBoard/0" class="btn btn-circle">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

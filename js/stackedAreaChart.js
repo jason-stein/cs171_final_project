@@ -20,7 +20,7 @@ StackedAreaChart.prototype.initVis = function(){
 
     vis.margin = { top: 40, right: 25, bottom: 60, left: 80 };
 
-    vis.width = $("#stackedareachart").width() - vis.margin.left - vis.margin.right,
+    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
     vis.height = 350 - vis.margin.top - vis.margin.bottom;
 
 
@@ -185,7 +185,7 @@ StackedAreaChart.prototype.updateVis = function(){
 
     //console.log(vis.keys);
 
-
+    var toolTipClickSwitch = false;
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
@@ -194,11 +194,46 @@ StackedAreaChart.prototype.updateVis = function(){
     categories.enter().append("path")
         .attr("class", "area")
         .merge(categories)
-        .on("mouseover", function(d, i){
-            d3.select("#tooltip").text(d.key);
+        .on('mouseover', function (d) {
+            if(toolTipClickSwitch === true) {
+                document.getElementById("DashboardHeader").style.display = 'none';
+                document.getElementById("DashBoardClickHeader").style.display = 'none';
+
+            }
+            document.getElementById("DashboardHeader").style.display = 'none';
+            document.getElementById("DashboardMouseOverHeader").style.display = 'inline';
+            document.getElementById("DashboardMouseOverHeader").innerHTML = d.key;
         })
-        .on("mouseout", function(d){
-            d3.select("#tooltip").text("Mouseover to see fields.");
+        .on('mouseout', function () {
+            if(toolTipClickSwitch === true) {
+                document.getElementById("DashBoardClickHeader").style.display = 'inline';
+                document.getElementById("DashboardMouseOverHeader").style.display = 'none';
+            }
+            else {
+                document.getElementById("DashboardHeader").style.display = 'inline';
+                document.getElementById("DashboardMouseOverHeader").style.display = 'none';
+            }
+        })
+        .on("click", function (d) {
+
+            // activating 'click switch'
+            if (!toolTipClickSwitch){
+                toolTipClickSwitch = true;
+                console.log("the switch showed false, because you clicked on a department for the first time or " +
+                            "you deselected a department by clicking twice. New value of the switch: " +
+                            toolTipClickSwitch);
+            }
+
+            // allow deselection while making sure that selection still works on the first click
+            if(document.getElementById("DashBoardClickHeader").innerHTML === d.key){
+                console.log("you just deselected " + d.key);
+                toolTipClickSwitch = !toolTipClickSwitch;
+            }
+            else {
+                document.getElementById("DashboardMouseOverHeader").style.display = 'none';
+                document.getElementById("DashBoardClickHeader").innerHTML = d.key;
+                console.log("you just selected " + d.key);
+            }
         })
         .attr("d", function(d) {
             return vis.area(d);
