@@ -16,7 +16,8 @@ StackedAreaChart = function(_parentElement, _data){
 StackedAreaChart.prototype.initVis = function(){
     var vis = this;
 
-    console.log(vis.data);
+    vis.selected = "";
+    vis.toolTipClickSwitch = false;
 
     vis.margin = { top: 40, right: 25, bottom: 60, left: 80 };
 
@@ -185,61 +186,53 @@ StackedAreaChart.prototype.updateVis = function(){
 
     //console.log(vis.keys);
 
-    var toolTipClickSwitch = false;
-
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
         .data(vis.displayData);
 
+    var dashboardHeader = document.getElementById("DashboardHeader");
+
     categories.enter().append("path")
         .attr("class", "area")
         .merge(categories)
-        .on('mouseover', function (d) {
-            if(toolTipClickSwitch === true) {
-                document.getElementById("DashboardHeader").style.display = 'none';
-                document.getElementById("DashBoardClickHeader").style.display = 'none';
-
+        .on("mouseover", function (d) {
+            if(!vis.toolTipClickSwitch){
+                dashboardHeader.innerHTML = d.key;
             }
-            document.getElementById("DashboardHeader").style.display = 'none';
-            document.getElementById("DashboardMouseOverHeader").style.display = 'inline';
-            document.getElementById("DashboardMouseOverHeader").innerHTML = d.key;
         })
-        .on('mouseout', function () {
-            if(toolTipClickSwitch === true) {
-                document.getElementById("DashBoardClickHeader").style.display = 'inline';
-                document.getElementById("DashboardMouseOverHeader").style.display = 'none';
-            }
-            else {
-                document.getElementById("DashboardHeader").style.display = 'inline';
-                document.getElementById("DashboardMouseOverHeader").style.display = 'none';
+        .on("mouseout", function () {
+            if(!vis.toolTipClickSwitch){
+                dashboardHeader.innerHTML = "Dashboard";
             }
         })
         .on("click", function (d) {
-
-            // activating 'click switch'
-            if (!toolTipClickSwitch){
-                toolTipClickSwitch = true;
-                console.log("the switch showed false, because you clicked on a department for the first time or " +
-                            "you deselected a department by clicking twice. New value of the switch: " +
-                            toolTipClickSwitch);
+            // select
+            if(!vis.toolTipClickSwitch){
+                vis.selected = d.key;
+                vis.toolTipClickSwitch = true;
             }
-
-            // allow deselection while making sure that selection still works on the first click
-            if(document.getElementById("DashBoardClickHeader").innerHTML === d.key){
-                console.log("you just deselected " + d.key);
-                toolTipClickSwitch = !toolTipClickSwitch;
+            // deselect
+            else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
+                vis.selected = "";
+                vis.toolTipClickSwitch = false;
             }
-            else {
-                document.getElementById("DashboardMouseOverHeader").style.display = 'none';
-                document.getElementById("DashBoardClickHeader").innerHTML = d.key;
-                console.log("you just selected " + d.key);
+            // reselect
+            else{
+                vis.selected = d.key;
+                dashboardHeader.innerHTML = d.key;
             }
+            vis.updateVis()
         })
         .attr("d", function(d) {
             return vis.area(d);
         })
         .attr("fill", function(d){
-            return vis.colorScale(d.key);
+            if(vis.selected === ""){
+                return vis.colorScale(d.key);
+            }
+            else{
+                return d.key === vis.selected ? vis.colorScale(d.key) : "gray";
+            }
         });
 
     categories.exit().remove();
