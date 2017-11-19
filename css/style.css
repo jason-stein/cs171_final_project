@@ -36,6 +36,10 @@
     background: rgba(240, 240, 240, 1);
 }
 
+#authors_disclaimer {
+    background: rgba(240, 240, 240, 1);
+}
+
 .vertical-align {
     display: flex;
     align-items: center;
@@ -85,6 +89,33 @@ h5 {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/*
+    AUTHOR PAGE
+ */
+.author_img {
+    max-width: 200px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.author_text {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: left;
+    color: #616161;
+    font-size: 24px;
+}
+
+.disclaimer {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-weight: 100;
+    font-size: 16px;
+    color: #6e6e6e;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+    font-style: italic;
+}
 
 /*
     STORYTELLING ETC.
