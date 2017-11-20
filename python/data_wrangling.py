@@ -88,4 +88,4 @@ for key in dic:
 sort = sorted(dic.items(), key=operator.itemgetter(1))[::-1]
 # and print (one per line for readability)
 for tup in sort:
-    print tup
+    print (tup)

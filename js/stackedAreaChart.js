@@ -177,7 +177,7 @@ StackedAreaChart.prototype.updateVis = function(){
     var dashboardHeader = document.getElementById("DashboardHeader");
 
     var childName = "gantt";
-    var childElement = document.getElementById(childName);
+    var childElement = d3.select("#" + childName);
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
