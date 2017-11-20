@@ -4,7 +4,13 @@ var parseDate = d3.timeParse("%Y");
 
 d3.select("#tooltip").text("Mouseover to see fields.");
 
+var extent;
 var range;
+
+var instructions = "<p>Mouseover to see department names. <br>\
+Click a department to isolate and get more information. <br> Click again to go back to explore.</p>";
+
+document.getElementById("gantt").innerHTML = instructions;
 
 queue()
     .defer(d3.csv,"data/all_fields_1990_2017.csv")
@@ -15,8 +21,7 @@ function createVis(error, data, bubbleData){
     if(error) throw error;
 
     range = document.getElementById('slider');
-    var extent = d3.extent(data, function(d){ return +d.ACADEMIC_YEAR });
-    console.log(extent);
+    extent = d3.extent(data, function(d){ return +d.ACADEMIC_YEAR });
     noUiSlider.create(range, {
             start: extent,
             margin: 2,
@@ -63,7 +68,7 @@ function slid() {
     var selectionRange = range.noUiSlider.get();
     selectionRange = selectionRange.map(function(d){ return parseDate(d) });
     stackedAreaChart.selectionChanged(selectionRange);
-    DetailedStackedAreaChart.selectionChanged(selectionRange);
+    // DetailedStackedAreaChart.selectionChanged(selectionRange);
     departmentTimeline.selectionChanged(selectionRange);
 }
 

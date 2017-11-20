@@ -13,9 +13,6 @@ DepartmentTimeline.prototype.initVis = function(){
 
     vis.width = $("#departmenttimeline").width() - vis.margin.left - vis.margin.right;
 
-
-
-
     vis.x = d3.scaleTime()
         .range([0, vis.width]);
 
@@ -52,14 +49,6 @@ DepartmentTimeline.prototype.updateVis = function(){
         .append("g")
         .attr("transform", "translate(" + vis.margin.left +
               "," + vis.margin.top + ")");
-
-    // vis.brush = d3.brushX()
-    //     .extent([[0, 0], [vis.width, vis.height]])
-    //     .on("brush", brushed);
-
-    // vis.svg.append("g")
-    //     .attr("class", "brush")
-    //     .call(vis.brush);
 
     vis.svg.append("g")
         .attr("class", "x-axis axis")

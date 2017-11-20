@@ -21,7 +21,7 @@ OUTPUT = '../data/all_fields_1990_2017.csv'              # where to write out to
 # set to empty list for all
 SCHOOLS = ['FAS']
 # columns to put in output
-COLUMNS = ['ACAD_GROUP', 'ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION']
+COLUMNS = ['ACAD_GROUP', 'ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION', 'COURSE_TITLE_LONG']
 
 ################################################################################
 #                                                                              #

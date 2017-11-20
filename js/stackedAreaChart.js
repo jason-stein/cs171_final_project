@@ -158,7 +158,9 @@ StackedAreaChart.prototype.wrangleData = function(){
 StackedAreaChart.prototype.updateVis = function(){
     var vis = this;
 
-    vis.x.domain(d3.extent(vis.filterData, function(d) { return d.ACADEMIC_YEAR; }));
+    var extent = d3.extent(vis.filterData, function(d) { return d.ACADEMIC_YEAR; })
+
+    vis.x.domain(extent);
 
     // get 2-d max
     vis.y.domain([0, d3.max(vis.displayData, function(d) {
@@ -172,25 +174,14 @@ StackedAreaChart.prototype.updateVis = function(){
     // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
 
+    var dashboardHeader = document.getElementById("DashboardHeader");
 
-/*
-    JASOOOOOONNNN!!!
-    console.log(tmpArray);
-    var tmpArray = [];
-    vis.keys.forEach(function (d){
-        tmpArray.push(
-
-        )
-    });*/
-
-
-    //console.log(vis.keys);
+    var childName = "gantt";
+    var childElement = document.getElementById(childName);
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
         .data(vis.displayData);
-
-    var dashboardHeader = document.getElementById("DashboardHeader");
 
     categories.enter().append("path")
         .attr("class", "area")
@@ -210,16 +201,25 @@ StackedAreaChart.prototype.updateVis = function(){
             if(!vis.toolTipClickSwitch){
                 vis.selected = d.key;
                 vis.toolTipClickSwitch = true;
+                childElement.innerHTML = "";
+                var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
+                vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
+                vis.child.selectionChanged(extent);
             }
             // deselect
             else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
                 vis.selected = "";
                 vis.toolTipClickSwitch = false;
+                childElement.innerHTML = instructions;
             }
             // reselect
             else{
                 vis.selected = d.key;
                 dashboardHeader.innerHTML = d.key;
+                childElement.innerHTML = "";
+                var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
+                vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
+                vis.child.selectionChanged(extent);
             }
             vis.updateVis()
         })
@@ -227,12 +227,7 @@ StackedAreaChart.prototype.updateVis = function(){
             return vis.area(d);
         })
         .attr("fill", function(d){
-            if(vis.selected === ""){
-                return vis.colorScale(d.key);
-            }
-            else{
-                return d.key === vis.selected ? vis.colorScale(d.key) : "gray";
-            }
+            return vis.selected === "" || vis.selected === d.key ? vis.colorScale(d.key) : "black";
         });
 
     categories.exit().remove();
@@ -244,6 +239,10 @@ StackedAreaChart.prototype.updateVis = function(){
 
 StackedAreaChart.prototype.selectionChanged = function(brushRegion){
     var vis = this;
+
+    if(vis.child){
+        vis.child.selectionChanged(brushRegion);
+    }
 
     // Filter data accordingly without changing the original data
     vis.filterData = vis.data.filter(function(d){
