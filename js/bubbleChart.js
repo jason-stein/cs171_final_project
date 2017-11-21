@@ -38,7 +38,7 @@ BubbleChart.prototype.wrangleData = function() {
     console.log(vis.data);
 
     vis.filteredData = vis.data.filter(function(d){
-       return d.ACADEMIC_YEAR === 2010 && d.CLASS_ACAD_ORG_DESCRIPTION === "Music";
+       return d.ACADEMIC_YEAR === 1990;
     });
 
     var tmpData = [];
