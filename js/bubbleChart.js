@@ -54,6 +54,19 @@ BubbleChart.prototype.wrangleData = function() {
 
     console.log(tmpData);
 
+    // vis.filteredData = vis.data.filter(function(d){
+    //    return d.ACADEMIC_YEAR === 2010 && d.CLASS_ACAD_ORG_DESCRIPTION === "Music";
+    // });
+
+    // var tmpData = [];
+    // vis.filteredData.forEach(function(d){
+    //     var tmp = {
+    //         course: d["CLASS_ACAD_ORG_DESCRIPTION"] + "." + d["COURSE_TITLE_LONG"],
+    //         course_enrollment: d["COURSE_ENROLLMENT_DATA"]
+    //     };
+    //     tmpData.push(tmp);
+    // });
+
 
     // dep.courseName, enrollment data
 
