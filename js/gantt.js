@@ -6,7 +6,7 @@ gantt = function(_parentElement, _data, _color){
     console.log(_data);
 
     this.initVis();
-}
+};
 
 gantt.prototype.initVis = function(){
     var vis = this;
@@ -32,29 +32,29 @@ gantt.prototype.initVis = function(){
 
     vis.svg.append("g")
         .attr("class", "x-axis axis")
-        .attr("transform", "translate(0," + vis.height + ")")
+        .attr("transform", "translate(0," + vis.height + ")");
 
     vis.y = d3.scaleBand()
         .range([0, vis.height])
         .paddingInner(.02);
 
     vis.wrangleData();
-}
+};
 
 gantt.prototype.wrangleData = function(){
     var vis = this;
 
-    vis.keys = []
-    tmp = {}
+    vis.keys = [];
+    tmp = {};
     vis.displayData.forEach(function(d){
         if(!tmp.hasOwnProperty(d.COURSE_TITLE_LONG)){
             tmp[d.COURSE_TITLE_LONG] = 1;
             vis.keys.push(d.COURSE_TITLE_LONG)
         }
-    })
+    });
 
     vis.updateVis();
-}
+};
 
 gantt.prototype.updateVis = function(){
     var vis = this;
@@ -87,12 +87,11 @@ gantt.prototype.updateVis = function(){
             selectedCourse = d.COURSE_TITLE_LONG;
             selectedDepartment = d.CLASS_ACAD_ORG_DESCRIPTION;
             selectedYear = d.ACADEMIC_YEAR;
+            updateBubble();
         });
 
-
     vis.svg.select(".x-axis").call(vis.xAxis);
-
-}
+};
 
 gantt.prototype.selectionChanged = function(brushRegion){
     var vis = this;

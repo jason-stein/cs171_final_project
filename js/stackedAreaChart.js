@@ -205,6 +205,9 @@ StackedAreaChart.prototype.updateVis = function(){
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
                 vis.child.selectionChanged(extent);
+
+                console.log(vis.colorScale(d.key));
+                selectedColor = vis.colorScale(d.key);
             }
             // deselect
             else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){

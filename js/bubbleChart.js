@@ -37,7 +37,7 @@ BubbleChart.prototype.initVis = function(){
 BubbleChart.prototype.wrangleData = function() {
     var vis = this;
 
-    console.log(vis.data);
+    //console.log(vis.data);
 
     vis.filteredData = vis.data.filter(function(d){
        return d.ACADEMIC_YEAR === selectedYear;
@@ -86,7 +86,13 @@ BubbleChart.prototype.updateVis = function() {
     node.append("circle")
         .attr("id", function(d) { return d.id; })
         .attr("r", function(d) { return d.r; })
-        .style("fill", function(d) { return "blue"; });
+        .style("fill", function(d) {
+           console.log(d.data);
+           if(d.data.course === selectedCourse){
+               return selectedColor
+           }
+           return "grey"
+        });
 
     node.append("clipPath")
         .attr("id", function(d) { return "clip-" + d.id; })
@@ -104,26 +110,6 @@ BubbleChart.prototype.updateVis = function() {
 
     node.append("title")
         .text(function(d) { return d.id + "\n" + format(d.course_enrollment); });
-/*    console.log("update vis is running");
-    console.log(vis.displayData);
-
-    vis.svg.append("text")
-        .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height / 2) + ")")
-        .attr("text-anchor", "middle")
-        .text("Bubble Chart");*/
-
-
-
-/*    var bubbles = vis.svg.selectAll('.course').append('circle').data(vis.displayData);
-https://bl.ocks.org/mbostock/4063269
-    bubbles.enter().append("circle")
-        .attr("class", "course")
-        .attr("x", vis.width/2)
-        .attr("y", vis.height/2)
-        .attr("r", 10);*/
-
-
-
 };
 
 
