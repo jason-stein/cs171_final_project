@@ -13,7 +13,7 @@ Click a department to isolate and get more information. <br> Click again to go b
 document.getElementById("gantt").innerHTML = instructions;
 
 queue()
-    .defer(d3.csv,"data/all_fields_1990_2017.csv")
+    .defer(d3.csv,"data/all_fields_FAS_1990_2017_EnrollmentAdded.csv")
     .defer(d3.csv, "data/course_enrollments_test.csv")
     .await(createVis);
 
@@ -56,7 +56,7 @@ function createVis(error, data, bubbleData){
     stackedAreaChart = new StackedAreaChart('stackedareachart', data);
     DetailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
     departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
-    bubbleChart = new BubbleChart('bubbleChart', bubbleData);
+    bubbleChart = new BubbleChart('bubbleChart', data);
 }
 
 function normalizeStackedAreaChart(){
