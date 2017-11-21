@@ -10,13 +10,14 @@ d3.csv("../data/all_fields_all_years.csv", function(RawData) {
 
     console.log(data);
 
+    data = fastData;
 
     // introduce margins
     var margin = {top: 10, right: 0, bottom: 50, left: 80};
 
     // define SVG Size
     var areaChartWidth = 600 - margin.left - margin.right,
-        areaChartHeight = 350 - margin.top - margin.bottom;
+        areaChartHeight = 400 - margin.top - margin.bottom;
 
     // Define svg_areaChart as a child-element (g) of the drawing area and include spaces
     var svg_areaChart = d3.select("#MartiniStory_AreaChart").append("svg")
@@ -34,8 +35,8 @@ d3.csv("../data/all_fields_all_years.csv", function(RawData) {
     // linear scale for x
     var scaleX = d3.scaleTime()
         .domain([
-            d3.min( data, function () { return parseTime(1932) } ),
-            d3.max( data, function () { return parseTime(2019) } )
+            d3.min( data, function () { return parseTime(1933) } ),
+            d3.max( data, function () { return parseTime(2017) } )
         ])
         .range([0, areaChartWidth]);
 
