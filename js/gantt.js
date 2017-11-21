@@ -72,7 +72,7 @@ gantt.prototype.updateVis = function(){
         .attr("class", "gantt")
         .merge(bars)
         .attr("x", function(d){
-            return vis.x(d.ACADEMIC_YEAR);
+            return vis.x(d.ACADEMIC_YEAR) - yearWidth / 2;
         })
         .attr("y", function(d){
             return vis.y(d.COURSE_TITLE_LONG);
