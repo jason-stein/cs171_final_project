@@ -82,6 +82,11 @@ gantt.prototype.updateVis = function(){
         .attr("fill", vis.color)
         .on("mouseover", function(d){
             console.log(d.COURSE_TITLE_LONG);
+        })
+        .on('click', function(d) {
+            selectedCourse = d.COURSE_TITLE_LONG;
+            selectedDepartment = d.CLASS_ACAD_ORG_DESCRIPTION;
+            selectedYear = d.ACADEMIC_YEAR;
         });
 
 

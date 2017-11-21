@@ -1,10 +1,12 @@
 
 
-BubbleChart = function(_parentElement, _data){
+BubbleChart = function(_parentElement, _data, _selectedCourse){
     this.parentElement = _parentElement;
     this.data = _data;
+    this.selectedCourse = _selectedCourse;
     this.displayData = [];
     this.normalize = false;
+
 
     this.initVis();
     this.updateVis();
@@ -38,40 +40,19 @@ BubbleChart.prototype.wrangleData = function() {
     console.log(vis.data);
 
     vis.filteredData = vis.data.filter(function(d){
-       return d.ACADEMIC_YEAR === 1990;
+       return d.ACADEMIC_YEAR === selectedYear;
     });
 
-    var tmpData = [];
-    vis.filteredData.forEach(function(d){
+    vis.bubbles = [];
+    vis.data.forEach(function(d){
         var tmp = {
             course: d["CLASS_ACAD_ORG_DESCRIPTION"] + "." + d["COURSE_TITLE_LONG"],
             course_enrollment: d["COURSE_ENROLLMENT_DATA"]
         };
-        tmpData.push(tmp);
+        vis.bubbles.push(tmp);
     });
 
-
-
-    console.log(tmpData);
-
-    // vis.filteredData = vis.data.filter(function(d){
-    //    return d.ACADEMIC_YEAR === 2010 && d.CLASS_ACAD_ORG_DESCRIPTION === "Music";
-    // });
-
-    // var tmpData = [];
-    // vis.filteredData.forEach(function(d){
-    //     var tmp = {
-    //         course: d["CLASS_ACAD_ORG_DESCRIPTION"] + "." + d["COURSE_TITLE_LONG"],
-    //         course_enrollment: d["COURSE_ENROLLMENT_DATA"]
-    //     };
-    //     tmpData.push(tmp);
-    // });
-
-
-    // dep.courseName, enrollment data
-
-
-    // vis.updateVis();
+    vis.updateVis();
 };
 
 
@@ -80,7 +61,7 @@ BubbleChart.prototype.wrangleData = function() {
 BubbleChart.prototype.updateVis = function() {
     var vis = this;
 
-    vis.root = d3.hierarchy({children: vis.data})
+    vis.root = d3.hierarchy({children: vis.bubbles})
         .sum(function(d) { return d.course_enrollment; })
         .each(function(d) {
             if (id = d.course) {
