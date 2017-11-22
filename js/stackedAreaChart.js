@@ -177,7 +177,7 @@ StackedAreaChart.prototype.updateVis = function(){
     var dashboardHeader = document.getElementById("DashboardHeader");
 
     var childName = "gantt";
-    var childElement = d3.select("#" + childName);
+    var childElement = document.getElementById(childName);
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".area")
@@ -213,6 +213,7 @@ StackedAreaChart.prototype.updateVis = function(){
             else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
                 vis.selected = "";
                 vis.toolTipClickSwitch = false;
+                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
                 childElement.innerHTML = instructions;
             }
             // reselect
@@ -222,6 +223,7 @@ StackedAreaChart.prototype.updateVis = function(){
                 childElement.innerHTML = "";
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
+                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
                 vis.child.selectionChanged(extent);
             }
             vis.updateVis()

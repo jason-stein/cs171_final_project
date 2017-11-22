@@ -1,4 +1,4 @@
-var stackedAreaChart, departmentTimeline, bubbleChart;
+var stackedAreaChart, departmentTimeline;
 
 var parseDate = d3.timeParse("%Y");
 
@@ -6,15 +6,18 @@ d3.select("#tooltip").text("Mouseover to see fields.");
 
 var extent;
 var range;
-var selectedYear = '1999';
-var selectedDepartment = 'Freshman Seminars';
-var selectedCourse = 'Freshman Seminars.America, Democrary, and the Culture of Cynicism';
-var selectedColor = "#ff7f0e";
+// var selectedYear = '1999';
+// var selectedDepartment = 'Freshman Seminars';
+// var selectedCourse = 'Freshman Seminars.America, Democrary, and the Culture of Cynicism';
+// var selectedColor = "#ff7f0e";
 
-var instructions = "<p>Mouseover to see department names. <br>\
+var instructions = "<p class='placeholder'>Mouseover to see department names. <br>\
 Click a department to isolate and get more information. <br> Click again to go back to explore.</p>";
 
+var bubblePlaceholder = "<p class='placeholder'>After selecting a department, click on a course to see enrollment data for that year.</p>"
+
 document.getElementById("gantt").innerHTML = instructions;
+document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
 
 
 
@@ -59,12 +62,9 @@ function createVis(error, data) {
 
 
     // filter Data for bubble chart -> we were struggeling doing this in bubblechart.wrangledata -> browser broke
-    filteredData = data.filter(function (d) {
-        return d.ACADEMIC_YEAR === selectedYear && d.CLASS_ACAD_ORG_DESCRIPTION === selectedDepartment;
-    });
-
-
-    console.log(filteredData);
+    // filteredData = data.filter(function (d) {
+    //     return d.ACADEMIC_YEAR === selectedYear && d.CLASS_ACAD_ORG_DESCRIPTION === selectedDepartment;
+    // });
 
 
     data.forEach(function (d) {
@@ -76,7 +76,7 @@ function createVis(error, data) {
     departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
 
     // instantiating bubble chart -> probably do that within gantt chart!
-    bubbleChart = new BubbleChart('bubbleChart', filteredData, selectedCourse);
+    // bubbleChart = new BubbleChart('bubbleChart', filteredData, selectedCourse);
 }
 
 function normalizeStackedAreaChart() {

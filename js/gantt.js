@@ -38,6 +38,12 @@ gantt.prototype.initVis = function(){
         .range([0, vis.height])
         .paddingInner(.02);
 
+    vis.tooltip = vis.svg.append("text")
+        .attr("id", "tooltip1")
+        .attr("x", vis.width / 2)
+        .attr("y", vis.height + 50)
+        .attr("text-anchor", "middle")
+
     vis.wrangleData();
 };
 
@@ -64,6 +70,8 @@ gantt.prototype.updateVis = function(){
     vis.y.domain(vis.keys);
 
     var yearWidth = vis.x(parseDate(2017)) - vis.x(parseDate(2016));
+    var childName = "bubblechart";
+    var childNode = document.getElementById(childName);
 
     var bars = vis.svg.selectAll("rect.gantt")
         .data(vis.displayData);
@@ -81,14 +89,15 @@ gantt.prototype.updateVis = function(){
         .attr("width", yearWidth)
         .attr("fill", vis.color)
         .on("mouseover", function(d){
-            console.log(d.COURSE_TITLE_LONG);
+            vis.tooltip.text(d.COURSE_TITLE_LONG)
         })
-        .on('click', function(d) {
-            selectedCourse = d.COURSE_TITLE_LONG;
-            selectedDepartment = d.CLASS_ACAD_ORG_DESCRIPTION;
-            selectedYear = d.ACADEMIC_YEAR;
-            updateBubble();
+        .on("mouseout", function(){ vis.tooltip.text("")})
+        .on("click", function(d){
+            document.getElementById("bubblechart").innerHTML="";
+            new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
         });
+
+    bars.exit().remove();
 
     vis.svg.select(".x-axis").call(vis.xAxis);
 };
