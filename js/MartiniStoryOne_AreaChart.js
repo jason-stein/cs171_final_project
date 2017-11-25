@@ -139,21 +139,32 @@ function drawMartiniOne (data) {
         .attr("fill", "GREY")
         .on('click', function (){
             MartiniStoryOne_TooltipAreaTwo.text("Though there were classes offered before the 1990s we will focus our attention on the\n" +
-                "                            most complete data set")
+                "                            most complete data set.")
             // draw line from text anchor end to
         });
 
     // third info circle
     svg_MartiniOne.append("circle")
         .attr("class", "MartiniGuidanceCircle")
-        .attr("cx", MartiniOneWidth / 3)
-        .attr("cy", MartiniOneHeight / 1.1)
+        .attr("cx", MartiniOneWidth / 1.15)
+        .attr("cy", MartiniOneHeight / 3)
         .attr("r", 10)
         .attr("fill", "GREY")
         .on('click', function (){
-            MartiniStoryOne_TooltipAreaThree.text("Sample Text 2")
+            MartiniStoryOne_TooltipAreaThree.text("The area highlighted in crimson corresponds to a robust dataset from 1990 to 2017.");
             // draw line from text anchor end to
+            drawLine();
+            console.log(MartiniStoryOne_TooltipAreaOne);
         });
+
+    function drawLine (){
+        svg_MartiniOne.append("line")
+            .attr("x1", 0)
+            .attr("x2", 200)
+            .attr("y1", 20)
+            .attr("y2", 200)
+            .style("stroke", "black")
+    }
 }
 
 
