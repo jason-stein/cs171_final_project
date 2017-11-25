@@ -31,6 +31,9 @@
     background: rgba(240, 240, 240, 1);
 }
 
+#martini-five {
+    background: rgba(240, 240, 240, 1);
+}
 
 #dash-board {
     background: rgba(240, 240, 240, 1);
@@ -138,8 +141,8 @@ h5 {
 */
 
 .explore_img {
-    max-width: 275px;
-    padding: 3px;
+    max-width: 400px;
+    padding: 10px;
 }
 
 
