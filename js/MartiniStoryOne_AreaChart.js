@@ -73,7 +73,7 @@ function drawMartiniOne (data) {
     // draw the actual area chart
     svg_MartiniOne.append("path")
         .datum(data)
-        .attr("class", "area")
+        //.attr("class", "area")
         .attr("d", area)
         .attr("fill", "url(#svgGradient)");
 

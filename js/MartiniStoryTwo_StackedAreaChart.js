@@ -141,6 +141,12 @@ var fastData_MartiniTwo = [
 
 drawMartiniTwo(fastData_MartiniTwo);
 
-
+/*
+<li><h5>Now you can see the more complete dataset displayed from 1992 to 2017. This plot
+includes all schools (FAS, GSD, HKS, HLS, etc.).</h5></li>
+<li><h5>Even this "all-schools" data is asynchronous and incomplete, so we are going to further
+focus on just FAS, again colored in crimson.</h5></li>
+<li><h5>The next page will give you an idea of the exploration you can do with the FAS data on
+the final dashboard.</h5></li>*/
 
 
