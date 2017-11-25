@@ -3,7 +3,6 @@ gantt = function(_parentElement, _data, _color){
     this.color = _color;
     this.data = _data;
     this.displayData = _data;
-    console.log(_data);
 
     this.initVis();
 };
@@ -30,7 +29,7 @@ gantt.prototype.initVis = function(){
     vis.xAxis = d3.axisBottom()
         .scale(vis.x);
 
-    vis.svg.append("g")
+    vis.gX = vis.svg.append("g")
         .attr("class", "x-axis axis")
         .attr("transform", "translate(0," + vis.height + ")");
 
@@ -38,11 +37,18 @@ gantt.prototype.initVis = function(){
         .range([0, vis.height])
         .paddingInner(.02);
 
+    vis.yscale = 1;
+
     vis.tooltip = vis.svg.append("text")
         .attr("id", "tooltip1")
         .attr("x", vis.width / 2)
         .attr("y", vis.height + 50)
         .attr("text-anchor", "middle")
+
+    vis.svg.append("rect")
+        .attr("height", vis.height)
+        .attr("width", vis.width)
+        .attr("opacity", 0);
 
     vis.wrangleData();
 };
@@ -69,9 +75,21 @@ gantt.prototype.updateVis = function(){
 
     vis.y.domain(vis.keys);
 
+    vis.zoom = d3.zoom()
+        .scaleExtent([1, 40])
+        .translateExtent([[-100, -100], [vis.width + 90, vis.height + 100]])
+        .on("zoom", function(){
+            vis.yscale = d3.event.transform.k;
+            vis.updateVis();
+        });
+
     var yearWidth = vis.x(parseDate(2017)) - vis.x(parseDate(2016));
+
     var childName = "bubblechart";
     var childNode = document.getElementById(childName);
+
+    var detailedChildName = "detailedbubblechart";
+    var detailedChildNode = document.getElementById(detailedChildName);
 
     var bars = vis.svg.selectAll("rect.gantt")
         .data(vis.displayData);
@@ -83,9 +101,9 @@ gantt.prototype.updateVis = function(){
             return vis.x(d.ACADEMIC_YEAR) - yearWidth / 2;
         })
         .attr("y", function(d){
-            return vis.y(d.COURSE_TITLE_LONG);
+            return vis.y(d.COURSE_TITLE_LONG) * vis.yscale;
         })
-        .attr("height", vis.y.bandwidth())
+        .attr("height", vis.y.bandwidth() * vis.yscale)
         .attr("width", yearWidth)
         .attr("fill", vis.color)
         .on("mouseover", function(d){
@@ -93,11 +111,23 @@ gantt.prototype.updateVis = function(){
         })
         .on("mouseout", function(){ vis.tooltip.text("")})
         .on("click", function(d){
-            document.getElementById("bubblechart").innerHTML="";
-            new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            document.getElementById(childName).innerHTML="";
+            child = new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            document.getElementById(detailedChildName).innerHTML="";
+            detailedChild = new BubbleChart(detailedChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            child.buddy = detailedChild;
+            detailedChild.buddy = child;
+            document.getElementById("info2").innerHTML =
+                "<li>Course: " + d.COURSE_TITLE_LONG + "</li>";
+            document.getElementById("info3").innerHTML =
+                "<li>Year: " + d3.timeFormat("%Y")(d.ACADEMIC_YEAR) + "</li>";
+            document.getElementById("info4").innerHTML =
+                "<li>Enrollment: " + d.COURSE_ENROLLMENT_DATA + "</li>";
         });
 
     bars.exit().remove();
+
+    vis.svg.call(vis.zoom);
 
     vis.svg.select(".x-axis").call(vis.xAxis);
 };

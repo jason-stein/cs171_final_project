@@ -13,6 +13,7 @@ Click a department to isolate and get more information. <br> Click again to go b
 var bubblePlaceholder = "<p class='placeholder'>After selecting a department, click on a course to see enrollment data for that year.</p>"
 
 document.getElementById("gantt").innerHTML = instructions;
+document.getElementById("detailedganttchart").innerHTML = instructions;
 document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
 
 
@@ -61,8 +62,10 @@ function createVis(error, data) {
     });
 
     stackedAreaChart = new StackedAreaChart('stackedareachart', data);
-    DetailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
-    departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
+    detailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
+    stackedAreaChart.buddy = detailedStackedAreaChart;
+    detailedStackedAreaChart.buddy = stackedAreaChart;
+    // departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
 
     // instantiating bubble chart -> probably do that within gantt chart!
     // bubbleChart = new BubbleChart('bubbleChart', filteredData, selectedCourse);
@@ -71,6 +74,8 @@ function createVis(error, data) {
 function normalizeStackedAreaChart() {
     stackedAreaChart.normalize = !stackedAreaChart.normalize;
     stackedAreaChart.wrangleData();
+    detailedStackedAreaChart.normalize = !detailedStackedAreaChart.normalize;
+    detailedStackedAreaChart.wrangleData();
 }
 
 function slid() {
@@ -79,8 +84,8 @@ function slid() {
         return parseDate(d)
     });
     stackedAreaChart.selectionChanged(selectionRange);
-    // DetailedStackedAreaChart.selectionChanged(selectionRange);
-    departmentTimeline.selectionChanged(selectionRange);
+    detailedStackedAreaChart.selectionChanged(selectionRange);
+    // departmentTimeline.selectionChanged(selectionRange);
 }
 
 /*

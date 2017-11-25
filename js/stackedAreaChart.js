@@ -8,6 +8,7 @@ StackedAreaChart = function(_parentElement, _data){
     this.filterData = _data;
     this.displayData = [];
     this.normalize = false;
+    this.buddy;
 
     this.initVis();
 };
@@ -175,9 +176,13 @@ StackedAreaChart.prototype.updateVis = function(){
     vis.colorScale.domain(vis.keys);
 
     var dashboardHeader = document.getElementById("DashboardHeader");
+    var detailedHeader = document.getElementById("DetailedHeader");
 
     var childName = "gantt";
     var childElement = document.getElementById(childName);
+
+    var detailChildName = "detailedganttchart";
+    var detailChildElement = document.getElementById(detailChildName);
 
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".stackarea")
@@ -189,11 +194,13 @@ StackedAreaChart.prototype.updateVis = function(){
         .on("mouseover", function (d) {
             if(!vis.toolTipClickSwitch){
                 dashboardHeader.innerHTML = d.key;
+                detailedHeader.innerHTML = d.key;
             }
         })
         .on("mouseout", function () {
             if(!vis.toolTipClickSwitch){
                 dashboardHeader.innerHTML = "Dashboard";
+                detailedHeader.innerHTML = "Departments";
             }
         })
         .on("click", function (d) {
@@ -205,28 +212,49 @@ StackedAreaChart.prototype.updateVis = function(){
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
                 vis.child.selectionChanged(extent);
-
-                //console.log(vis.colorScale(d.key));
-                selectedColor = vis.colorScale(d.key);
+                vis.detailedChild = new gantt(detailChildName, ganttData, vis.colorScale(d.key));
+                vis.detailedChild.selectionChanged(extent);
+                if (vis.buddy){
+                    vis.buddy.selected = d.key;
+                    vis.buddy.toolTipClickSwitch = true;
+                }
+                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
             }
             // deselect
             else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
                 vis.selected = "";
                 vis.toolTipClickSwitch = false;
                 document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+                document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+                detailChildElement.innerHTML = instructions;
                 childElement.innerHTML = instructions;
+                if (vis.buddy){
+                    vis.buddy.selected = "";
+                    vis.buddy.toolTipClickSwitch = false;
+                }
             }
             // reselect
             else{
                 vis.selected = d.key;
                 dashboardHeader.innerHTML = d.key;
+                detailedHeader.innerHTML = d.key;
                 childElement.innerHTML = "";
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
-                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
                 vis.child.selectionChanged(extent);
+                vis.detailedChild = new gantt(detailChildName, ganttData, vis.colorScale(d.key));
+                vis.detailedChild.selectionChanged(extent);
+                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+                document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+                if (vis.buddy){
+                    vis.buddy.selected = d.key;
+                }
+                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
             }
-            vis.updateVis()
+            vis.updateVis();
+            if (vis.buddy){
+                vis.buddy.updateVis();
+            }
         })
         .attr("d", function(d) {
             return vis.area(d);
