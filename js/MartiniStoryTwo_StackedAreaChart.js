@@ -7,7 +7,7 @@ function drawMartiniTwo (data){
 
     // define SVG Size
     var MartiniTwoWidth = $("#MartiniStoryTwo").width() - margin.left - margin.right,
-        MartiniTwoHeight = 550 - margin.top - margin.bottom;
+        MartiniTwoHeight = 500 - margin.top - margin.bottom;
 
     // Define svg_MartiniTwo_StackedArea as a child-element (g) of the drawing area and include spaces
     var svg_MartiniTwo_StackedArea = d3.select("#MartiniStoryTwo").append("svg")

@@ -130,6 +130,13 @@ h5 {
     STORYTELLING ETC.
 */
 
+
+.MartiniStoryTwo_TooltipArea {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-weight: 100;
+    font-size: 14px;
+}
 /*.StoryTellingSVG {
     width: auto;
     margin-top: 2%;
@@ -212,7 +219,7 @@ h5 {
     text-anchor: end;
 }
 
-.area {
+.f {
     opacity: 0.7;
     clip-path: url(#clip);
 }

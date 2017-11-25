@@ -9,7 +9,7 @@ function drawMartiniOne (data) {
 
     // define SVG Size
     var MartiniOneWidth = $("#MartiniStoryOne").width() - margin.left - margin.right,
-        MartiniOneHeight = 700 - margin.top - margin.bottom;
+        MartiniOneHeight = 500 - margin.top - margin.bottom;
 
     // Define svg_MartiniTwo_StackedArea as a child-element (g) of the drawing area and include spaces
     var svg_MartiniOne = d3.select("#MartiniStoryOne").append("svg")
@@ -103,6 +103,10 @@ function drawMartiniOne (data) {
         .text("Year");
 
 
+    /*
+        INFO TOOLTIPS
+    */
+
     // create and draw tooltip area
     MartiniStoryOne_TooltipAreaOne = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
@@ -118,6 +122,7 @@ function drawMartiniOne (data) {
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
         .attr("y", 110);
+
 
 
     // first info circle
@@ -155,7 +160,7 @@ function drawMartiniOne (data) {
         .on('click', function (){
             MartiniStoryOne_TooltipAreaThree.text("The area highlighted in crimson corresponds to a robust dataset from 1990 to 2017.");
             // draw line from text anchor end to
-            drawLine();
+            //drawLine();
             console.log(MartiniStoryOne_TooltipAreaOne);
         });
 
