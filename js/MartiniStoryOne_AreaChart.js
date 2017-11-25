@@ -107,71 +107,74 @@ function drawMartiniOne (data) {
         INFO TOOLTIPS
     */
 
-    // create and draw tooltip area
-    MartiniStoryOne_TooltipAreaOne = svg_MartiniOne.append("text")
+    // info text box 1
+    var MartiniStoryOne_TooltipAreaOne = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 30);
+        .attr("y", 40);
 
-    MartiniStoryOne_TooltipAreaTwo = svg_MartiniOne.append("text")
+    // info text box 2
+    var MartiniStoryOne_TooltipAreaTwo = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 70);
+        .attr("y", 90);
 
-    MartiniStoryOne_TooltipAreaThree = svg_MartiniOne.append("text")
+    // info text box 3
+    var MartiniStoryOne_TooltipAreaThree = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 110);
+        .attr("y", 140);
 
 
 
     // first info circle
-    svg_MartiniOne.append("circle")
-        .attr("class", "MartiniGuidanceCircle")
+    var infoCircleOne = svg_MartiniOne.append("circle")
+        .attr("class", "MartiniGuidanceCircle pulse")
         .attr("cx", MartiniOneWidth / 2.12)
         .attr("cy", MartiniOneHeight / 1.06)
         .attr("r", 10)
-        .attr("fill", "GREY")
         .on('click', function (){
-            MartiniStoryOne_TooltipAreaOne.text("Notice that prior to the 1990s the data becomes quite sparse.")
-            // draw line from text anchor end to
+            MartiniStoryOne_TooltipAreaOne.text(" - Notice that prior to the 1990s the data is quite sparse.");
+            infoCircleTwo.classed("hideInfo2", false)
+
+            // drawLine( (MartiniOneWidth / 2.12), (MartiniOneHeight / 1.06) );
         });
 
+
     // second info circle
-    svg_MartiniOne.append("circle")
-        .attr("class", "MartiniGuidanceCircle")
+    var infoCircleTwo = svg_MartiniOne.append("circle")
+        .attr("class", "MartiniGuidanceCircle pulse hideInfo2")
         .attr("cx", MartiniOneWidth / 1.5)
         .attr("cy", MartiniOneHeight / 1.2)
         .attr("r", 10)
-        .attr("fill", "GREY")
         .on('click', function (){
-            MartiniStoryOne_TooltipAreaTwo.text("Though there were classes offered before the 1990s we will focus our attention on the\n" +
-                "                            most complete data set.")
-            // draw line from text anchor end to
+            MartiniStoryOne_TooltipAreaTwo.text(" - It is only in 1991 when the data set reaches a significant size.");
+            infoCircleThree.classed("hideInfo3", false)
+
+            // drawLine( (MartiniOneWidth / 1.5), (MartiniOneHeight / 1.2) );
         });
 
     // third info circle
-    svg_MartiniOne.append("circle")
-        .attr("class", "MartiniGuidanceCircle")
+    var infoCircleThree = svg_MartiniOne.append("circle")
+        .attr("class", "MartiniGuidanceCircle pulse hideInfo3")
         .attr("cx", MartiniOneWidth / 1.15)
         .attr("cy", MartiniOneHeight / 3)
         .attr("r", 10)
-        .attr("fill", "GREY")
         .on('click', function (){
-            MartiniStoryOne_TooltipAreaThree.text("The area highlighted in crimson corresponds to a robust dataset from 1990 to 2017.");
-            // draw line from text anchor end to
-            //drawLine();
-            console.log(MartiniStoryOne_TooltipAreaOne);
+            MartiniStoryOne_TooltipAreaThree.html(" - The area highlighted in crimson corresponds to a robust dataset from 1991 to 2017.");
+            // drawLine( (MartiniOneWidth / 1.15), (MartiniOneHeight / 3) );
         });
 
-    function drawLine (){
+    // draw line function to connect info text with info circle
+
+/*    function drawLine (circleX, circleY){
         svg_MartiniOne.append("line")
-            .attr("x1", 0)
-            .attr("x2", 200)
-            .attr("y1", 20)
-            .attr("y2", 200)
+            .attr("x1", MartiniOneWidth/2)
+            .attr("x2", circleX)
+            .attr("y1", 50)
+            .attr("y2", circleY)
             .style("stroke", "black")
-    }
+    }*/
 }
 
 
