@@ -5,9 +5,11 @@ function drawMartiniOne (data) {
     // introduce margins
     var margin = {top: 10, right: 0, bottom: 50, left: 80};
 
+    console.log( $("#MartiniStoryOne").width() );
+
     // define SVG Size
     var MartiniOneWidth = $("#MartiniStoryOne").width() - margin.left - margin.right,
-        MartiniOneHeight = 550 - margin.top - margin.bottom;
+        MartiniOneHeight = 700 - margin.top - margin.bottom;
 
     // Define svg_MartiniTwo_StackedArea as a child-element (g) of the drawing area and include spaces
     var svg_MartiniOne = d3.select("#MartiniStoryOne").append("svg")
