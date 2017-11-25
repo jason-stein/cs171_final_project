@@ -8,9 +8,10 @@ BubbleChart = function(_parentElement, _data, _selectedCourse, _color, _year){
     this.displayData = [];
     this.year = _year;
 
-
     this.initVis();
 };
+
+
 
 BubbleChart.prototype.initVis = function(){
     var vis = this;
@@ -33,19 +34,20 @@ BubbleChart.prototype.initVis = function(){
     vis.formatDate = d3.timeFormat("%Y");
 
     vis.tooltip1 = vis.svg.append("text")
-        .attr("y",2)
+        .attr("y",2);
     vis.tooltip2 = vis.svg.append("text")
-        .attr("y",15)
+        .attr("y",15);
 
     vis.wrangleData();
 };
+
 
 
 BubbleChart.prototype.wrangleData = function() {
     var vis = this;
 
     vis.filteredData = vis.data.filter(function(d){
-        return d.ACADEMIC_YEAR.toString() == vis.year.toString();
+        return d.ACADEMIC_YEAR.toString() === vis.year.toString();
     });
 
 
@@ -60,7 +62,6 @@ BubbleChart.prototype.wrangleData = function() {
 
     vis.updateVis();
 };
-
 
 
 
@@ -81,7 +82,7 @@ BubbleChart.prototype.updateVis = function() {
             }
         });
 
-    console.log(vis.root);
+    // console.log(vis.root);
     vis.pack = d3.pack()
         .size([vis.width, vis.height])
         .padding(1.5);
@@ -89,7 +90,7 @@ BubbleChart.prototype.updateVis = function() {
     var node = vis.svg.selectAll(".node")
         .data(vis.pack(vis.root).leaves());
 
-    console.log(vis.selectedCourse)
+    // console.log(vis.selectedCourse);
     node.enter().append("g")
         .merge(node)
         .attr("class", "node")
@@ -105,8 +106,8 @@ BubbleChart.prototype.updateVis = function() {
            return .35
         })
         .on("click", function(d){
-            vis.svg.selectAll(".node").remove()
-            vis.selectedCourse = d.data.course.split(".")[1]
+            vis.svg.selectAll(".node").remove();
+            vis.selectedCourse = d.data.course.split(".")[1];
             vis.updateVis();
         });
     node.exit().remove();
@@ -115,18 +116,6 @@ BubbleChart.prototype.updateVis = function() {
         .attr("id", function(d) { return "clip-" + d.id; })
         .append("use")
         .attr("xlink:href", function(d) { return "#" + d.id; });
-
-    // node.append("text")
-    //     .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
-    //     .selectAll("tspan")
-    //     .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
-    //     .enter().append("tspan")
-    //     .attr("x", 0)
-    //     .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
-    //     .text(function(d) { return d; });
-
-    // node.append("title")
-    //     .text(function(d) { return d.id + "\n" + format(d.course_enrollment); });
 };
 
 

@@ -206,7 +206,7 @@ StackedAreaChart.prototype.updateVis = function(){
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
                 vis.child.selectionChanged(extent);
 
-                console.log(vis.colorScale(d.key));
+                //console.log(vis.colorScale(d.key));
                 selectedColor = vis.colorScale(d.key);
             }
             // deselect

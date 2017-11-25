@@ -208,8 +208,10 @@ h5 {
 }
 
 button#normalize{
+    font-size : 10px;
     margin: 25px;
     margin-bottom: 0px;
+
 }
 
 #tooltip{
