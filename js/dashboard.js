@@ -65,7 +65,7 @@ function createVis(error, data) {
     detailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
     stackedAreaChart.buddy = detailedStackedAreaChart;
     detailedStackedAreaChart.buddy = stackedAreaChart;
-    departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
+    // departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
 
     // instantiating bubble chart -> probably do that within gantt chart!
     // bubbleChart = new BubbleChart('bubbleChart', filteredData, selectedCourse);
@@ -74,6 +74,8 @@ function createVis(error, data) {
 function normalizeStackedAreaChart() {
     stackedAreaChart.normalize = !stackedAreaChart.normalize;
     stackedAreaChart.wrangleData();
+    detailedStackedAreaChart.normalize = !detailedStackedAreaChart.normalize;
+    detailedStackedAreaChart.wrangleData();
 }
 
 function slid() {
@@ -82,8 +84,8 @@ function slid() {
         return parseDate(d)
     });
     stackedAreaChart.selectionChanged(selectionRange);
-    // DetailedStackedAreaChart.selectionChanged(selectionRange);
-    departmentTimeline.selectionChanged(selectionRange);
+    detailedStackedAreaChart.selectionChanged(selectionRange);
+    // departmentTimeline.selectionChanged(selectionRange);
 }
 
 /*

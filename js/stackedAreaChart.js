@@ -176,6 +176,7 @@ StackedAreaChart.prototype.updateVis = function(){
     vis.colorScale.domain(vis.keys);
 
     var dashboardHeader = document.getElementById("DashboardHeader");
+    var detailedHeader = document.getElementById("DetailedHeader");
 
     var childName = "gantt";
     var childElement = document.getElementById(childName);
@@ -193,11 +194,13 @@ StackedAreaChart.prototype.updateVis = function(){
         .on("mouseover", function (d) {
             if(!vis.toolTipClickSwitch){
                 dashboardHeader.innerHTML = d.key;
+                detailedHeader.innerHTML = d.key;
             }
         })
         .on("mouseout", function () {
             if(!vis.toolTipClickSwitch){
                 dashboardHeader.innerHTML = "Dashboard";
+                detailedHeader.innerHTML = "Departments";
             }
         })
         .on("click", function (d) {
@@ -215,6 +218,7 @@ StackedAreaChart.prototype.updateVis = function(){
                     vis.buddy.selected = d.key;
                     vis.buddy.toolTipClickSwitch = true;
                 }
+                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
             }
             // deselect
             else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
@@ -233,6 +237,7 @@ StackedAreaChart.prototype.updateVis = function(){
             else{
                 vis.selected = d.key;
                 dashboardHeader.innerHTML = d.key;
+                detailedHeader.innerHTML = d.key;
                 childElement.innerHTML = "";
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
@@ -244,10 +249,10 @@ StackedAreaChart.prototype.updateVis = function(){
                 if (vis.buddy){
                     vis.buddy.selected = d.key;
                 }
+                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
             }
             vis.updateVis();
             if (vis.buddy){
-                console.log(vis.buddy.toolTipClickSwitch);
                 vis.buddy.updateVis();
             }
         })

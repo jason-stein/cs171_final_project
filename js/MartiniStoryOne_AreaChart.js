@@ -5,8 +5,6 @@ function drawMartiniOne (data) {
     // introduce margins
     var margin = {top: 10, right: 0, bottom: 50, left: 80};
 
-    console.log( $("#MartiniStoryOne").width() );
-
     // define SVG Size
     var MartiniOneWidth = $("#MartiniStoryOne").width() - margin.left - margin.right,
         MartiniOneHeight = 500 - margin.top - margin.bottom;

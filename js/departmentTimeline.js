@@ -56,9 +56,7 @@ DepartmentTimeline.prototype.updateVis = function(){
         .call(vis.xAxis);
 
     // mouseover display
-    vis.tooltip = vis.svg.append("text")
-        .attr("x", 50)
-        .attr("y", -10);
+    vis.tooltip = document.getElementById("DetailedHeader")
 
     var bars = vis.svg.selectAll("rect.timebar")
         .data(vis.displayData);
@@ -66,10 +64,10 @@ DepartmentTimeline.prototype.updateVis = function(){
         .attr("class", "timebar")
         .merge(bars)
         .on("mouseover", function(d){
-            d3.select("#tooltip").text(d.key);
+            vis.tooltip.innerHTML = d.key;
         })
         .on("mouseout", function(d){
-            d3.select("#tooltip").text("Mouseover to see fields.");
+            vis.tooltip.innerHTML = "Departments";
         })
         .attr("x", function(d){
             return vis.x(d.value[0]);

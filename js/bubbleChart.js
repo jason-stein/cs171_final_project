@@ -83,7 +83,6 @@ BubbleChart.prototype.updateVis = function() {
             }
         });
 
-    // console.log(vis.root);
     vis.pack = d3.pack()
         .size([vis.width, vis.height])
         .padding(1.5);
@@ -91,7 +90,6 @@ BubbleChart.prototype.updateVis = function() {
     var node = vis.svg.selectAll(".node")
         .data(vis.pack(vis.root).leaves());
 
-    // console.log(vis.selectedCourse);
     node.enter().append("g")
         .merge(node)
         .attr("class", "node")
@@ -114,6 +112,10 @@ BubbleChart.prototype.updateVis = function() {
                 vis.buddy.svg.selectAll(".node").remove();
                 vis.buddy.selectedCourse = d.data.course.split(".")[1];
                 vis.buddy.updateVis();
+                document.getElementById("info2").innerHTML =
+                    "<li>Course: " + d.data.course.split(".")[1] + "</li>";
+                document.getElementById("info4").innerHTML =
+                    "<li>Enrollment: " + d.data.course_enrollment + "</li>";
             }
         });
     node.exit().remove();
