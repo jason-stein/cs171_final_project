@@ -8,6 +8,7 @@ StackedAreaChart = function(_parentElement, _data){
     this.filterData = _data;
     this.displayData = [];
     this.normalize = false;
+    this.buddy;
 
     this.initVis();
 };
@@ -179,6 +180,9 @@ StackedAreaChart.prototype.updateVis = function(){
     var childName = "gantt";
     var childElement = document.getElementById(childName);
 
+    var detailChildName = "detailedganttchart";
+    var detailChildElement = document.getElementById(detailChildName);
+
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".stackarea")
         .data(vis.displayData);
@@ -205,16 +209,25 @@ StackedAreaChart.prototype.updateVis = function(){
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
                 vis.child.selectionChanged(extent);
-
-                //console.log(vis.colorScale(d.key));
-                selectedColor = vis.colorScale(d.key);
+                vis.detailedChild = new gantt(detailChildName, ganttData, vis.colorScale(d.key));
+                vis.detailedChild.selectionChanged(extent);
+                if (vis.buddy){
+                    vis.buddy.selected = d.key;
+                    vis.buddy.toolTipClickSwitch = true;
+                }
             }
             // deselect
             else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
                 vis.selected = "";
                 vis.toolTipClickSwitch = false;
                 document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+                document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+                detailChildElement.innerHTML = instructions;
                 childElement.innerHTML = instructions;
+                if (vis.buddy){
+                    vis.buddy.selected = "";
+                    vis.buddy.toolTipClickSwitch = false;
+                }
             }
             // reselect
             else{
@@ -223,10 +236,20 @@ StackedAreaChart.prototype.updateVis = function(){
                 childElement.innerHTML = "";
                 var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
                 vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
-                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
                 vis.child.selectionChanged(extent);
+                vis.detailedChild = new gantt(detailChildName, ganttData, vis.colorScale(d.key));
+                vis.detailedChild.selectionChanged(extent);
+                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+                document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+                if (vis.buddy){
+                    vis.buddy.selected = d.key;
+                }
             }
-            vis.updateVis()
+            vis.updateVis();
+            if (vis.buddy){
+                console.log(vis.buddy.toolTipClickSwitch);
+                vis.buddy.updateVis();
+            }
         })
         .attr("d", function(d) {
             return vis.area(d);

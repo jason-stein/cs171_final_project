@@ -7,6 +7,7 @@ BubbleChart = function(_parentElement, _data, _selectedCourse, _color, _year){
     this.color = _color;
     this.displayData = [];
     this.year = _year;
+    this.buddy;
 
     this.initVis();
 };
@@ -109,6 +110,11 @@ BubbleChart.prototype.updateVis = function() {
             vis.svg.selectAll(".node").remove();
             vis.selectedCourse = d.data.course.split(".")[1];
             vis.updateVis();
+            if (vis.buddy){
+                vis.buddy.svg.selectAll(".node").remove();
+                vis.buddy.selectedCourse = d.data.course.split(".")[1];
+                vis.buddy.updateVis();
+            }
         });
     node.exit().remove();
 

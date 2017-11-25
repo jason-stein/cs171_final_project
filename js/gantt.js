@@ -70,8 +70,12 @@ gantt.prototype.updateVis = function(){
     vis.y.domain(vis.keys);
 
     var yearWidth = vis.x(parseDate(2017)) - vis.x(parseDate(2016));
+
     var childName = "bubblechart";
     var childNode = document.getElementById(childName);
+
+    var detailedChildName = "detailedbubblechart";
+    var detailedChildNode = document.getElementById(detailedChildName);
 
     var bars = vis.svg.selectAll("rect.gantt")
         .data(vis.displayData);
@@ -93,8 +97,13 @@ gantt.prototype.updateVis = function(){
         })
         .on("mouseout", function(){ vis.tooltip.text("")})
         .on("click", function(d){
-            document.getElementById("bubblechart").innerHTML="";
-            new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            document.getElementById(childName).innerHTML="";
+            child = new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            document.getElementById(detailedChildName).innerHTML="";
+            detailedChild = new BubbleChart(detailedChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            child.buddy = detailedChild;
+            detailedChild.buddy = child;
+
         });
 
     bars.exit().remove();
