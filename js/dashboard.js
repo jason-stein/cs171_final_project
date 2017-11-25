@@ -6,10 +6,6 @@ d3.select("#tooltip").text("Mouseover to see fields.");
 
 var extent;
 var range;
-// var selectedYear = '1999';
-// var selectedDepartment = 'Freshman Seminars';
-// var selectedCourse = 'Freshman Seminars.America, Democrary, and the Culture of Cynicism';
-// var selectedColor = "#ff7f0e";
 
 var instructions = "<p class='placeholder'>Mouseover to see department names. <br>\
 Click a department to isolate and get more information. <br> Click again to go back to explore.</p>";
@@ -59,13 +55,6 @@ function createVis(error, data) {
 
     // callback for slider: update
     range.noUiSlider.on('slide', slid);
-
-
-    // filter Data for bubble chart -> we were struggeling doing this in bubblechart.wrangledata -> browser broke
-    // filteredData = data.filter(function (d) {
-    //     return d.ACADEMIC_YEAR === selectedYear && d.CLASS_ACAD_ORG_DESCRIPTION === selectedDepartment;
-    // });
-
 
     data.forEach(function (d) {
         d.ACADEMIC_YEAR = parseDate(d.ACADEMIC_YEAR)
