@@ -33,6 +33,7 @@
 
         <!-- INTRO -->
         <div class="section" id="CoverPage" data-intro="Get it, use it.">
+            <img src="img/favicon.ico" class="harvard_icon"/>
             <h1>The Knowledge Producing Machine</h1>
             <h2>Mapping Harvard's Curricular History</h2>
 
@@ -124,7 +125,9 @@
                         <li><h5>This area chart represents all the courses offered at Harvard since 1931.</h5></li>
                         <li><h5>Notice that prior to the 1990s the data becomes quite sparse.</h5></li>
                         <li><h5>Though there were classes offered before the 1990s we will focus our attention on the
-                            most complete data set</h5></li>
+                            most complete data set.</h5></li>
+                        <li><h5>The area highlighted in crimson corresponds to a robust dataset from 1990 to 2017.</h5>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -146,12 +149,13 @@
                 </div>
                 <div class="col-xs-4">
                     <ul>
-                        <li><h5>Now the data is aggregated into a more complete dataset from 1992 to 2017.</h5></li>
-                        <li><h5>Take a closer look at a department of interest.</h5></li>
+                        <li><h5>Now you can see the more complete dataset displayed from 1992 to 2017. This plot
+                            includes all schools (FAS, GSD, HKS, HLS, etc.).</h5></li>
+                        <li><h5>Even this "all-schools" data is asynchronous and incomplete, so we are going to further
+                            focus on just FAS, again colored in crimson.</h5></li>
+                        <li><h5>The next page will give you an idea of the exploration you can do with the FAS data on
+                            the final dashboard.</h5></li>
 
-                        <li><h5 style="color: red">All courses should be stacked, color coded by school. All schools
-                            schould be grey,
-                            despite FAS which should be crimson red</h5></li>
                     </ul>
                 </div>
             </div>
@@ -165,36 +169,98 @@
         </div>
 
 
-        <!-- (4) DEPARTMENT OVERVIEW, ABSOLUTE -->
+        <!-- (4) DASHBOARD OVERVIEW, ABSOLUTE -->
         <div class="section" id="martini-four">
-            <h1>Mini Dashboard</h1>
-
+            <h1>Dashboard Exploration</h1>
             <div class="row vertical-align">
-                <div class="col-xs-6 col-xs-offset-1"><img src="img/minidashboard.png"></div>
-                <div class="col-xs-4">
+                <div class="col-xs-4" align="center">
+                    <img src="img/explore1.png" align="right" class="explore_img"/>
+                </div>
+                <div class="col-xs-6">
                     <ul>
-                        <li><h5>Display actual d3 area chart on the left. Display d3 gantt chart on the left, after
-                            clicking on a department </h5></li>
-                        <li><h5>Add Intro.js explanations regarding what the user is able to do</h5></li>
-                        <li><h5>Explore change in y scale in absolute/proportions</h5></li>
-                        <li><h5>Allow user to switch between concentrations / all departments view</h5></li>
-
-                        <li><h5 style="color: red">All courses should be stacked, color coded by school. All schools
-                            schould be grey,
-                            despite FAS which should be crimson red</h5></li>
+                        <li><h5>The first visualization you will be presented with on the full dashboard is a stacked
+                            area chart including all the departments within FAS from 1992 to 2017.</h5></li>
+                        <li><h5>Each colored line represents a department. Hovering over a line will display the
+                            department title at the top of the dashboard.</h5></li>
+                        <li><h5>The x-axis is time in year, and the y-axis represents either total number of courses or
+                            a relative proportion of courses
+                            for each year. There is a button labeled 'Relative/Absolute' to change the display."</h5>
+                        </li>
                     </ul>
                 </div>
             </div>
+
+            <div class="row vertical-align">
+                <div class="col-xs-4" align="center">
+                    <img src="img/explore2.png" align="right" class="explore_img"/>
+                </div>
+                <div class="col-xs-6">
+                    <ul>
+                        <li><h5>Clicking a department's time-line will highlight it by changing all the other
+                            departments
+                            to gray.</h5></li>
+                        <li><h5>Clicking the time-line again will redisplay all the departments in their respective
+                            colors.</h5></li>
+                        <li><h5>Clicking a department's line will also render a new Ganttchart to the left of the
+                            stacked area
+                            chart.</h5></li>
+                        <li><h5>There is a slider to narrow your focus to specific years between 1992 and 2017.</h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="col-xs-12  button-container">
-                <p class="btn-txt">Advanced Dashboard</p>
+                <p class="btn-txt">Continue Exploration</p>
+                <!--href="dashboard.html"-->
+                <a href="#martini-five" class="btn btn-circle">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- (4) CONTINUED EXPLORATION, ABSOLUTE -->
+        <div class="section" id="martini-five">
+            <h1>Continued Dashboard Exploration</h1>
+            <div class="row vertical-align">
+                <div class="col-xs-4" align="center">
+                    <img src="img/explore3.png" align="right" class="explore_img"/>
+                </div>
+                <div class="col-xs-6">
+                    <ul>
+                        <li><h5>Each Gantt chart is unique and shows the department's building and changing over
+                            time.</h5></li>
+                        <li><h5>By hovering over a rectangle you can display the course title.</h5></li>
+                        <li><h5>Clicking a particular course will render a bubble chart of enrollment data for that
+                            course on that particular year.</h5></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row vertical-align">
+                <div class="col-xs-4" align="center">
+                    <img src="img/explore4.png" align="right" class="explore_img"/>
+                </div>
+                <div class="col-xs-6">
+                    <ul>
+                        <li><h5>The bubble chart is a representation of a particular year within a department.</h5></li>
+                        <li><h5>Each bubble's size represents the enrollment for that course during that year.</h5></li>
+                        <li><h5>The highlighted bubble is the course last clicked, and if there are more than one bubble
+                            highlighted, there were more than one instance of the course offered during the term.</h5>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12  button-container">
+                <p class="btn-txt">Full Dashboard</p>
                 <!--href="dashboard.html"-->
                 <a href="#DashBoard" class="btn btn-circle">
                     <i class="fa fa-angle-double-down animated"></i>
                 </a>
             </div>
         </div>
-
-
         <!-- DASHBOARD MODULE -->
         <div class="section" id="dash-board">
 
@@ -220,15 +286,18 @@
                 <div class="row">
                     <div><br></div>
                     <div class="col-xs-5 col-xs-offset-1" id="stackedareachart">
-                        <div class="col-xs-3"><button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button></div>
-                        <div class="col-xs-6"><h3>Department Overview <a href="#DashBoard/1"><i class="fa fa-expand" aria-hidden="true"></i></a></h3></div>
-
-
+                        <div class="col-xs-3">
+                            <button id="normalize" onclick="normalizeStackedAreaChart()">Relative / Absolute</button>
+                        </div>
+                        <div class="col-xs-6"><h3>Department Overview <a href="#DashBoard/1"><i class="fa fa-expand"
+                                                                                                aria-hidden="true"></i></a>
+                        </h3></div>
 
 
                     </div>
                     <div class="col-xs-5">
-                        <h3>Departmental Courses <a href="#DashBoard/2"><i class="fa fa-expand" aria-hidden="true"></i></a></h3>
+                        <h3>Departmental Courses <a href="#DashBoard/2"><i class="fa fa-expand" aria-hidden="true"></i></a>
+                        </h3>
                         <div id="gantt"></div>
                         <!-- <div id="tooltip" style="text-align: right"></div>-->
                         <!--<div id="departmenttimeline"></div>-->

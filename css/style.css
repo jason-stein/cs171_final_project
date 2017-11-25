@@ -28,9 +28,12 @@
 }
 
 #martini-four {
-    background: rgba(210, 210, 210, 0.98);
+    background: rgba(240, 240, 240, 1);
 }
 
+#martini-five {
+    background: rgba(240, 240, 240, 1);
+}
 
 #dash-board {
     background: rgba(240, 240, 240, 1);
@@ -89,6 +92,12 @@ h5 {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.harvard_icon {
+    display: block;
+    margin: auto;
+    max-width: 150px;
+}
+
 /*
     AUTHOR PAGE
  */
@@ -126,6 +135,16 @@ h5 {
     margin-top: 2%;
     margin-bottom: 2%;
 }
+
+/*
+    Explore page
+*/
+
+.explore_img {
+    max-width: 400px;
+    padding: 10px;
+}
+
 
 /*
     BUTTONS ETC.
