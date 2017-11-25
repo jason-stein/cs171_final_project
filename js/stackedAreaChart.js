@@ -180,11 +180,11 @@ StackedAreaChart.prototype.updateVis = function(){
     var childElement = document.getElementById(childName);
 
     // enter-update-exit paths
-    var categories = vis.svg.selectAll(".area")
+    var categories = vis.svg.selectAll(".stackarea")
         .data(vis.displayData);
 
     categories.enter().append("path")
-        .attr("class", "area")
+        .attr("class", "stackarea")
         .merge(categories)
         .on("mouseover", function (d) {
             if(!vis.toolTipClickSwitch){

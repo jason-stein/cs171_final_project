@@ -148,7 +148,7 @@ h5 {
 */
 
 .explore_img {
-    max-width: 400px;
+    max-width: 350px;
     padding: 10px;
 }
 
@@ -219,12 +219,13 @@ h5 {
     text-anchor: end;
 }
 
-.f {
+.stackarea {
     opacity: 0.7;
     clip-path: url(#clip);
 }
 
-.area:hover {
+.stackarea:hover {
+>>>>>>> ff20e39248afd05e66901c68ab3439ce9e0d5062
     opacity: 1;
 }
 
