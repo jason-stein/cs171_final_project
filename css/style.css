@@ -97,7 +97,12 @@ h6 {
     font-size: 16px;
     text-align: center;
     /*color: #555555;*/
+}
 
+.placeholder {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
 }
 
 .harvard_icon {
