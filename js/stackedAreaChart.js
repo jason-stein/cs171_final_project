@@ -195,6 +195,7 @@ StackedAreaChart.prototype.updateVis = function(){
             if(!vis.toolTipClickSwitch){
                 dashboardHeader.innerHTML = d.key;
                 detailedHeader.innerHTML = d.key;
+                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
             }
         })
         .on("mouseout", function () {
@@ -232,6 +233,9 @@ StackedAreaChart.prototype.updateVis = function(){
                     vis.buddy.selected = "";
                     vis.buddy.toolTipClickSwitch = false;
                 }
+                for(var i = 1; i <= 5; i++){
+                    document.getElementById("info" + i).innerHTML = "";
+                }
             }
             // reselect
             else{
@@ -250,6 +254,9 @@ StackedAreaChart.prototype.updateVis = function(){
                     vis.buddy.selected = d.key;
                 }
                 document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
+                for(var i = 2; i <= 5; i++){
+                    document.getElementById("info" + i).innerHTML = "";
+                }
             }
             vis.updateVis();
             if (vis.buddy){
