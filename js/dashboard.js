@@ -75,11 +75,12 @@ function createVis(error, data) {
         }
     });
     keys = keys.sort();
-    selectElement = document.getElementById("departmentselect");
-    keys.forEach(function(key){
-        selectElement.innerHTML += "<option value='" + key + "'>" + key + "</option>";
-    });
-
+    for(var i = 1; i < 4; i++){
+        selectElement = document.getElementById("departmentselect" + i);
+        keys.forEach(function(key){
+            selectElement.innerHTML += "<option value='" + key + "'>" + key + "</option>";
+        });
+    }
 }
 
 function normalizeStackedAreaChart() {
