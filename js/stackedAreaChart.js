@@ -211,23 +211,26 @@ StackedAreaChart.prototype.select = function(key){
 StackedAreaChart.prototype.deselect = function(){
     var vis = this;
 
+    // clear selection
     vis.selected = "";
     vis.toolTipClickSwitch = false;
+    // remove bubble and gantt charts (because we have left the department)
     document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
     document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
     vis.detailChildElement.innerHTML = instructions;
     vis.childElement.innerHTML = instructions;
+    // deselect buddy
     if (vis.buddy){
         vis.buddy.selected = "";
         vis.buddy.toolTipClickSwitch = false;
+        buddy.updateVis();
     }
+    // clear info box
     for(var i = 1; i <= 5; i++){
         document.getElementById("info" + i).innerHTML = "";
     }
     vis.updateVis();
-    if (vis.buddy){
-        vis.buddy.updateVis();
-    }
+    // reset all dropdowns
     for(var i = 1; i < 4; i++){
         $("#departmentselect" + i).val("NULL");
     }
@@ -290,6 +293,7 @@ StackedAreaChart.prototype.updateVis = function(){
         .attr("d", function(d) {
             return vis.area(d);
         })
+        // appropriate color if nothing selected or it's the selected path, else black
         .attr("fill", function(d){
             return vis.selected === "" || vis.selected === d.key ? vis.colorScale(d.key) : "black";
         });
@@ -301,6 +305,7 @@ StackedAreaChart.prototype.updateVis = function(){
     vis.svg.select(".y-axis").transition().duration(800).call(vis.yAxis);
 };
 
+// for slider
 StackedAreaChart.prototype.selectionChanged = function(brushRegion){
     var vis = this;
 

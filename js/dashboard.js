@@ -2,22 +2,24 @@ var stackedAreaChart, departmentTimeline;
 
 var parseDate = d3.timeParse("%Y");
 
-d3.select("#tooltip").text("Mouseover to see fields.");
-
 var extent;
 var range;
 
+// placeholder for gantt chart
 var instructions = "<p class='placeholder'><br><br><br><br><br>Mouseover the area chart to see department names. <br>\
 Click a department to isolate and get more information. <br> Click again to go back to explore.</p>";
 
+// placeholder for bubble chart
 var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the upper-right chart\ " +
     "to see enrollment data for that year.</p>"
 
+// set all placeholders
 document.getElementById("gantt").innerHTML = instructions;
 document.getElementById("detailedganttchart").innerHTML = instructions;
 document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
 
-
+// load data
 queue()
     .defer(d3.csv, "data/all_fields_FAS_1990_2017_EnrollmentAdded.csv")
     .await(createVis);
@@ -25,6 +27,7 @@ queue()
 function createVis(error, data) {
     if (error) throw error;
 
+    // set up noUiSlider
     range = document.getElementById('slider');
     extent = d3.extent(data, function (d) {
         return +d.ACADEMIC_YEAR
@@ -57,15 +60,18 @@ function createVis(error, data) {
     // callback for slider: update
     range.noUiSlider.on('slide', slid);
 
+    // parse dates
     data.forEach(function (d) {
         d.ACADEMIC_YEAR = parseDate(d.ACADEMIC_YEAR)
     });
 
+    // initialize SACs
     stackedAreaChart = new StackedAreaChart('stackedareachart', data);
     detailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
     stackedAreaChart.buddy = detailedStackedAreaChart;
     detailedStackedAreaChart.buddy = stackedAreaChart;
 
+    // fill dropdowns
     keys = [];
     tmp = {};
     data.forEach(function(d){
@@ -83,6 +89,7 @@ function createVis(error, data) {
     }
 }
 
+// normalized / absolute SAC
 function normalizeStackedAreaChart() {
     stackedAreaChart.normalize = !stackedAreaChart.normalize;
     stackedAreaChart.wrangleData();
@@ -90,6 +97,7 @@ function normalizeStackedAreaChart() {
     detailedStackedAreaChart.wrangleData();
 }
 
+// slider callback
 function slid() {
     var selectionRange = range.noUiSlider.get();
     selectionRange = selectionRange.map(function (d) {
@@ -97,9 +105,9 @@ function slid() {
     });
     stackedAreaChart.selectionChanged(selectionRange);
     detailedStackedAreaChart.selectionChanged(selectionRange);
-    // departmentTimeline.selectionChanged(selectionRange);
 }
 
+// dropdown callback
 function selectHappened(value){
     if (value == "NULL"){
         console.log("asdf")
