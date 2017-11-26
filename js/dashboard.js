@@ -7,15 +7,15 @@ d3.select("#tooltip").text("Mouseover to see fields.");
 var extent;
 var range;
 
-var instructions = "<p class='placeholder'>Mouseover to see department names. <br>\
+var instructions = "<p class='placeholder'><br><br><br><br><br>Mouseover the area chart to see department names. <br>\
 Click a department to isolate and get more information. <br> Click again to go back to explore.</p>";
 
-var bubblePlaceholder = "<p class='placeholder'>After selecting a department, click on a course to see enrollment data for that year.</p>"
+var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the upper-right chart\ " +
+    "to see enrollment data for that year.</p>"
 
 document.getElementById("gantt").innerHTML = instructions;
 document.getElementById("detailedganttchart").innerHTML = instructions;
 document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
-
 
 
 queue()
