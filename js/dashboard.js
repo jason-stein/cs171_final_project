@@ -10,7 +10,7 @@ var instructions = "<p class='placeholder'><br><br><br><br><br>Mouseover the are
 Click a department to isolate and get more information. <br> Click again to go back to explore.</p>";
 
 // placeholder for bubble chart
-var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the upper-right chart\ " +
+var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the 'Departmental Courses' chart\ " +
     "to see enrollment data for that year.</p>"
 
 // set all placeholders
