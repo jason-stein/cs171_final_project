@@ -65,10 +65,21 @@ function createVis(error, data) {
     detailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
     stackedAreaChart.buddy = detailedStackedAreaChart;
     detailedStackedAreaChart.buddy = stackedAreaChart;
-    // departmentTimeline = new DepartmentTimeline('departmenttimeline', data);
 
-    // instantiating bubble chart -> probably do that within gantt chart!
-    // bubbleChart = new BubbleChart('bubbleChart', filteredData, selectedCourse);
+    keys = [];
+    tmp = {};
+    data.forEach(function(d){
+        if(!tmp.hasOwnProperty(d.CLASS_ACAD_ORG_DESCRIPTION)){
+            keys.push(d.CLASS_ACAD_ORG_DESCRIPTION);
+            tmp[d.CLASS_ACAD_ORG_DESCRIPTION] = 1;
+        }
+    });
+    keys = keys.sort();
+    selectElement = document.getElementById("departmentselect");
+    keys.forEach(function(key){
+        selectElement.innerHTML += "<option value='" + key + "'>" + key + "</option>";
+    });
+
 }
 
 function normalizeStackedAreaChart() {
@@ -88,8 +99,14 @@ function slid() {
     // departmentTimeline.selectionChanged(selectionRange);
 }
 
-/*
-function updateBubble(){
-    bubbleChart.wrangleData();
+function selectHappened(value){
+    if (value == "NULL"){
+        console.log("asdf")
+        stackedAreaChart.deselect();
+        detailedStackedAreaChart.deselect();
+    }
+    else{
+        stackedAreaChart.select(value);
+        detailedStackedAreaChart.select(value);
+    }
 }
-*/
