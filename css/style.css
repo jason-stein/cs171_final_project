@@ -270,6 +270,10 @@ button#normalize{
     margin-left:80px;
 }
 
-/*.framed {
-    border: thin solid black;
-}*/
+#detailedbubblechart {
+    height: 600px;
+}
+
+#bubblechart {
+    height: 200px;
+}

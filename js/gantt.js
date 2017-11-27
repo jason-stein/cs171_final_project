@@ -15,7 +15,9 @@ gantt.prototype.initVis = function(){
     vis.width = vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
     vis.height = 350 - vis.margin.top - vis.margin.bottom;
 
-    d3.select("#" + vis.parentElement).html("")
+    console.log($("#" + vis.parentElement).width());
+
+    d3.select("#" + vis.parentElement).html("");
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -43,7 +45,7 @@ gantt.prototype.initVis = function(){
         .attr("id", "tooltip1")
         .attr("x", vis.width / 2)
         .attr("y", vis.height + 50)
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "middle");
 
     vis.svg.append("rect")
         .attr("height", vis.height)
