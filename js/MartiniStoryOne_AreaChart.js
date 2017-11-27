@@ -105,23 +105,30 @@ function drawMartiniOne (data) {
         INFO TOOLTIPS
     */
 
+    // first calculate a fitting font size
+    var FontSize = ( $("#MartiniStoryOne").width()/50 ).toString() + "px";
+
+
     // info text box 1
     var MartiniStoryOne_TooltipAreaOne = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 40);
+        .attr("y", 40)
+        .style("font-size", FontSize  );
 
     // info text box 2
     var MartiniStoryOne_TooltipAreaTwo = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 90);
+        .attr("y", 90)
+        .style("font-size", FontSize  );
 
     // info text box 3
     var MartiniStoryOne_TooltipAreaThree = svg_MartiniOne.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 140);
+        .attr("y", 140)
+        .style("font-size", FontSize  );
 
 
 
@@ -152,12 +159,14 @@ function drawMartiniOne (data) {
             // drawLine( (MartiniOneWidth / 1.5), (MartiniOneHeight / 1.2) );
         });
 
+
     // third info circle
     var infoCircleThree = svg_MartiniOne.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse hideInfo3")
         .attr("cx", MartiniOneWidth / 1.15)
         .attr("cy", MartiniOneHeight / 3)
         .attr("r", 10)
+
         .on('click', function (){
             MartiniStoryOne_TooltipAreaThree.html(" - The area highlighted in crimson corresponds to a robust dataset from 1991 to 2017.");
             // drawLine( (MartiniOneWidth / 1.15), (MartiniOneHeight / 3) );

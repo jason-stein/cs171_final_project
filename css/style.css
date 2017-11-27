@@ -230,6 +230,39 @@ h6 {
     DASHBOARD COMPONENTS
 */
 
+/* STACKED AREA CHART */
+#DashboardStackedAreaChart {
+    height: 350px;
+}
+
+#ZoomedStackedAreaChart{
+    height: 600px;
+}
+
+
+/* GANTT CHART */
+#DashboardGanttChart {
+    height: 350px;
+}
+
+#ZoomedGanttChart {
+    height: 600px;
+}
+
+
+/* BUBBLE CHART */
+#DashboardBubbleChart {
+    height: 200px;
+}
+
+#ZoomedBubbleChart {
+    height: 600px;
+}
+
+
+
+
+
 .linker
 {
     font-size : 20px;
