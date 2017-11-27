@@ -26,8 +26,9 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     // prepare stacking of the data
     var stack = d3.stack()
         .keys(keys)
-        .order(d3.stackOrderInsideOut)
+        //.order(d3.stackOrderInsideOut)
         //.order(d3.stackOrderNone)
+        .order(d3.stackOrderAscending)
         .offset(d3.stackOffsetNone);
 
     // create display data
