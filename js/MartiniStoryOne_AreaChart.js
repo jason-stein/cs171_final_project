@@ -3,14 +3,14 @@
 function drawMartiniOne (data) {
 
     // introduce margins
-    var margin = {top: 10, right: 0, bottom: 50, left: 80};
+    var margin = {top: 10, right: 50, bottom: 50, left: 50};
 
     // define SVG Size
     var MartiniOneWidth = $("#MartiniStoryOne").width() - margin.left - margin.right,
         MartiniOneHeight = 500 - margin.top - margin.bottom;
 
     // Define svg_MartiniTwo_StackedArea as a child-element (g) of the drawing area and include spaces
-    var svg_MartiniOne = d3.select("#MartiniStoryOne").append("svg")
+    var svg_MartiniOne_AreaChart = d3.select("#MartiniStoryOne").append("svg")
         .attr("id", "my-svg")
         .attr("width", MartiniOneWidth + margin.left + margin.right)
         .attr("height", MartiniOneHeight + margin.top + margin.bottom)
@@ -39,7 +39,7 @@ function drawMartiniOne (data) {
     // calculate myOffset
     myOffset = (scaleX(parseTime(1990))) / MartiniOneWidth * 100 + "%";
 
-    var gradient = svg_MartiniOne.append("defs").append("linearGradient")
+    var gradient = svg_MartiniOne_AreaChart.append("defs").append("linearGradient")
         .attr("id", "svgGradient")
         .attr("x1", "0%")
         .attr("x2", "100%")
@@ -69,7 +69,7 @@ function drawMartiniOne (data) {
         .y0(MartiniOneHeight);
 
     // draw the actual area chart
-    svg_MartiniOne.append("path")
+    svg_MartiniOne_AreaChart.append("path")
         .datum(data)
         //.attr("class", "area")
         .attr("d", area)
@@ -79,23 +79,23 @@ function drawMartiniOne (data) {
     var xAxis_areaChart = d3.axisBottom()
         .scale(scaleX);
     // append x axis
-    svg_MartiniOne.append("g")
+    svg_MartiniOne_AreaChart.append("g")
         .attr("class", "axis x-axis areaChart")
         .attr("transform", "translate(0," + (MartiniOneHeight) + ")")
         .call(xAxis_areaChart);
 
     // append y axis
-    svg_MartiniOne.append("g")
+    svg_MartiniOne_AreaChart.append("g")
         .attr("class", "axis y-axis")
         .call(d3.axisLeft(scaleY));
 
 
-    ylab = svg_MartiniOne.append("text")
+    ylab = svg_MartiniOne_AreaChart.append("text")
         .attr("transform", "translate(-50," + MartiniOneHeight / 2 + ")rotate(270)")
         .attr("text-anchor", "middle")
         .text("Course Count");
 
-    xlab = svg_MartiniOne.append("text")
+    xlab = svg_MartiniOne_AreaChart.append("text")
         .attr("transform", "translate(" + (MartiniOneWidth / 2) + "," + (MartiniOneHeight + 40) + ")")
         .attr("text-anchor", "middle")
         .text("Year");
@@ -105,28 +105,35 @@ function drawMartiniOne (data) {
         INFO TOOLTIPS
     */
 
+    // first calculate a fitting font size
+    var FontSize = ( $("#MartiniStoryOne").width()/50 ).toString() + "px";
+
+
     // info text box 1
-    var MartiniStoryOne_TooltipAreaOne = svg_MartiniOne.append("text")
-        .attr("class", "MartiniStoryTwo_TooltipArea")
+    var MartiniStoryOne_TooltipAreaOne = svg_MartiniOne_AreaChart.append("text")
+        .attr("class", "MartiniStoryOne_TooltipArea")
         .attr("x", 10)
-        .attr("y", 40);
+        .attr("y", 40)
+        .style("font-size", FontSize  );
 
     // info text box 2
-    var MartiniStoryOne_TooltipAreaTwo = svg_MartiniOne.append("text")
-        .attr("class", "MartiniStoryTwo_TooltipArea")
+    var MartiniStoryOne_TooltipAreaTwo = svg_MartiniOne_AreaChart.append("text")
+        .attr("class", "MartiniStoryOne_TooltipArea")
         .attr("x", 10)
-        .attr("y", 90);
+        .attr("y", 90)
+        .style("font-size", FontSize  );
 
     // info text box 3
-    var MartiniStoryOne_TooltipAreaThree = svg_MartiniOne.append("text")
-        .attr("class", "MartiniStoryTwo_TooltipArea")
+    var MartiniStoryOne_TooltipAreaThree = svg_MartiniOne_AreaChart.append("text")
+        .attr("class", "MartiniStoryOne_TooltipArea")
         .attr("x", 10)
-        .attr("y", 140);
+        .attr("y", 140)
+        .style("font-size", FontSize  );
 
 
 
     // first info circle
-    var infoCircleOne = svg_MartiniOne.append("circle")
+    var infoCircleOne = svg_MartiniOne_AreaChart.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse")
         .attr("cx", MartiniOneWidth / 2.12)
         .attr("cy", MartiniOneHeight / 1.06)
@@ -140,7 +147,7 @@ function drawMartiniOne (data) {
 
 
     // second info circle
-    var infoCircleTwo = svg_MartiniOne.append("circle")
+    var infoCircleTwo = svg_MartiniOne_AreaChart.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse hideInfo2")
         .attr("cx", MartiniOneWidth / 1.5)
         .attr("cy", MartiniOneHeight / 1.2)
@@ -152,12 +159,14 @@ function drawMartiniOne (data) {
             // drawLine( (MartiniOneWidth / 1.5), (MartiniOneHeight / 1.2) );
         });
 
+
     // third info circle
-    var infoCircleThree = svg_MartiniOne.append("circle")
+    var infoCircleThree = svg_MartiniOne_AreaChart.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse hideInfo3")
         .attr("cx", MartiniOneWidth / 1.15)
         .attr("cy", MartiniOneHeight / 3)
         .attr("r", 10)
+
         .on('click', function (){
             MartiniStoryOne_TooltipAreaThree.html(" - The area highlighted in crimson corresponds to a robust dataset from 1991 to 2017.");
             // drawLine( (MartiniOneWidth / 1.15), (MartiniOneHeight / 3) );
@@ -166,7 +175,7 @@ function drawMartiniOne (data) {
     // draw line function to connect info text with info circle
 
 /*    function drawLine (circleX, circleY){
-        svg_MartiniOne.append("line")
+        svg_MartiniOne_AreaChart.append("line")
             .attr("x1", MartiniOneWidth/2)
             .attr("x2", circleX)
             .attr("y1", 50)

@@ -24,7 +24,7 @@ StackedAreaChart.prototype.initVis = function(){
     vis.margin = { top: 40, right: 25, bottom: 60, left: 80 };
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-    vis.height = 350 - vis.margin.top - vis.margin.bottom;
+    vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
 
     // SVG drawing area
@@ -85,10 +85,10 @@ StackedAreaChart.prototype.initVis = function(){
     vis.dashboardHeader = document.getElementById("DashboardHeader");
     vis.detailedHeader = document.getElementById("DetailedHeader");
 
-    vis.childName = "gantt";
+    vis.childName = "DashboardGanttChart";
     vis.childElement = document.getElementById(vis.childName);
 
-    vis.detailChildName = "detailedganttchart";
+    vis.detailChildName = "ZoomedGanttChart";
     vis.detailChildElement = document.getElementById(vis.detailChildName);
 
     vis.wrangleData();
@@ -191,8 +191,8 @@ StackedAreaChart.prototype.select = function(key){
     vis.detailedChild = new gantt(vis.detailChildName, ganttData, vis.colorScale(key));
     vis.detailedChild.selectionChanged(vis.extent);
     // reset the bubble chart
-    document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
-    document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+    document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
+    document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
     // update buddy vis
     if (vis.buddy){
         vis.buddy.toolTipClickSwitch = true;
@@ -215,8 +215,8 @@ StackedAreaChart.prototype.deselect = function(){
     vis.selected = "";
     vis.toolTipClickSwitch = false;
     // remove bubble and gantt charts (because we have left the department)
-    document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
-    document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+    document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
+    document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
     vis.detailChildElement.innerHTML = instructions;
     vis.childElement.innerHTML = instructions;
     // deselect buddy
@@ -251,6 +251,8 @@ StackedAreaChart.prototype.updateVis = function(){
             });
         })
     ]);
+
+    console.log(vis.displayData);
 
     // colorscale domain
     // (will overflow range and repeat... actually thanks Bostock)
