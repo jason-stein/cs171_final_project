@@ -14,9 +14,10 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     // get data types right
     data.forEach(function(d) {
         d.year = parseTime(d.year);
-        d["FAS"] = +d["FAS"];
+        /*d["FAS"] = +d["FAS"];
         d["GSD"] = +d["GSD"];
-        d["KEN"] = +d["KEN"];
+        d["KEN"] = +d["KEN"];*/
+
     });
 
     // find all keys within data
@@ -25,7 +26,8 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     // prepare stacking of the data
     var stack = d3.stack()
         .keys(keys)
-        .order(d3.stackOrderDescending)
+        .order(d3.stackOrderInsideOut)
+        //.order(d3.stackOrderNone)
         .offset(d3.stackOffsetNone);
 
     // create display data
