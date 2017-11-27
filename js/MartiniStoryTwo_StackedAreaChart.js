@@ -123,7 +123,7 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     */
 
     // first calculate a fitting font size
-    var FontSize = ( $("#MartiniStoryOne").width()/80 ).toString() + "px";
+    var FontSize = ( $("#MartiniStoryTwo").width()/80 ).toString() + "px";
 
 
     // info text box 1
