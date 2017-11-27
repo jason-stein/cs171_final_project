@@ -295,7 +295,6 @@ StackedAreaChart.prototype.updateVis = function(){
         })
         // appropriate color if nothing selected or it's the selected path, else black
         .attr("fill", function(d){
-            console.log(vis.selected)
             return vis.selected === "" || vis.selected === d.key ? vis.colorScale(d.key) : "black";
         });
 
