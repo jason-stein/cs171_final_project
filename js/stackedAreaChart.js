@@ -17,6 +17,7 @@ StackedAreaChart = function(_parentElement, _data){
 StackedAreaChart.prototype.initVis = function(){
     var vis = this;
 
+    // object globals that determine what department is selected
     vis.selected = "";
     vis.toolTipClickSwitch = false;
 
@@ -34,6 +35,8 @@ StackedAreaChart.prototype.initVis = function(){
         .attr("transform", "translate(" + vis.margin.left +
               "," + vis.margin.top + ")");
 
+    // initialize range of years (changes later)
+    vis.extent = d3.extent(vis.data, function(d) { return d.ACADEMIC_YEAR; })
 
     // scales and axes
     vis.x = d3.scaleTime()
@@ -57,6 +60,7 @@ StackedAreaChart.prototype.initVis = function(){
     vis.svg.append("g")
         .attr("class", "y-axis axis");
 
+    // axis labels
     vis.ylab = vis.svg.append("text")
         .attr("transform", "translate(-50," + vis.height / 2 + ")rotate(270)")
         .attr("text-anchor", "middle");
@@ -76,6 +80,16 @@ StackedAreaChart.prototype.initVis = function(){
     vis.tooltip = vis.svg.append("text")
         .attr("x", 50)
         .attr("y", -10);
+
+    // where to update things when interacting
+    vis.dashboardHeader = document.getElementById("DashboardHeader");
+    vis.detailedHeader = document.getElementById("DetailedHeader");
+
+    vis.childName = "gantt";
+    vis.childElement = document.getElementById(vis.childName);
+
+    vis.detailChildName = "detailedganttchart";
+    vis.detailChildElement = document.getElementById(vis.detailChildName);
 
     vis.wrangleData();
 };
@@ -155,13 +169,80 @@ StackedAreaChart.prototype.wrangleData = function(){
     vis.updateVis()
 };
 
+// when a department is selected
+StackedAreaChart.prototype.select = function(key){
+    var vis = this;
+
+    // update the dropdown
+    for(var i = 1; i < 4; i++){
+        $("#departmentselect" + i).val(key);
+    }
+    // update selection
+    vis.toolTipClickSwitch = true;
+    vis.selected = key;
+    // update headers
+    vis.dashboardHeader.innerHTML = key;
+    vis.detailedHeader.innerHTML = key;
+    // make 2 new Gantt charts (dashboard and big slide)
+    vis.childElement.innerHTML = "";
+    var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == key });
+    vis.child = new gantt(vis.childName, ganttData, vis.colorScale(key));
+    vis.child.selectionChanged(vis.extent);
+    vis.detailedChild = new gantt(vis.detailChildName, ganttData, vis.colorScale(key));
+    vis.detailedChild.selectionChanged(vis.extent);
+    // reset the bubble chart
+    document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+    document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+    // update buddy vis
+    if (vis.buddy){
+        vis.buddy.toolTipClickSwitch = true;
+        vis.buddy.selected = key;
+        vis.buddy.updateVis();
+    }
+    // update info box
+    document.getElementById("info1").innerHTML = "<li>Department: " + key + "</li>";
+    for(var i = 2; i <= 5; i++){
+        document.getElementById("info" + i).innerHTML = "";
+    }
+    // redraw
+    vis.updateVis();
+}
+
+StackedAreaChart.prototype.deselect = function(){
+    var vis = this;
+
+    // clear selection
+    vis.selected = "";
+    vis.toolTipClickSwitch = false;
+    // remove bubble and gantt charts (because we have left the department)
+    document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
+    document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+    vis.detailChildElement.innerHTML = instructions;
+    vis.childElement.innerHTML = instructions;
+    // deselect buddy
+    if (vis.buddy){
+        vis.buddy.selected = "";
+        vis.buddy.toolTipClickSwitch = false;
+        buddy.updateVis();
+    }
+    // clear info box
+    for(var i = 1; i <= 5; i++){
+        document.getElementById("info" + i).innerHTML = "";
+    }
+    vis.updateVis();
+    // reset all dropdowns
+    for(var i = 1; i < 4; i++){
+        $("#departmentselect" + i).val("NULL");
+    }
+}
+
 // dynamic shit
 StackedAreaChart.prototype.updateVis = function(){
     var vis = this;
 
-    var extent = d3.extent(vis.filterData, function(d) { return d.ACADEMIC_YEAR; })
+    vis.extent = d3.extent(vis.filterData, function(d) { return d.ACADEMIC_YEAR; })
 
-    vis.x.domain(extent);
+    vis.x.domain(vis.extent);
 
     // get 2-d max
     vis.y.domain([0, d3.max(vis.displayData, function(d) {
@@ -175,15 +256,6 @@ StackedAreaChart.prototype.updateVis = function(){
     // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
 
-    var dashboardHeader = document.getElementById("DashboardHeader");
-    var detailedHeader = document.getElementById("DetailedHeader");
-
-    var childName = "gantt";
-    var childElement = document.getElementById(childName);
-
-    var detailChildName = "detailedganttchart";
-    var detailChildElement = document.getElementById(detailChildName);
-
     // enter-update-exit paths
     var categories = vis.svg.selectAll(".stackarea")
         .data(vis.displayData);
@@ -193,72 +265,35 @@ StackedAreaChart.prototype.updateVis = function(){
         .merge(categories)
         .on("mouseover", function (d) {
             if(!vis.toolTipClickSwitch){
-                dashboardHeader.innerHTML = d.key;
-                detailedHeader.innerHTML = d.key;
+                vis.dashboardHeader.innerHTML = d.key;
+                vis.detailedHeader.innerHTML = d.key;
+                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
             }
         })
         .on("mouseout", function () {
             if(!vis.toolTipClickSwitch){
-                dashboardHeader.innerHTML = "Dashboard";
-                detailedHeader.innerHTML = "Departments";
+                vis.dashboardHeader.innerHTML = "Dashboard";
+                vis.detailedHeader.innerHTML = "Departments";
             }
         })
         .on("click", function (d) {
             // select
             if(!vis.toolTipClickSwitch){
-                vis.selected = d.key;
-                vis.toolTipClickSwitch = true;
-                childElement.innerHTML = "";
-                var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
-                vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
-                vis.child.selectionChanged(extent);
-                vis.detailedChild = new gantt(detailChildName, ganttData, vis.colorScale(d.key));
-                vis.detailedChild.selectionChanged(extent);
-                if (vis.buddy){
-                    vis.buddy.selected = d.key;
-                    vis.buddy.toolTipClickSwitch = true;
-                }
-                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
+                vis.select(d.key);
             }
             // deselect
-            else if(vis.toolTipClickSwitch && dashboardHeader.innerHTML === d.key){
-                vis.selected = "";
-                vis.toolTipClickSwitch = false;
-                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
-                document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
-                detailChildElement.innerHTML = instructions;
-                childElement.innerHTML = instructions;
-                if (vis.buddy){
-                    vis.buddy.selected = "";
-                    vis.buddy.toolTipClickSwitch = false;
-                }
+            else if(vis.toolTipClickSwitch && vis.dashboardHeader.innerHTML === d.key){
+                vis.deselect();
             }
             // reselect
             else{
-                vis.selected = d.key;
-                dashboardHeader.innerHTML = d.key;
-                detailedHeader.innerHTML = d.key;
-                childElement.innerHTML = "";
-                var ganttData = vis.data.filter(function(e){ return e.CLASS_ACAD_ORG_DESCRIPTION == d.key });
-                vis.child = new gantt(childName, ganttData, vis.colorScale(d.key));
-                vis.child.selectionChanged(extent);
-                vis.detailedChild = new gantt(detailChildName, ganttData, vis.colorScale(d.key));
-                vis.detailedChild.selectionChanged(extent);
-                document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
-                document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
-                if (vis.buddy){
-                    vis.buddy.selected = d.key;
-                }
-                document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
-            }
-            vis.updateVis();
-            if (vis.buddy){
-                vis.buddy.updateVis();
+                vis.select(d.key);
             }
         })
         .attr("d", function(d) {
             return vis.area(d);
         })
+        // appropriate color if nothing selected or it's the selected path, else black
         .attr("fill", function(d){
             return vis.selected === "" || vis.selected === d.key ? vis.colorScale(d.key) : "black";
         });
@@ -270,6 +305,7 @@ StackedAreaChart.prototype.updateVis = function(){
     vis.svg.select(".y-axis").transition().duration(800).call(vis.yAxis);
 };
 
+// for slider
 StackedAreaChart.prototype.selectionChanged = function(brushRegion){
     var vis = this;
 

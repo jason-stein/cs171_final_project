@@ -92,6 +92,19 @@ h5 {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+h6 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    /*color: #555555;*/
+}
+
+.placeholder {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
 .harvard_icon {
     display: block;
     margin: auto;
@@ -277,3 +290,12 @@ button#normalize{
 #bubblechart {
     height: 200px;
 }
+
+#normalize2, .deptdropdown{
+    display: block;
+    margin: 0 auto;
+}
+
+/*.framed {
+    border: thin solid black;
+}*/
