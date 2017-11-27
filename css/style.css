@@ -283,7 +283,7 @@ button#normalize{
     margin-left:80px;
 }
 
-.deptdropdown{
+#normalize2, .deptdropdown{
     display: block;
     margin: 0 auto;
 }
