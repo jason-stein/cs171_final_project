@@ -144,14 +144,23 @@ h6 {
 */
 
 
-.MartiniStoryTwo_TooltipArea {
+.MartiniStoryOne_TooltipArea {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 27px;
+    font-weight: 200;
     fill: #740702;
 }
 
-.MartiniGuidanceCircle {
+.MartiniStoryTwo_TooltipArea {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    fill: #740702;
+}
+
+.MartiniStoryOne_GuidanceCircle {
+    fill: #434343;
+}
+
+.MartiniStoryTwo_GuidanceCircle {
     fill: #434343;
 }
 

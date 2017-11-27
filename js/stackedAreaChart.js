@@ -252,6 +252,8 @@ StackedAreaChart.prototype.updateVis = function(){
         })
     ]);
 
+    console.log(vis.displayData);
+
     // colorscale domain
     // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
