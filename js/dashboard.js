@@ -14,10 +14,10 @@ var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a depart
     "to see enrollment data for that year.</p>"
 
 // set all placeholders
-document.getElementById("gantt").innerHTML = instructions;
-document.getElementById("detailedganttchart").innerHTML = instructions;
-document.getElementById("bubblechart").innerHTML = bubblePlaceholder;
-document.getElementById("detailedbubblechart").innerHTML = bubblePlaceholder;
+document.getElementById("DashboardGanttChart").innerHTML = instructions;
+document.getElementById("ZoomedGanttChart").innerHTML = instructions;
+document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
+document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
 
 // load data
 queue()
@@ -66,8 +66,8 @@ function createVis(error, data) {
     });
 
     // initialize SACs
-    stackedAreaChart = new StackedAreaChart('stackedareachart', data);
-    detailedStackedAreaChart = new StackedAreaChart('DetailedStackedAreaChart', data);
+    stackedAreaChart = new StackedAreaChart('DashboardStackedAreaChart', data);
+    detailedStackedAreaChart = new StackedAreaChart('ZoomedStackedAreaChart', data);
     stackedAreaChart.buddy = detailedStackedAreaChart;
     detailedStackedAreaChart.buddy = stackedAreaChart;
 
@@ -110,7 +110,7 @@ function slid() {
 // dropdown callback
 function selectHappened(value){
     if (value == "NULL"){
-        console.log("asdf")
+        console.log("asdf");
         stackedAreaChart.deselect();
         detailedStackedAreaChart.deselect();
     }
