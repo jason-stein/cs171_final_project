@@ -223,7 +223,7 @@ StackedAreaChart.prototype.deselect = function(){
     if (vis.buddy){
         vis.buddy.selected = "";
         vis.buddy.toolTipClickSwitch = false;
-        buddy.updateVis();
+        vis.buddy.updateVis();
     }
     // clear info box
     for(var i = 1; i <= 5; i++){
@@ -295,6 +295,7 @@ StackedAreaChart.prototype.updateVis = function(){
         })
         // appropriate color if nothing selected or it's the selected path, else black
         .attr("fill", function(d){
+            console.log(vis.selected)
             return vis.selected === "" || vis.selected === d.key ? vis.colorScale(d.key) : "black";
         });
 
