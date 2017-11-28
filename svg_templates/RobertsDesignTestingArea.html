@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Knowledge Producing Machine</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/jquery.fullpage.css">
+    <link rel="stylesheet" href="../css/introjs.css">
+    <link href="../css/nouislider.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!--<link href="css/grayscale.css" rel="stylesheet">-->
+
+    <style>
+        #sample0{
+
+            background: url("../img/sample0.svg");
+            height: 350px;
+        }
+
+        #div0{
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            height: 100%;
+        }
+
+        #div0:hover{
+            opacity: 0;
+           /* background-color: unset;*/
+            height: 350px;
+        }
+
+        #sample1{
+            background-image: url("../img/sample2.svg");
+            height: 350px;
+        }
+
+        #div1{
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            height: 100%;
+        }
+
+        #div1:hover{
+            opacity: 0;
+            /* background-color: unset;*/
+            height: 350px;
+        }
+
+        #sample3 {
+            background-image: url("../img/sample3.svg");
+            height: 200px;
+        }
+
+        #div3{
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            height: 100%;
+        }
+
+        #div3:hover{
+            opacity: 0;
+            /* background-color: unset;*/
+            height: 350px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div>
+    <div class="row">
+        <div class="col-xs-5 col-xs-offset-1" id="sample0">
+            <div class="container" id="div0">
+                <h2>STACKED AREA CHART</h2>
+                <h3>(hover to explore)</h3>
+                <ul>
+                    <li><h5>Clicking a department's time-line will highlight it by changing all the other
+                        departments to gray. This area chart is displaying the "Visual and Environmental Studies"
+                        department.</h5></li>
+                    <li><h5>Clicking the time-line again will redisplay all the departments in their respective
+                        colors.</h5></li>
+                    <li><h5>Clicking a department's line will also render a new Gantt chart to the left of the
+                        stacked area chart.</h5></li>
+                    <li><h5>There is a slider to narrow your focus to specific years between 1990 and 2017.</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-5" id="sample1">
+            <div class="container" id="div1">
+                <h2>GANTT CHART</h2>
+                <h3>(hover to explore)</h3>
+                <ul>
+                    <li><h5>Each Gantt chart is unique and shows the department's growth and change over
+                        time.</h5></li>
+                    <li><h5>The chart to the left represents the "Visual and Environmental Studies" department from
+                        1990 to
+                        2017.</h5></li>
+                    <li><h5>By hovering over a rectangle you can display the course title.</h5></li>
+                    <li><h5>Clicking a particular course will render a bubble chart of enrollment data for that
+                        course in that particular year.</h5></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xs-5 col-xs-offset-1" id="sample3">
+            <div class="container" id="div3">
+                <h2>BUBBLE CHART</h2>
+                <h3>(hover to explore)</h3>
+                <ul>
+                    <li><h5>The bubble chart is a representation of a particular year within a department.</h5></li>
+                    <li><h5>Each bubble's size represents the relative enrollment for that course during that
+                        year.</h5></li>
+                    <li><h5>The highlighted bubble in this chart represents "Classic and World Silent Cinema" in
+                        1991.</h5></li>
+                    <li><h5>The highlighted bubble is the course last clicked; if more than one bubble is
+                        highlighted, the course was offered more than once that year.</h5>
+                    </li>
+                    <li><h5>Now you are ready to move on to the full dashboard and explore the Harvard FAS
+                        curricular
+                        history from 1990 to 2017.</h5></li>
+                    <li><h5><b>NOTE: Due to arrangements between the metaLAB and the Harvard Registrar's Office, the
+                        enrollment data for each course
+                        was artificially generated for use in this project.</b></h5></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-5" id="sample4"></div>
+    </div>
+
+
+
+</div>
+
+
+<!-- Load JS libraries -->
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/d3.js"></script>
+<script src="../js/jquery.fullpage.js"></script>
+<script src="../js/queue.v1.min.js"></script>
+<script src="../js/intro.js"></script>
+<script src="../js/nouislider.js"></script>
+
+<!-- Visualization objects
+<script src="../js/stackedAreaChart.js"></script>
+<script src="../js/dashboard.js"></script>
+<script src="../js/departmentTimeline.js"></script>
+<script src="../js/bubbleChart.js"></script>
+<script src="../js/gantt.js"></script>
+
+&lt;!&ndash; own JS files &ndash;&gt;
+<script src="../js/fullpageCustomization.js"></script>
+<script src="../js/main.js"></script>-->
+
+
+<!-- own JS files - Martini -->
+<script src="js/MartiniStoryOne_AreaChart.js"></script>
+<script src="js/MartiniStoryTwo_StackedAreaChart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vivus@0.4.3/dist/vivus.min.js"></script>
+
+
+</body>
+</html>
