@@ -139,7 +139,7 @@ function drawMartiniOne (data) {
         .attr("cy", MartiniOneHeight / 1.06)
         .attr("r", 10)
         .on('click', function (){
-            MartiniStoryOne_TooltipAreaOne.text(" - Notice that prior to the 1990s the data is quite sparse.");
+            MartiniStoryOne_TooltipAreaOne.text(" - There is curricular data starting in 1931; you will notice it is quite sparse prior to the 1990s.");
             infoCircleTwo.classed("hideInfo2", false)
 
             // drawLine( (MartiniOneWidth / 2.12), (MartiniOneHeight / 1.06) );
@@ -153,7 +153,7 @@ function drawMartiniOne (data) {
         .attr("cy", MartiniOneHeight / 1.2)
         .attr("r", 10)
         .on('click', function (){
-            MartiniStoryOne_TooltipAreaTwo.text(" - It is only in 1991 when the data set reaches a significant size.");
+            MartiniStoryOne_TooltipAreaTwo.text(" - It is only in 1990 that the number of courses recorded reaches a significant size.");
             infoCircleThree.classed("hideInfo3", false)
 
             // drawLine( (MartiniOneWidth / 1.5), (MartiniOneHeight / 1.2) );

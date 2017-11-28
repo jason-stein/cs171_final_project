@@ -136,14 +136,14 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     var MartiniStoryTwo_TooltipAreaTwo = svg_MartiniTwo_StackedArea.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 90)
+        .attr("y", 80)
         .style("font-size", FontSize  );
 
     // info text box 3
     var MartiniStoryTwo_TooltipAreaThree = svg_MartiniTwo_StackedArea.append("text")
         .attr("class", "MartiniStoryTwo_TooltipArea")
         .attr("x", 10)
-        .attr("y", 140)
+        .attr("y", 120)
         .style("font-size", FontSize  );
 
 
@@ -151,12 +151,12 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     // first info circle
     var infoCircleOne = svg_MartiniTwo_StackedArea.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse")
-        .attr("cx", MartiniTwoWidth / 2.12)
-        .attr("cy", MartiniTwoHeight / 1.06)
+        .attr("cx", MartiniTwoWidth / 20)
+        .attr("cy", MartiniTwoHeight / 1.5)
         .attr("r", 10)
         .on('click', function (){
-            MartiniStoryTwo_TooltipAreaOne.text(" - Now you can see the more complete dataset displayed from 1991 to 2017. This plot\n" +
-                "includes all schools (FAS, GSD, HKS, HLS, etc.).");
+            MartiniStoryTwo_TooltipAreaOne.text(" - Now the more complete dataset from 1990 to 2017 is displayed. This plot\n" +
+                "includes all Harvard schools.");
             infoCircleTwo.classed("hideInfo2", false)
         });
 
@@ -164,12 +164,12 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     // second info circle
     var infoCircleTwo = svg_MartiniTwo_StackedArea.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse hideInfo2")
-        .attr("cx", MartiniTwoWidth / 1.5)
-        .attr("cy", MartiniTwoHeight / 1.2)
+        .attr("cx", MartiniTwoWidth / 2)
+        .attr("cy", MartiniTwoHeight / 3)
         .attr("r", 10)
         .on('click', function (){
-            MartiniStoryTwo_TooltipAreaTwo.text(" - Even this \"all-schools\" data is asynchronous and incomplete, so we are going to further\n" +
-                "focus on just FAS, again colored in crimson.");
+            MartiniStoryTwo_TooltipAreaTwo.text(" - This \"all-schools\" data is also asynchronous and incomplete; the dataset for FAS\n" +
+                " is again more robust.");
             infoCircleThree.classed("hideInfo3", false)
         });
 
@@ -178,11 +178,11 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     var infoCircleThree = svg_MartiniTwo_StackedArea.append("circle")
         .attr("class", "MartiniGuidanceCircle pulse hideInfo3")
         .attr("cx", MartiniTwoWidth / 1.15)
-        .attr("cy", MartiniTwoHeight / 3)
+        .attr("cy", MartiniTwoHeight / 8.5)
         .attr("r", 10)
 
         .on('click', function (){
-            MartiniStoryTwo_TooltipAreaThree.html(" - The next page will give you an idea of the exploration you can do with the FAS data on\n" +
+            MartiniStoryTwo_TooltipAreaThree.html(" - The next page will give you an idea of the exploration you can do with this FAS data on\n" +
                 "the final dashboard.");
         });
     }
