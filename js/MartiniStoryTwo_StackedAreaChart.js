@@ -14,10 +14,6 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
     // get data types right
     data.forEach(function(d) {
         d.year = parseTime(d.year);
-        /*d["FAS"] = +d["FAS"];
-        d["GSD"] = +d["GSD"];
-        d["KEN"] = +d["KEN"];*/
-
     });
 
     // find all keys within data
@@ -159,7 +155,7 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
         .attr("cy", MartiniTwoHeight / 1.06)
         .attr("r", 10)
         .on('click', function (){
-            MartiniStoryTwo_TooltipAreaOne.text(" - Now you can see the more complete dataset displayed from 1992 to 2017. This plot\n" +
+            MartiniStoryTwo_TooltipAreaOne.text(" - Now you can see the more complete dataset displayed from 1991 to 2017. This plot\n" +
                 "includes all schools (FAS, GSD, HKS, HLS, etc.).");
             infoCircleTwo.classed("hideInfo2", false)
         });
