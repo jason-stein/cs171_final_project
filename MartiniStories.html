@@ -10,14 +10,39 @@
         #MartiniStoryTwo_TooltipArea {
             font-size: 25px;
         }
+
+         #sample0{
+
+             background: url("img/sample0.svg");
+             height: 350px;
+         }
+
+        #div0{
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            height: 100%;
+            border: thin solid red;
+        }
+
+        #div0:hover{
+            opacity: 0;
+            /* background-color: unset;*/
+            height: 350px;
+            border: thin solid black;
+        }
+
     </style>
 
 </head>
 
 <body>
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1" id="MartiniStoryOne"></div>
-        <div class="col-xs-10 col-xs-offset-1" id="MartiniStoryTwo"></div>
+        <div id="div0">
+                <div class="col-xs-10 col-xs-offset-1" id="MartiniStoryOne"></div>
+                <div class="col-xs-10 col-xs-offset-1" id="MartiniStoryTwo"></div>
+            </div>
+        </div>
     </div>
 
 

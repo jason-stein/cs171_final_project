@@ -27,6 +27,10 @@
     background: rgba(225, 225, 225, 0.95);
 }
 
+#martiniTEST {
+    background: rgba(240, 240, 240, 1);
+}
+
 #martini-four {
     background: rgba(240, 240, 240, 1);
 }
@@ -188,6 +192,67 @@ h6 {
 .hideInfo3 {
     display: none;
 }
+
+
+#sample0{
+
+    background: url("../img/sample0.svg");
+    background-size: cover;
+    height: 350px;
+}
+
+#div0{
+    opacity: 1;
+    background-color: rgba(240, 240, 240, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+#div0:hover{
+    opacity: 0;
+    /* background-color: unset;*/
+    height: 350px;
+}
+
+#sample1{
+    background-image: url("../img/sample2.svg");
+    background-size: cover;
+    height: 350px;
+}
+
+#div1{
+    opacity: 1;
+    background-color: rgba(240, 240, 240, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+#div1:hover{
+    opacity: 0;
+    background-color: rgba(240, 240, 240, 0);
+    /* background-color: unset;*/
+    height: 350px;
+}
+
+#sample3 {
+    background-image: url("../img/sample3.svg");
+    background-size: cover;
+    height: 200px;
+}
+
+#div3{
+    opacity: 1;
+    background-color: rgba(240, 240, 240, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+#div3:hover{
+    opacity: 0;
+    /* background-color: unset;*/
+    height: 350px;
+}
+
 
 
 /*
