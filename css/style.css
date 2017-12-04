@@ -341,6 +341,14 @@ h6 {
     height: 600px;
 }
 
+/* BUBBLE CHART */
+#DashboardBarChart {
+    height: 200px;
+}
+
+#ZoomedBarChart {
+    height: 600px;
+}
 
 
 
