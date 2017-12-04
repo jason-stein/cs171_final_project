@@ -29,6 +29,7 @@
 
 #martiniTEST {
     background: rgba(240, 240, 240, 1);
+    padding-top: 1em;
 }
 
 #martini-four {
@@ -99,6 +100,13 @@ h5 {
 h6 {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 20px;
+    text-align: center;
+    color: #555555;
+}
+
+.pulse_instruction {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
     text-align: center;
     color: #555555;
 }
