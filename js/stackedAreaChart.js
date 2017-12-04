@@ -301,6 +301,7 @@ StackedAreaChart.prototype.updateVis = function(){
             }
         })
         .on("click", function (d) {
+            vis.mouseoverRect.attr("opacity", 0);
             // select
             if(!vis.toolTipClickSwitch){
                 vis.select(d.key);

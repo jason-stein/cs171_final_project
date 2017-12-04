@@ -110,7 +110,6 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
         .attr('class', 'area')
         .attr('d', area)
         .style('fill', function(d) {
-            console.log(d.key);
             if (d.key === "FAS"){
                 return "#740702"
             }
