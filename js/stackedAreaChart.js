@@ -85,6 +85,13 @@ StackedAreaChart.prototype.initVis = function(){
     vis.dashboardHeader = document.getElementById("DashboardHeader");
     vis.detailedHeader = document.getElementById("DetailedHeader");
 
+    vis.mouseoverRect = vis.svg.append("rect")
+        .attr("fill", "gray")
+        .attr("height", vis.height)
+        .attr("y", 0)
+        .attr("opacity", 0)
+        .attr("mouse-events", "none");
+
     vis.childName = "DashboardGanttChart";
     vis.childElement = document.getElementById(vis.childName);
 
@@ -252,8 +259,6 @@ StackedAreaChart.prototype.updateVis = function(){
         })
     ]);
 
-    console.log(vis.displayData);
-
     // colorscale domain
     // (will overflow range and repeat... actually thanks Bostock)
     vis.colorScale.domain(vis.keys);
@@ -265,17 +270,34 @@ StackedAreaChart.prototype.updateVis = function(){
     categories.enter().append("path")
         .attr("class", "stackarea")
         .merge(categories)
-        .on("mouseover", function (d) {
+        .on("mousemove", function (d) {
             if(!vis.toolTipClickSwitch){
-                vis.dashboardHeader.innerHTML = d.key;
-                vis.detailedHeader.innerHTML = d.key;
+                var hoverYear = +d3.timeFormat("%Y")(vis.x.invert(d3.mouse(this)[0]))
+                var selectionRange = range.noUiSlider.get();
+                var yearwidth = vis.width / (selectionRange[1] - selectionRange[0]);
+                var index = hoverYear - selectionRange[0]
+                var dataSlice = vis.displayData.filter(function(e){
+                    return e.key == d.key;
+                })
+                var yearSlice = dataSlice[0][index]
+                var total = yearSlice[1] - yearSlice[0]
+                if (vis.normalize){
+                    total = Math.round(total*1000)/10 + "% of";
+                }
+                vis.dashboardHeader.innerHTML = d.key + " (" + hoverYear +") " + total + " Courses";
+                vis.detailedHeader.innerHTML = d.key + " (" + hoverYear +") " + total + " Courses";
                 document.getElementById("info1").innerHTML = "<li>Department: " + d.key + "</li>";
+                vis.mouseoverRect
+                    .attr("x", vis.x(parseDate(hoverYear)))
+                    .attr("opacity", 0.35)
+                    .attr("width", yearwidth);
             }
         })
         .on("mouseout", function () {
             if(!vis.toolTipClickSwitch){
                 vis.dashboardHeader.innerHTML = "Dashboard";
                 vis.detailedHeader.innerHTML = "Departments";
+                vis.mouseoverRect.attr("opacity", 0);
             }
         })
         .on("click", function (d) {
