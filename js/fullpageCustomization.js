@@ -3,7 +3,7 @@ $(document).ready(function() {
         //Navigation
         menu: '#menu',
         lockAnchors: false,
-        anchors:['Intro', 'MartiniOne', 'MartiniTwo' , 'MartiniThree','MartiniTest', 'MartiniFour', 'MartiniFive', 'DashBoard', 'Disclaimer'],
+        anchors:['Intro', 'MartiniOne', 'MartiniTwo' , 'MartiniThree', 'MartiniFour', 'DashBoard', 'Disclaimer'],
         navigation: true,
         navigationPosition: 'right',
         //navigationTooltips: ['Intro', 'Facts', 'Vis 1', 'Vis 2', 'Vis 3', 'Moving Forward', 'Recommendations'],
