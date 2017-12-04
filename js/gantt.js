@@ -91,6 +91,12 @@ gantt.prototype.updateVis = function(){
     var detailedChildName = "ZoomedBubbleChart";
     var detailedChildNode = document.getElementById(detailedChildName);
 
+    var barChildName = "DashboardBarChart";
+    var barChildNode = document.getElementById(barChildName);
+
+    var detailedBarChildName = "ZoomedBarChart";
+    var detailedBarChildNode = document.getElementById(barChildName);
+
     var bars = vis.svg.selectAll("rect.gantt")
         .data(vis.displayData);
 
@@ -111,12 +117,25 @@ gantt.prototype.updateVis = function(){
         })
         .on("mouseout", function(){ vis.tooltip.text("")})
         .on("click", function(d){
-            document.getElementById(childName).innerHTML="";
+            document.getElementById(childName).innerHTML = "";
             child = new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
-            document.getElementById(detailedChildName).innerHTML="";
+            document.getElementById(detailedChildName).innerHTML = "";
             detailedChild = new BubbleChart(detailedChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
             child.buddy = detailedChild;
             detailedChild.buddy = child;
+
+            document.getElementById(barChildName).innerHTML = "";
+            barChild = new EnrollmentBarchart(barChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            document.getElementById(detailedBarChildName).innerHTML = "";
+            detailedBarChild = new EnrollmentBarchart(detailedBarChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            barChild.buddy = detailedBarChild;
+            detailedBarChild.buddy = barChild;
+
+            child.child1 = barChild;
+            child.child2 = detailedBarChild;
+            detailedChild.child1 = barChild;
+            detailedChild.child2 = detailedBarChild;
+
             document.getElementById("info2").innerHTML =
                 "<li>Course: " + d.COURSE_TITLE_LONG + "</li>";
             document.getElementById("info3").innerHTML =

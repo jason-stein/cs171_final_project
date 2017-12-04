@@ -1,6 +1,4 @@
-
-
-function drawMartiniOne (data) {
+function drawMartiniOne(data) {
 
     // introduce margins
     var margin = {top: 10, right: 50, bottom: 50, left: 50};
@@ -23,8 +21,12 @@ function drawMartiniOne (data) {
     // linear scale for x
     var scaleX = d3.scaleTime()
         .domain([
-            d3.min( data, function () { return parseTime(1933) } ),
-            d3.max( data, function () { return parseTime(2017) } )
+            d3.min(data, function () {
+                return parseTime(1933)
+            }),
+            d3.max(data, function () {
+                return parseTime(2017)
+            })
         ])
         .range([0, MartiniOneWidth]);
 
@@ -61,7 +63,7 @@ function drawMartiniOne (data) {
     // calculate area
     var area = d3.area()
         .x(function (d) {
-            return scaleX( parseTime(d.key) )
+            return scaleX(parseTime(d.key))
         })
         .y1(function (d) {
             return scaleY(d.value)
@@ -106,7 +108,7 @@ function drawMartiniOne (data) {
     */
 
     // first calculate a fitting font size
-    var FontSize = ( $("#MartiniStoryOne").width()/50 ).toString() + "px";
+    var FontSize = ( $("#MartiniStoryOne").width() / 50 ).toString() + "px";
 
 
     // info text box 1
@@ -114,22 +116,21 @@ function drawMartiniOne (data) {
         .attr("class", "MartiniStoryOne_TooltipArea")
         .attr("x", 10)
         .attr("y", 40)
-        .style("font-size", FontSize  );
+        .style("font-size", FontSize);
 
     // info text box 2
     var MartiniStoryOne_TooltipAreaTwo = svg_MartiniOne_AreaChart.append("text")
         .attr("class", "MartiniStoryOne_TooltipArea")
         .attr("x", 10)
         .attr("y", 90)
-        .style("font-size", FontSize  );
+        .style("font-size", FontSize);
 
     // info text box 3
     var MartiniStoryOne_TooltipAreaThree = svg_MartiniOne_AreaChart.append("text")
         .attr("class", "MartiniStoryOne_TooltipArea")
         .attr("x", 10)
         .attr("y", 140)
-        .style("font-size", FontSize  );
-
+        .style("font-size", FontSize);
 
 
     // first info circle
@@ -138,7 +139,7 @@ function drawMartiniOne (data) {
         .attr("cx", MartiniOneWidth / 2.12)
         .attr("cy", MartiniOneHeight / 1.06)
         .attr("r", 10)
-        .on('click', function (){
+        .on('click', function () {
             MartiniStoryOne_TooltipAreaOne.text(" - There is curricular data starting in 1931; you will notice it is quite sparse prior to the 1990s.");
             infoCircleTwo.classed("hideInfo2", false)
 
@@ -152,7 +153,7 @@ function drawMartiniOne (data) {
         .attr("cx", MartiniOneWidth / 1.5)
         .attr("cy", MartiniOneHeight / 1.2)
         .attr("r", 10)
-        .on('click', function (){
+        .on('click', function () {
             MartiniStoryOne_TooltipAreaTwo.text(" - It is only in 1990 that the number of courses recorded reaches a significant size.");
             infoCircleThree.classed("hideInfo3", false)
 
@@ -167,25 +168,26 @@ function drawMartiniOne (data) {
         .attr("cy", MartiniOneHeight / 3)
         .attr("r", 10)
 
-        .on('click', function (){
+        .on('click', function () {
             MartiniStoryOne_TooltipAreaThree.html(" - The area highlighted in crimson corresponds to a robust dataset from 1991 to 2017.");
             // drawLine( (MartiniOneWidth / 1.15), (MartiniOneHeight / 3) );
         });
 
     // draw line function to connect info text with info circle
 
-/*    function drawLine (circleX, circleY){
-        svg_MartiniOne_AreaChart.append("line")
-            .attr("x1", MartiniOneWidth/2)
-            .attr("x2", circleX)
-            .attr("y1", 50)
-            .attr("y2", circleY)
-            .style("stroke", "black")
-    }*/
+    /*    function drawLine (circleX, circleY){
+            svg_MartiniOne_AreaChart.append("line")
+                .attr("x1", MartiniOneWidth/2)
+                .attr("x2", circleX)
+                .attr("y1", 50)
+                .attr("y2", circleY)
+                .style("stroke", "black")
+        }*/
 }
 
 
 var fastData_MartiniOne = [
+    {key: "1932", value: 8},
     {key: "1933", value: 8},
     {key: "1939", value: 6},
     {key: "1940", value: 8},
@@ -193,6 +195,7 @@ var fastData_MartiniOne = [
     {key: "1945", value: 8},
     {key: "1946", value: 2},
     {key: "1948", value: 9},
+    {key: "1949", value: 8},
     {key: "1950", value: 4},
     {key: "1951", value: 2},
     {key: "1952", value: 10},
@@ -227,39 +230,39 @@ var fastData_MartiniOne = [
     {key: "1982", value: 716},
     {key: "1983", value: 759},
     {key: "1984", value: 722},
-    {key: "1985", value: 718},
-    {key: "1986", value: 784},
-    {key: "1987", value: 812},
-    {key: "1988", value: 883},
-    {key: "1989", value: 943},
-    {key: "1990", value: 960},
-    {key: "1991", value: 4631},
-    {key: "1992", value: 4784},
-    {key: "1993", value: 4739},
-    {key: "1994", value: 4879},
-    {key: "1995", value: 5138},
-    {key: "1996", value: 5271},
-    {key: "1997", value: 5467},
-    {key: "1998", value: 5570},
-    {key: "1999", value: 6354},
-    {key: "2000", value: 6570},
-    {key: "2001", value: 6804},
-    {key: "2002", value: 7088},
-    {key: "2003", value: 7208},
-    {key: "2004", value: 7303},
-    {key: "2005", value: 7545},
-    {key: "2006", value: 7738},
-    {key: "2007", value: 8044},
-    {key: "2008", value: 8279},
-    {key: "2009", value: 8402},
-    {key: "2010", value: 8704},
-    {key: "2011", value: 9038},
-    {key: "2012", value: 9203},
-    {key: "2013", value: 9620},
-    {key: "2014", value: 9588},
-    {key: "2015", value: 9724},
-    {key: "2016", value: 13189},
-    {key: "2017", value: 13598}
+    {key: "1985", value: 726},
+    {key: "1986", value: 872},
+    {key: "1987", value: 926},
+    {key: "1988", value: 1033},
+    {key: "1989", value: 1126},
+    {key: "1990", value: 1162},
+    {key: "1991", value: 4962},
+    {key: "1992", value: 5183},
+    {key: "1993", value: 5321},
+    {key: "1994", value: 5642},
+    {key: "1995", value: 6747},
+    {key: "1996", value: 7114},
+    {key: "1997", value: 7445},
+    {key: "1998", value: 7615},
+    {key: "1999", value: 8430},
+    {key: "2000", value: 8695},
+    {key: "2001", value: 9287},
+    {key: "2002", value: 10169},
+    {key: "2003", value: 10612},
+    {key: "2004", value: 10810},
+    {key: "2005", value: 11026},
+    {key: "2006", value: 11161},
+    {key: "2007", value: 11526},
+    {key: "2008", value: 11836},
+    {key: "2009", value: 11960},
+    {key: "2010", value: 12135},
+    {key: "2011", value: 12971},
+    {key: "2012", value: 13006},
+    {key: "2013", value: 13878},
+    {key: "2014", value: 13847},
+    {key: "2015", value: 14051},
+    {key: "2016", value: 20955},
+    {key: "2017", value: 22024}
     /*,
     {key: "2018", value: 10879},
     {key: "2019", value: 4}
