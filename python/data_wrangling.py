@@ -15,13 +15,13 @@ MAX_YEAR = 2017
 # files
 FIELDS = '../data/all_fields.csv'      # CSV of fields (e.g. concentrations.csv)
 INPUT = '../data/raw.csv'                                   # main CSV: all data
-OUTPUT = '../data/all_fields_1990_2017.csv'              # where to write out to
+OUTPUT = '../data/all_fields_all_schools_1931_2017.csv'              # where to write out to
 
 # schools to put in output
 # set to empty list for all
-SCHOOLS = ['FAS']
+SCHOOLS = []
 # columns to put in output
-COLUMNS = ['ACAD_GROUP', 'ACADEMIC_YEAR', 'CLASS_ACAD_ORG_DESCRIPTION', 'COURSE_TITLE_LONG']
+COLUMNS = ['ACADEMIC_YEAR']
 
 ################################################################################
 #                                                                              #
