@@ -65,10 +65,11 @@ StackedAreaChart.prototype.initVis = function(){
         .attr("transform", "translate(-50," + vis.height / 2 + ")rotate(270)")
         .attr("text-anchor", "middle");
 
-    vis.xlab = vis.svg.append("text")
-        .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height + 40) + ")")
-        .attr("text-anchor", "middle")
-        .text("Year");
+    // LESS TEXT
+    // vis.xlab = vis.svg.append("text")
+    //     .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height + 40) + ")")
+    //     .attr("text-anchor", "middle")
+    //     .text("Year");
 
     // area constructor
     vis.area = d3.area()
