@@ -118,6 +118,16 @@ BubbleChart.prototype.updateVis = function() {
                 document.getElementById("info4").innerHTML =
                     "<li>Enrollment: " + d.data.course_enrollment + "</li>";
             }
+            if (vis.child1){
+                vis.child1.selected = d.data.course.split(".")[1];
+                vis.child1.wrangleData();
+            }
+            if (vis.child2){
+                vis.child2.selected = d.data.course.split(".")[1];
+                vis.child2.wrangleData();
+            }
+
+
         });
     node.exit().remove();
 
