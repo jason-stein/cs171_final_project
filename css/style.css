@@ -52,7 +52,7 @@ h1 {
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
     font-size: 50px;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
 }
 
 h2 {
@@ -70,6 +70,7 @@ h3 {
     font-weight: lighter;
     font-size: 16px;
     color: #555555;
+    margin: 0 auto;
 }
 
 h4 {
@@ -142,27 +143,20 @@ h6 {
     font-style: italic;
 }
 
+
+
 /*
-    STORYTELLING ETC.
+    STORYTELLING - DATA WRANGLING SLIDES
 */
 
-
-.MartiniStoryOne_TooltipArea {
+.MartiniStoryOne_TooltipArea,
+.MartiniStoryTwo_TooltipArea{
     font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 200;
     fill: #740702;
 }
 
-.MartiniStoryTwo_TooltipArea {
-    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;
-    fill: #740702;
-}
-
-.MartiniStoryOne_GuidanceCircle {
-    fill: #434343;
-}
-
+.MartiniStoryOne_GuidanceCircle,
 .MartiniStoryTwo_GuidanceCircle {
     fill: #434343;
 }
@@ -184,16 +178,14 @@ h6 {
     }
 }
 
-.hideInfo2 {
+.hideInfo2,
+.hideInfo3{
     display: none;
 }
 
-.hideInfo3 {
-    display: none;
-}
 
 /*
-    STORYTELLING ETC.
+    STORYTELLING - DASHBOARD EXPLANATION & EXPLORATION
 */
 
 #MartiniStoryExampleOne_Background{
@@ -203,36 +195,9 @@ h6 {
     height: 300px;
 }
 
-#MartiniStoryExampleOne_Foreground{
-    opacity: 1;
-    background-color: rgba(240, 240, 240, 0.9);
-    width: 100%;
-    height: 100%;
-}
-
-#MartiniStoryExampleOne_Foreground:hover{
-    opacity: 0;
-    /* background-color: unset;*/
-    height: 300px;
-}
-
 #MartiniStoryExampleTwo_Background{
     background-image: url("../img/MartiniStoryExamplePictureTwo.svg");
     background-size: cover;
-    height: 300px;
-}
-
-#MartiniStoryExampleTwo_Foreground{
-    opacity: 1;
-    background-color: rgba(240, 240, 240, 0.9);
-    width: 100%;
-    height: 100%;
-}
-
-#MartiniStoryExampleTwo_Foreground:hover{
-    opacity: 0;
-    background-color: rgba(240, 240, 240, 0);
-    /* background-color: unset;*/
     height: 300px;
 }
 
@@ -242,37 +207,79 @@ h6 {
     height: 200px;
 }
 
-#MartiniStoryExampleThree_Foreground{
-    opacity: 1;
-    background-color: rgba(240, 240, 240, 0.9);
-    width: 100%;
-    height: 100%;
-}
-
-#MartiniStoryExampleThree_Foreground:hover{
-    opacity: 0;
-    /* background-color: unset;*/
-    height: 200px;
-}
-
 #MartiniStoryExampleFour_Background {
     background-image: url("../img/MartiniStoryExamplePictureFour.svg");
     background-size: cover;
     height: 200px;
 }
 
-#MartiniStoryExampleFour_Foreground{
+#MartiniStoryExampleOne_Foreground,
+#MartiniStoryExampleTwo_Foreground,
+#MartiniStoryExampleThree_Foreground,
+#MartiniStoryExampleFour_Foreground
+{
     opacity: 1;
-    background-color: rgba(240, 240, 240, 0.9);
+    background-color: rgba(240, 240, 240, 0.85);
     width: 100%;
     height: 100%;
 }
 
-#MartiniStoryExampleFour_Foreground:hover{
+#MartiniStoryExampleOne_Foreground:hover,
+#MartiniStoryExampleTwo_Foreground:hover,
+#MartiniStoryExampleThree_Foreground:hover,
+#MartiniStoryExampleFour_Foreground:hover
+{
     opacity: 0;
-    /* background-color: unset;*/
+}
+
+/*
+    STORYTELLING - DASHBOARD EXPLANATION & EXPLORATION
+*/
+
+#MartiniStoryNarrativeOne_One_Background{
+
+    background: url("../img/MartiniStoryNarrativeOne_One.svg");
+    background-size: cover;
+    height: 300px;
+}
+
+#MartiniStoryNarrativeOne_Two_Background{
+    background-image: url("../img/MartiniStoryNarrativeOne_Two.svg");
+    background-size: cover;
+    height: 300px;
+}
+
+#MartiniStoryNarrativeOne_Three_Background {
+    background-image: url("../img/MartiniStoryNarrativeOne_Three.svg");
+    background-size: cover;
     height: 200px;
 }
+
+#MartiniStoryNarrativeOne_Four_Background {
+    background-image: url("../img/MartiniStoryNarrativeOne_Four.svg");
+    background-size: cover;
+    height: 200px;
+}
+
+#MartiniStoryNarrativeOne_One_Foreground,
+#MartiniStoryNarrativeOne_Two_Foreground,
+#MartiniStoryNarrativeOne_Three_Foreground,
+#MartiniStoryNarrativeOne_Four_Foreground
+{
+    opacity: 1;
+    background-color: rgba(240, 240, 240, 0.85);
+    width: 100%;
+    height: 100%;
+}
+
+#MartiniStoryNarrativeOne_One_Foreground:hover,
+#MartiniStoryNarrativeOne_Two_Foreground:hover,
+#MartiniStoryNarrativeOne_Three_Foreground:hover,
+#MartiniStoryNarrativeOne_Four_Foreground:hover
+{
+    opacity: 0;
+}
+
 
 
 
@@ -410,9 +417,8 @@ h6 {
 }
 
 button#normalize{
-    font-size : 10px;
-    margin: 25px;
-    margin-bottom: 0px;
+    font-size : 9px;
+    margin: 0 auto;
 
 }
 
@@ -423,7 +429,15 @@ button#normalize{
 #normalize2, .deptdropdown{
     display: block;
     margin: 0 auto;
+    align-self: center;
+    width: 200px;
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 16px;
+    color: #555555;
 }
+
 
 /*.framed {
     border: thin solid black;
