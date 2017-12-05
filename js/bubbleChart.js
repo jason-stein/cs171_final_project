@@ -18,7 +18,7 @@ BubbleChart.prototype.initVis = function(){
     var vis = this;
 
     // define margins
-    vis.margin = { top: 10, right: 10, bottom: 30, left: 30 };
+    vis.margin = { top: 10, right: 40, bottom: 40, left: 40 };
 
     // calculate width and height
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
