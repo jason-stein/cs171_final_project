@@ -4,10 +4,10 @@ EnrollmentBarchart = function(_parentElement, _data, _selected, _color, _year){
     this.displayData = [];
     this.selected = _selected;
     this.color = _color;
-    this.year = _year
+    this.year = _year;
 
     this.initVis();
-}
+};
 
 EnrollmentBarchart.prototype.initVis = function(){
     var vis = this;

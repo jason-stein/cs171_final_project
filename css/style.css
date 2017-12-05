@@ -192,6 +192,9 @@ h6 {
     display: none;
 }
 
+/*
+    STORYTELLING ETC.
+*/
 
 #MartiniStoryExampleOne_Background{
 
@@ -202,7 +205,7 @@ h6 {
 
 #MartiniStoryExampleOne_Foreground{
     opacity: 1;
-    background-color: rgba(240, 240, 240, 0.8);
+    background-color: rgba(240, 240, 240, 0.9);
     width: 100%;
     height: 100%;
 }
@@ -221,7 +224,7 @@ h6 {
 
 #MartiniStoryExampleTwo_Foreground{
     opacity: 1;
-    background-color: rgba(240, 240, 240, 0.8);
+    background-color: rgba(240, 240, 240, 0.9);
     width: 100%;
     height: 100%;
 }
@@ -241,7 +244,7 @@ h6 {
 
 #MartiniStoryExampleThree_Foreground{
     opacity: 1;
-    background-color: rgba(240, 240, 240, 0.8);
+    background-color: rgba(240, 240, 240, 0.9);
     width: 100%;
     height: 100%;
 }
@@ -253,14 +256,14 @@ h6 {
 }
 
 #MartiniStoryExampleFour_Background {
-    background-image: url("../img/MartiniStoryExamplePictureThree.svg");
+    background-image: url("../img/MartiniStoryExamplePictureFour.svg");
     background-size: cover;
     height: 200px;
 }
 
 #MartiniStoryExampleFour_Foreground{
     opacity: 1;
-    background-color: rgba(240, 240, 240, 0.8);
+    background-color: rgba(240, 240, 240, 0.9);
     width: 100%;
     height: 100%;
 }
@@ -328,7 +331,7 @@ h6 {
 }
 
 #ZoomedStackedAreaChart{
-    height: 600px;
+    height: 550px;
 }
 
 
@@ -338,7 +341,7 @@ h6 {
 }
 
 #ZoomedGanttChart {
-    height: 600px;
+    height: 550px;
 }
 
 
@@ -348,7 +351,7 @@ h6 {
 }
 
 #ZoomedBubbleChart {
-    height: 600px;
+    height: 550px;
 }
 
 
@@ -358,7 +361,7 @@ h6 {
 }
 
 #ZoomedBarChart {
-    height: 600px;
+    height: 550px;
 }
 
 
