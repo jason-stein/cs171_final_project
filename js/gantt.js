@@ -10,7 +10,7 @@ gantt = function(_parentElement, _data, _color){
 gantt.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 50, right: 75, bottom: 60, left: 60 };
+    vis.margin = { top: 30, right: 75, bottom: 60, left: 60 };
 
     vis.width = vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
     vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;

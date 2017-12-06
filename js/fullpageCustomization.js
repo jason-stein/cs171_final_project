@@ -3,7 +3,7 @@ $(document).ready(function() {
         //Navigation
         menu: '#menu',
         lockAnchors: false,
-        anchors:['Intro', 'MartiniOne', 'MartiniTwo' , 'MartiniThree','MartiniTest', 'MartiniFour', 'MartiniFive', 'DashBoard', 'Disclaimer'],
+        anchors:['Intro', 'MartiniOne', 'MartiniTwo' , 'MartiniThree', 'MartiniFour', 'DashBoard', 'Disclaimer'],
         navigation: true,
         navigationPosition: 'right',
         //navigationTooltips: ['Intro', 'Facts', 'Vis 1', 'Vis 2', 'Vis 3', 'Moving Forward', 'Recommendations'],
@@ -48,7 +48,7 @@ $(document).ready(function() {
         controlArrows: false,
         verticalCentered: true,
         //sectionsColor : ['#ccc','#ccc', '#ccc', '#ccc'],
-        paddingTop: '3em',
+        paddingTop: '0em',
         paddingBottom: '10px',
         fixedElements: '#header, .footer',
         responsiveWidth: 0,

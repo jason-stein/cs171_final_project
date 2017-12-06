@@ -21,7 +21,7 @@ StackedAreaChart.prototype.initVis = function(){
     vis.selected = "";
     vis.toolTipClickSwitch = false;
 
-    vis.margin = { top: 40, right: 25, bottom: 60, left: 80 };
+    vis.margin = { top: 30, right: 25, bottom: 60, left: 80 };
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
     vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
@@ -65,10 +65,11 @@ StackedAreaChart.prototype.initVis = function(){
         .attr("transform", "translate(-50," + vis.height / 2 + ")rotate(270)")
         .attr("text-anchor", "middle");
 
-    vis.xlab = vis.svg.append("text")
-        .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height + 40) + ")")
-        .attr("text-anchor", "middle")
-        .text("Year");
+    // LESS TEXT
+    // vis.xlab = vis.svg.append("text")
+    //     .attr("transform", "translate(" + (vis.width / 2) + "," + (vis.height + 40) + ")")
+    //     .attr("text-anchor", "middle")
+    //     .text("Year");
 
     // area constructor
     vis.area = d3.area()

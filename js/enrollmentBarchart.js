@@ -4,15 +4,16 @@ EnrollmentBarchart = function(_parentElement, _data, _selected, _color, _year){
     this.displayData = [];
     this.selected = _selected;
     this.color = _color;
-    this.year = _year
+    this.year = _year;
 
     this.initVis();
-}
+};
 
 EnrollmentBarchart.prototype.initVis = function(){
     var vis = this;
 
     vis.margin = { top: 5, right: 40, bottom: 40, left: 40 };
+    vis.margin = { top: 10, right: 60, bottom: 40, left: 40 };
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
     vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
