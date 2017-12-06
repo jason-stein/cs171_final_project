@@ -70,8 +70,10 @@ BubbleChart.prototype.wrangleData = function() {
 BubbleChart.prototype.updateVis = function() {
     var vis = this;
 
-    vis.tooltip1.text(vis.selectedCourse);
-    vis.tooltip2.text(vis.formatDate(vis.year));
+    if(vis.parentElement == "ZoomedBubbleChart"){
+        vis.tooltip1.text(vis.selectedCourse);
+        vis.tooltip2.text(vis.formatDate(vis.year));
+    }
 
     vis.root = d3.hierarchy({children: vis.bubbles})
         .sum(function(d) { return d.course_enrollment; })

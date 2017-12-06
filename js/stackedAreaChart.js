@@ -200,6 +200,8 @@ StackedAreaChart.prototype.select = function(key){
     // reset the bubble chart
     document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
     document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
+    document.getElementById("DashboardBarChart").innerHTML = barchartPlaceholder;
+    document.getElementById("ZoomedBarChart").innerHTML = barchartPlaceholder;
     // update buddy vis
     if (vis.buddy){
         vis.buddy.toolTipClickSwitch = true;
@@ -224,6 +226,8 @@ StackedAreaChart.prototype.deselect = function(){
     // remove bubble and gantt charts (because we have left the department)
     document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
     document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
+    document.getElementById("DashboardBarChart").innerHTML = barchartPlaceholder;
+    document.getElementById("ZoomedBarChart").innerHTML = barchartPlaceholder;
     vis.detailChildElement.innerHTML = instructions;
     vis.childElement.innerHTML = instructions;
     // deselect buddy

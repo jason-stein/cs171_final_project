@@ -11,13 +11,18 @@ Click a department to isolate and get more information. <br> Click again to go b
 
 // placeholder for bubble chart
 var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the 'Departmental Courses' chart\ " +
-    "to see enrollment data for that year.</p>"
+    "to see the department's enrollment data for that year.</p>"
+
+var barchartPlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the 'Departmental Courses' chart\ " +
+    "to see that course's enrollment data over time.</p>"
 
 // set all placeholders
 document.getElementById("DashboardGanttChart").innerHTML = instructions;
 document.getElementById("ZoomedGanttChart").innerHTML = instructions;
 document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
 document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
+document.getElementById("DashboardBarChart").innerHTML = barchartPlaceholder;
+document.getElementById("ZoomedBarChart").innerHTML = barchartPlaceholder;
 
 // load data
 queue()
