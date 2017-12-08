@@ -54,6 +54,16 @@ gantt.prototype.initVis = function(){
         .attr("width", vis.width)
         .attr("opacity", 0);
 
+    // zoom element
+    vis.zoom = d3.zoom()
+        .scaleExtent([1, 40])
+        .on("zoom", function(){
+            vis.yscale = d3.event.transform.k;
+            vis.updateVis();
+        })
+
+    vis.svg.call(vis.zoom);
+
     vis.wrangleData();
 };
 
@@ -80,15 +90,6 @@ gantt.prototype.updateVis = function(){
     vis.x.domain(d3.extent(vis.displayData, function(d) { return d.ACADEMIC_YEAR; }));
 
     vis.y.domain(vis.keys);
-
-    // zoom element
-    vis.zoom = d3.zoom()
-        .scaleExtent([1, 40])
-        .translateExtent([[-100, -100], [vis.width + 90, vis.height + 100]])
-        .on("zoom", function(){
-            vis.yscale = d3.event.transform.k;
-            vis.updateVis();
-        });
 
     // parenting!
     // visualizations can have "buddies" (versions of themselves)
@@ -168,8 +169,6 @@ gantt.prototype.updateVis = function(){
         });
 
     bars.exit().remove();
-
-    vis.svg.call(vis.zoom);
 
     vis.svg.select(".x-axis").call(vis.xAxis);
 };
