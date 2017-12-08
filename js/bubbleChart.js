@@ -35,6 +35,7 @@ BubbleChart.prototype.initVis = function(){
 
     vis.formatDate = d3.timeFormat("%Y");
 
+    // info displays
     vis.tooltip1 = vis.svg.append("text")
         .attr("class", "bubbletooltip")
         .attr("y",2);
@@ -75,11 +76,13 @@ BubbleChart.prototype.wrangleData = function() {
 BubbleChart.prototype.updateVis = function() {
     var vis = this;
 
+    // only want info displays on zoomed
     if(vis.parentElement == "ZoomedBubbleChart"){
         vis.tooltip1.text(vis.selectedCourse);
         vis.tooltip2.text("Year: " + vis.formatDate(vis.year));
     }
 
+    // bubble chart data prep (bostock)
     vis.root = d3.hierarchy({children: vis.bubbles})
         .sum(function(d) { return d.course_enrollment; })
         .each(function(d) {
@@ -98,6 +101,7 @@ BubbleChart.prototype.updateVis = function() {
     node = vis.svg.selectAll(".node")
         .data(vis.pack(vis.root).leaves());
 
+    // create bubbles
     node.enter().append("g")
         .merge(node)
         .attr("class", "node")
@@ -110,18 +114,22 @@ BubbleChart.prototype.updateVis = function() {
             return d.data.course.split(".")[1] === vis.selectedCourse ? 1 : .35;
         })
         .on("click", function(d){
+            // clear bubbles, reset self
             vis.svg.selectAll(".node").remove();
             vis.selectedCourse = d.data.course.split(".")[1];
             vis.updateVis();
+            // reset info box
+            document.getElementById("info2").innerHTML =
+                "<li>Course: " + d.data.course.split(".")[1] + "</li>";
+            document.getElementById("info4").innerHTML =
+                "<li>Enrollment: " + d.data.course_enrollment + "</li>";
+            // reset buddy
             if (vis.buddy){
                 vis.buddy.svg.selectAll(".node").remove();
                 vis.buddy.selectedCourse = d.data.course.split(".")[1];
                 vis.buddy.updateVis();
-                document.getElementById("info2").innerHTML =
-                    "<li>Course: " + d.data.course.split(".")[1] + "</li>";
-                document.getElementById("info4").innerHTML =
-                    "<li>Enrollment: " + d.data.course_enrollment + "</li>";
             }
+            // reset bar charts
             if (vis.child1){
                 vis.child1.selected = d.data.course.split(".")[1];
                 vis.child1.wrangleData();
@@ -130,6 +138,7 @@ BubbleChart.prototype.updateVis = function() {
                 vis.child2.selected = d.data.course.split(".")[1];
                 vis.child2.wrangleData();
             }
+
             if (vis.parentElement == "ZoomedBubbleChart"){
                 vis.tooltip3.text("Enrollment: " + d.data.course_enrollment)
             }

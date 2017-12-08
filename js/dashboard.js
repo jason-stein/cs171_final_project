@@ -13,6 +13,7 @@ Click a department to isolate and get more information. <br> Click again to go b
 var bubblePlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the 'Departmental Courses' chart\ " +
     "to see the department's enrollment data for that year.</p>"
 
+// placeholder for bar chart
 var barchartPlaceholder = "<p class='placeholder'><br><br>After selecting a department, click on a course in the 'Departmental Courses' chart\ " +
     "to see that course's enrollment data over time.</p>"
 

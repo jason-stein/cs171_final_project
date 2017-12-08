@@ -28,6 +28,7 @@ EnrollmentBarchart.prototype.initVis = function(){
         .attr("transform", "translate(" + vis.margin.left +
               "," + vis.margin.top + ")");
 
+    // scales and axes
     vis.x = d3.scaleTime()
         .range([0, vis.width]);
 
@@ -56,6 +57,7 @@ EnrollmentBarchart.prototype.initVis = function(){
 
     vis.formatDate = d3.timeFormat("%Y");
 
+    // course title placeholder
     vis.subtitle = vis.svg.append("text")
         .attr("class", "bubbletooltip")
         .attr("x", vis.width / 2)
@@ -69,6 +71,7 @@ EnrollmentBarchart.prototype.initVis = function(){
 EnrollmentBarchart.prototype.wrangleData = function(){
     var vis = this;
 
+    // filter to course
     vis.displayData = vis.data.filter(function(d){
         return d.COURSE_TITLE_LONG == vis.selected;
     })
@@ -79,10 +82,12 @@ EnrollmentBarchart.prototype.wrangleData = function(){
 EnrollmentBarchart.prototype.updateVis = function(){
     var vis = this;
 
+    // create bars
     var bars = vis.svg.selectAll("rect")
         .data(vis.displayData);
 
     var ext = d3.extent(vis.displayData, function(d){ return d.ACADEMIC_YEAR; });
+    // date objects are permanent
     ext[0] = new Date(ext[0])
     ext[1] = new Date(ext[1])
     ext[1].setFullYear(ext[1].getFullYear() + 1)
@@ -90,12 +95,13 @@ EnrollmentBarchart.prototype.updateVis = function(){
 
     vis.y.domain([0, d3.max(vis.displayData, function(d){ return +d.COURSE_ENROLLMENT_DATA; })]);
 
+    // define width of bars
     var barwidth = vis.width / (+vis.formatDate(ext[1]) - +vis.formatDate(ext[0]) + 1)
-
     if (isNaN(barwidth)){
         barwidth = vis.width / 2
     }
 
+    // create bars
     bars.enter().append("rect")
         .merge(bars)
         .attr("fill", vis.color)
@@ -104,12 +110,14 @@ EnrollmentBarchart.prototype.updateVis = function(){
         .attr("x", function(d,){ return vis.x(d.ACADEMIC_YEAR) + 1 })
         .attr("y", function(d){ return vis.y(+d.COURSE_ENROLLMENT_DATA)})
         .on("click", function(d){
+            // reset bubble charts
             vis.parent1.year = d.ACADEMIC_YEAR;
             vis.parent1.svg.selectAll(".node").remove();
             vis.parent1.wrangleData();
             vis.parent2.year = d.ACADEMIC_YEAR;
             vis.parent2.svg.selectAll(".node").remove();
             vis.parent2.wrangleData();
+            // reset info box
             document.getElementById("info3").innerHTML =
                     "<li>Year: " + vis.formatDate(d.ACADEMIC_YEAR) + "</li>";
             document.getElementById("info4").innerHTML =
@@ -118,6 +126,7 @@ EnrollmentBarchart.prototype.updateVis = function(){
 
     bars.exit().remove();
 
+    // only want text on parent
     if (vis.parentElement == "ZoomedBarChart"){
         vis.subtitle.text(vis.selected);
     }

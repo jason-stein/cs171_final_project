@@ -10,6 +10,7 @@ gantt = function(_parentElement, _data, _color){
 gantt.prototype.initVis = function(){
     var vis = this;
 
+    // SVG drawing area
     vis.margin = { top: 30, right: 75, bottom: 60, left: 60 };
 
     vis.width = vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
@@ -23,6 +24,7 @@ gantt.prototype.initVis = function(){
         .attr("transform", "translate(" + vis.margin.left +
               "," + vis.margin.top + ")");
 
+    // scales and axes
     vis.x = d3.scaleTime()
         .range([0, vis.width]);
 
@@ -39,16 +41,28 @@ gantt.prototype.initVis = function(){
 
     vis.yscale = 1;
 
+    // tooltip
     vis.tooltip = vis.svg.append("text")
         .attr("id", "tooltip1")
         .attr("x", vis.width / 2)
         .attr("y", vis.height + 50)
         .attr("text-anchor", "middle");
 
+    // to enable mouse events
     vis.svg.append("rect")
         .attr("height", vis.height)
         .attr("width", vis.width)
         .attr("opacity", 0);
+
+    // zoom element
+    vis.zoom = d3.zoom()
+        .scaleExtent([1, 40])
+        .on("zoom", function(){
+            vis.yscale = d3.event.transform.k;
+            vis.updateVis();
+        })
+
+    vis.svg.call(vis.zoom);
 
     vis.wrangleData();
 };
@@ -56,6 +70,7 @@ gantt.prototype.initVis = function(){
 gantt.prototype.wrangleData = function(){
     var vis = this;
 
+    // get the list of keys
     vis.keys = [];
     tmp = {};
     vis.displayData.forEach(function(d){
@@ -71,17 +86,16 @@ gantt.prototype.wrangleData = function(){
 gantt.prototype.updateVis = function(){
     var vis = this;
 
+    // update domains
     vis.x.domain(d3.extent(vis.displayData, function(d) { return d.ACADEMIC_YEAR; }));
 
     vis.y.domain(vis.keys);
 
-    vis.zoom = d3.zoom()
-        .scaleExtent([1, 40])
-        .translateExtent([[-100, -100], [vis.width + 90, vis.height + 100]])
-        .on("zoom", function(){
-            vis.yscale = d3.event.transform.k;
-            vis.updateVis();
-        });
+    // parenting!
+    // visualizations can have "buddies" (versions of themselves)
+    // or "children" (visualizations that are altered by them)
+    // assigning buddies allows interactions to carry over to expanded views
+    // assigning children enables interactions between visualizations
 
     var yearWidth = vis.x(parseDate(2017)) - vis.x(parseDate(2016));
 
@@ -117,6 +131,7 @@ gantt.prototype.updateVis = function(){
         })
         .on("mouseout", function(){ vis.tooltip.text("")})
         .on("click", function(d){
+            // clear children, make new children
             document.getElementById(childName).innerHTML = "";
             child = new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
             document.getElementById(detailedChildName).innerHTML = "";
@@ -128,14 +143,13 @@ gantt.prototype.updateVis = function(){
             document.getElementById(detailedgrandChildName).innerHTML = "";
             detailedgrandChild = new EnrollmentBarchart(detailedgrandChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
 
+            // assign buddies, children, and parents as necessary
             child.buddy = detailedChild;
             detailedChild.buddy = child;
 
-            grandChild.buddy = detailedgrandChild;
-            detailedgrandChild.buddy = grandChild;
-
             child.child1 = grandChild;
             child.child2 = detailedgrandChild;
+
             detailedChild.child1 = grandChild;
             detailedChild.child2 = detailedgrandChild;
 
@@ -145,6 +159,7 @@ gantt.prototype.updateVis = function(){
             detailedgrandChild.parent1 = child;
             detailedgrandChild.parent2 = detailedChild;
 
+            // update info box
             document.getElementById("info2").innerHTML =
                 "<li>Course: " + d.COURSE_TITLE_LONG + "</li>";
             document.getElementById("info3").innerHTML =
@@ -154,8 +169,6 @@ gantt.prototype.updateVis = function(){
         });
 
     bars.exit().remove();
-
-    vis.svg.call(vis.zoom);
 
     vis.svg.select(".x-axis").call(vis.xAxis);
 };

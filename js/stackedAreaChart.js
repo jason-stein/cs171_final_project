@@ -224,7 +224,7 @@ StackedAreaChart.prototype.deselect = function(){
     // clear selection
     vis.selected = "";
     vis.toolTipClickSwitch = false;
-    // remove bubble and gantt charts (because we have left the department)
+    // remove bubble, gantt, and bar charts (because we have left the department)
     document.getElementById("DashboardBubbleChart").innerHTML = bubblePlaceholder;
     document.getElementById("ZoomedBubbleChart").innerHTML = bubblePlaceholder;
     document.getElementById("DashboardBarChart").innerHTML = barchartPlaceholder;
