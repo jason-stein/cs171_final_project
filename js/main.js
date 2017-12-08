@@ -76,5 +76,13 @@ function move() {
 }
 
 
+/*function saveAsPng () {
+    var e = document.createElement('script');
+    e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
+    e.setAttribute('class', 'svg-crowbar');
+    document.getElementById("ZoomedStackedAreaChart").appendChild(e);
+}*/
+
+
 
 
