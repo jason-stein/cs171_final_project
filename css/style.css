@@ -421,6 +421,10 @@ button#normalize{
     margin: 0 auto;
 
 }
+#tooltip1 {
+    font-family: 'Lora', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 
 #tooltip{
     margin-left:80px;
