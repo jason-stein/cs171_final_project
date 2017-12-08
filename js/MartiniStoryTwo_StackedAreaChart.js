@@ -29,7 +29,8 @@ d3.csv("data/MartiniStoryTwo_StackedAreaChart_DATA.csv", function(data) {
 
     // create display data
     var displayData = stack(data);
-    // console.log(displayData);
+
+    //console.log(data);
 
 
     /*
