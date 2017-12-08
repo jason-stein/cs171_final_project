@@ -7,4 +7,4 @@
 - **Data:** The data used in the implementation of our site is found in the data folder. Data wrangling scripts are found in the python folder. Please be aware that this data is sensitive and proprietary and is not to be shared outside of this class. For more information regarding the data, please contact one of the students or the metaLAB directly.
 - **Process Book:** in PDF format in the top-level directory.
 - **Website Link:** Since the data used for the implementation is sensitive and proprietary to Harvard University (metaLAB and the Registrar's Office), we have not hosted our website on a public server. This deviation from overall project guidelines was arranged with Johanna and Michael on 30 November 2017.
-- **Project Screencast:**
+- **Project Screencast:** https://youtu.be/09Qwyyy6WVE
