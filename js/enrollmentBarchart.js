@@ -36,6 +36,13 @@ EnrollmentBarchart.prototype.initVis = function(){
         .scale(vis.x)
         .ticks(vis.parentElement == "DashboardBarChart" ? 4 : 10);
 
+    vis.svg.append("line")
+        .attr("x1",0)
+        .attr("x2", vis.width)
+        .attr("y1", vis.height)
+        .attr("y2", vis.height)
+        .attr("stroke", "black");
+
     vis.svg.append("g")
         .attr("class", "x-axis axis")
 
@@ -94,13 +101,6 @@ EnrollmentBarchart.prototype.updateVis = function(){
     ext[1] = new Date(ext[1])
     ext[1].setFullYear(ext[1].getFullYear() + 1)
     vis.x.domain(ext);
-
-    console.log(ext)
-
-    console.log(vis.displayData)
-    vis.displayData.forEach(function(d){
-        console.log(d.ACADEMIC_YEAR, +d.COURSE_ENROLLMENT_DATA)
-    })
 
     vis.y.domain([0, d3.max(vis.displayData, function(d){ return +d.COURSE_ENROLLMENT_DATA; })]);
 

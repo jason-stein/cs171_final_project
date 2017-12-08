@@ -36,9 +36,14 @@ BubbleChart.prototype.initVis = function(){
     vis.formatDate = d3.timeFormat("%Y");
 
     vis.tooltip1 = vis.svg.append("text")
+        .attr("class", "bubbletooltip")
         .attr("y",2);
     vis.tooltip2 = vis.svg.append("text")
-        .attr("y",15);
+        .attr("class", "bubbletooltip")
+        .attr("y",22);
+    vis.tooltip3 = vis.svg.append("text")
+        .attr("class", "bubbletooltip")
+        .attr("y",42);
 
     vis.wrangleData();
 };
@@ -102,10 +107,7 @@ BubbleChart.prototype.updateVis = function() {
         .attr("r", function(d) { return d.r; })
         .attr("fill", vis.color)
         .style("opacity", function(d) {
-            if(d.data.course.split(".")[1] === vis.selectedCourse){
-                return 1
-           }
-           return .35
+            return d.data.course.split(".")[1] === vis.selectedCourse ? 1 : .35;
         })
         .on("click", function(d){
             vis.svg.selectAll(".node").remove();
@@ -127,6 +129,9 @@ BubbleChart.prototype.updateVis = function() {
             if (vis.child2){
                 vis.child2.selected = d.data.course.split(".")[1];
                 vis.child2.wrangleData();
+            }
+            if (vis.parentElement == "ZoomedBubbleChart"){
+                vis.tooltip3.text("Enrollment: " + d.data.course_enrollment)
             }
 
 

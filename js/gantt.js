@@ -123,6 +123,7 @@ gantt.prototype.updateVis = function(){
             detailedChild = new BubbleChart(detailedChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
             child.buddy = detailedChild;
             detailedChild.buddy = child;
+            detailedChild.tooltip3.text("Enrollment: " + d.COURSE_ENROLLMENT_DATA);
 
             document.getElementById(barChildName).innerHTML = "";
             barChild = new EnrollmentBarchart(barChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
