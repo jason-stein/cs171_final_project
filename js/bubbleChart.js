@@ -77,7 +77,7 @@ BubbleChart.prototype.updateVis = function() {
 
     if(vis.parentElement == "ZoomedBubbleChart"){
         vis.tooltip1.text(vis.selectedCourse);
-        vis.tooltip2.text(vis.formatDate(vis.year));
+        vis.tooltip2.text("Year: " + vis.formatDate(vis.year));
     }
 
     vis.root = d3.hierarchy({children: vis.bubbles})

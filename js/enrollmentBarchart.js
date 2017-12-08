@@ -12,8 +12,7 @@ EnrollmentBarchart = function(_parentElement, _data, _selected, _color, _year){
 EnrollmentBarchart.prototype.initVis = function(){
     var vis = this;
 
-    vis.margin = { top: 5, right: 40, bottom: 40, left: 40 };
-    vis.margin = { top: 10, right: 60, bottom: 40, left: 40 };
+    vis.margin = { top: 40, right: 40, bottom: 40, left: 40 };
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
     vis.height = $("#" + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
@@ -39,12 +38,12 @@ EnrollmentBarchart.prototype.initVis = function(){
     vis.svg.append("line")
         .attr("x1",0)
         .attr("x2", vis.width)
-        .attr("y1", vis.height)
-        .attr("y2", vis.height)
+        .attr("y1", vis.height + .5)
+        .attr("y2", vis.height + .5)
         .attr("stroke", "black");
 
     vis.svg.append("g")
-        .attr("class", "x-axis axis")
+        .attr("class", "x-axis axis");
 
     vis.y = d3.scaleLinear()
         .range([vis.height, 0]);
@@ -55,7 +54,13 @@ EnrollmentBarchart.prototype.initVis = function(){
     vis.svg.append("g")
         .attr("class", "y-axis axis");
 
-    vis.formatDate = d3.timeFormat("%Y")
+    vis.formatDate = d3.timeFormat("%Y");
+
+    vis.subtitle = vis.svg.append("text")
+        .attr("class", "bubbletooltip")
+        .attr("x", vis.width / 2)
+        .attr("y", -20)
+        .attr("text-anchor", "middle");
 
     vis.wrangleData();
 }
@@ -66,26 +71,6 @@ EnrollmentBarchart.prototype.wrangleData = function(){
     vis.displayData = vis.data.filter(function(d){
         return d.COURSE_TITLE_LONG == vis.selected;
     })
-
-    // var tmpObj = {}
-    // tmpData.forEach(function(d){
-    //     if(tmpObj.hasOwnProperty(d.COURSE_TITLE_LONG + "/" + d.ACADEMIC_YEAR)){
-    //         tmpObj[d.COURSE_TITLE_LONG + "/" + d.ACADEMIC_YEAR] += +d.COURSE_ENROLLMENT_DATA
-    //     }
-    //     else{
-    //         tmpObj[d.COURSE_TITLE_LONG + "/" + d.ACADEMIC_YEAR] = +d.COURSE_ENROLLMENT_DATA
-    //     }
-    // })
-
-    // Object.keys(tmpObj).forEach(function(key){
-    //     keySplit = key.split("/")
-    //     vis.displayData.push({"COURSE_TITLE_LONG": keySplit[0], "ACADEMIC_YEAR": keySplit[1], "COURSE_ENROLLMENT_DATA": tmpObj[key]})
-    // })
-    // console.log(vis.data)
-    // console.log(vis.displayData)
-
-    // console.log(tmpObj)
-
 
     vis.updateVis();
 }
@@ -115,6 +100,10 @@ EnrollmentBarchart.prototype.updateVis = function(){
         .attr("y", function(d){ return vis.y(+d.COURSE_ENROLLMENT_DATA)});
 
     bars.exit().remove();
+
+    if (vis.parentElement == "ZoomedBarChart"){
+        vis.subtitle.text(vis.selected);
+    }
 
     vis.svg.select(".x-axis").call(vis.xAxis).attr("transform", "translate(" + (barwidth / 2) + "," + vis.height + ")");;
     vis.svg.select(".y-axis").call(vis.yAxis);
