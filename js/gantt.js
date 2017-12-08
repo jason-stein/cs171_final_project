@@ -91,11 +91,11 @@ gantt.prototype.updateVis = function(){
     var detailedChildName = "ZoomedBubbleChart";
     var detailedChildNode = document.getElementById(detailedChildName);
 
-    var barChildName = "DashboardBarChart";
-    var barChildNode = document.getElementById(barChildName);
+    var grandChildName = "DashboardBarChart";
+    var grandChildNode = document.getElementById(grandChildName);
 
-    var detailedBarChildName = "ZoomedBarChart";
-    var detailedBarChildNode = document.getElementById(barChildName);
+    var detailedgrandChildName = "ZoomedBarChart";
+    var detailedgrandChildNode = document.getElementById(grandChildName);
 
     var bars = vis.svg.selectAll("rect.gantt")
         .data(vis.displayData);
@@ -121,21 +121,29 @@ gantt.prototype.updateVis = function(){
             child = new BubbleChart(childName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
             document.getElementById(detailedChildName).innerHTML = "";
             detailedChild = new BubbleChart(detailedChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
-            child.buddy = detailedChild;
-            detailedChild.buddy = child;
             detailedChild.tooltip3.text("Enrollment: " + d.COURSE_ENROLLMENT_DATA);
 
-            document.getElementById(barChildName).innerHTML = "";
-            barChild = new EnrollmentBarchart(barChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
-            document.getElementById(detailedBarChildName).innerHTML = "";
-            detailedBarChild = new EnrollmentBarchart(detailedBarChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
-            barChild.buddy = detailedBarChild;
-            detailedBarChild.buddy = barChild;
+            document.getElementById(grandChildName).innerHTML = "";
+            grandChild = new EnrollmentBarchart(grandChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
+            document.getElementById(detailedgrandChildName).innerHTML = "";
+            detailedgrandChild = new EnrollmentBarchart(detailedgrandChildName, vis.data, d.COURSE_TITLE_LONG, vis.color, d.ACADEMIC_YEAR);
 
-            child.child1 = barChild;
-            child.child2 = detailedBarChild;
-            detailedChild.child1 = barChild;
-            detailedChild.child2 = detailedBarChild;
+            child.buddy = detailedChild;
+            detailedChild.buddy = child;
+
+            grandChild.buddy = detailedgrandChild;
+            detailedgrandChild.buddy = grandChild;
+
+            child.child1 = grandChild;
+            child.child2 = detailedgrandChild;
+            detailedChild.child1 = grandChild;
+            detailedChild.child2 = detailedgrandChild;
+
+            grandChild.parent1 = child;
+            grandChild.parent2 = detailedChild;
+
+            detailedgrandChild.parent1 = child;
+            detailedgrandChild.parent2 = detailedChild;
 
             document.getElementById("info2").innerHTML =
                 "<li>Course: " + d.COURSE_TITLE_LONG + "</li>";

@@ -95,7 +95,7 @@ BubbleChart.prototype.updateVis = function() {
         .size([vis.width, vis.height])
         .padding(1.5);
 
-    var node = vis.svg.selectAll(".node")
+    node = vis.svg.selectAll(".node")
         .data(vis.pack(vis.root).leaves());
 
     node.enter().append("g")

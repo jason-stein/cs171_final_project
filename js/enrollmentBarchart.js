@@ -60,7 +60,8 @@ EnrollmentBarchart.prototype.initVis = function(){
         .attr("class", "bubbletooltip")
         .attr("x", vis.width / 2)
         .attr("y", -20)
-        .attr("text-anchor", "middle");
+        .attr("text-anchor", "middle")
+        .attr("font-size", "17pt");
 
     vis.wrangleData();
 }
@@ -91,13 +92,29 @@ EnrollmentBarchart.prototype.updateVis = function(){
 
     var barwidth = vis.width / (+vis.formatDate(ext[1]) - +vis.formatDate(ext[0]) + 1)
 
+    if (isNaN(barwidth)){
+        barwidth = vis.width / 2
+    }
+
     bars.enter().append("rect")
         .merge(bars)
         .attr("fill", vis.color)
         .attr("width", barwidth)
         .attr("height", function(d){ return vis.height - vis.y(+d.COURSE_ENROLLMENT_DATA); })
         .attr("x", function(d,){ return vis.x(d.ACADEMIC_YEAR) + 1 })
-        .attr("y", function(d){ return vis.y(+d.COURSE_ENROLLMENT_DATA)});
+        .attr("y", function(d){ return vis.y(+d.COURSE_ENROLLMENT_DATA)})
+        .on("click", function(d){
+            vis.parent1.year = d.ACADEMIC_YEAR;
+            vis.parent1.svg.selectAll(".node").remove();
+            vis.parent1.wrangleData();
+            vis.parent2.year = d.ACADEMIC_YEAR;
+            vis.parent2.svg.selectAll(".node").remove();
+            vis.parent2.wrangleData();
+            document.getElementById("info3").innerHTML =
+                    "<li>Year: " + vis.formatDate(d.ACADEMIC_YEAR) + "</li>";
+            document.getElementById("info4").innerHTML =
+                    "<li>Year: " + d.COURSE_ENROLLMENT_DATA + "</li>";
+        });
 
     bars.exit().remove();
 
